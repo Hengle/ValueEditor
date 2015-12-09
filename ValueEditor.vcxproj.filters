@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="moc">
+      <UniqueIdentifier>{6dda9c94-75c9-4702-ae79-e5c4846c0440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ViewItems">
+      <UniqueIdentifier>{55af20b8-cad8-42be-b973-480d5fd10782}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseModelItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseViewItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_BaseViewItem.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_BaseModelItem.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewItemFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseViewItemCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatViewItem.cpp">
+      <Filter>ViewItems</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatViewItemCreator.cpp">
+      <Filter>ViewItems</Filter>
+    </ClCompile>
+    <ClCompile Include="RTValViewItem.cpp">
+      <Filter>ViewItems</Filter>
+    </ClCompile>
+    <ClCompile Include="RTValViewItemCreator.cpp">
+      <Filter>ViewItems</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="BaseModelItem.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="BaseViewItem.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="main.h">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FloatViewItem.h">
+      <Filter>ViewItems</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RTValViewItem.h">
+      <Filter>ViewItems</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ViewItemFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseViewItemCreator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatViewItemCreator.h">
+      <Filter>ViewItems</Filter>
+    </ClInclude>
+    <ClInclude Include="RTValViewItemCreator.h">
+      <Filter>ViewItems</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
