@@ -43,20 +43,33 @@ QWidget* RTValViewItem::BuildWidgets(bool expanded)
 
 void RTValViewItem::UpdateValue(QVariant value)
 {
-	m_val = value.value<FabricCore::RTVal>();
+	m_val = toRTVal(value);
 	for (auto itr = m_children.begin(); itr != m_children.end(); itr++)
 	{
 		QString childName = (*itr)->GetName();
 		QByteArray asciiName = childName.toAscii();
 		FabricCore::RTVal childVal = m_val.maybeGetMemberRef(asciiName.data());
 		// Assert childVal is valid
-		(*itr)->UpdateValue(QVariant::fromValue<FabricCore::RTVal>(childVal));
+		(*itr)->UpdateValue(toVariant(childVal));
 	}
+}
+
+void RTValViewItem::OnChildChanged(QVariant value, QString childName)
+{
+	QByteArray asciiName = childName.toAscii();
+	// We cannot simply create a new RTVal based on the QVariant type, as 
+	// we have to set the type exactly the same as the original.  Get the
+	// original child value to ensure the new value matches the internal type
+	FabricCore::RTVal oldChildVal = m_val.maybeGetMemberRef(asciiName.data());
+	VariantToRTVal(m_client, value, oldChildVal);
+	m_val.setMember(asciiName.data(), oldChildVal);
+
+	emit OnValueChanged(toVariant(m_val), GetName());
 }
 
 QVariant RTValViewItem::GetValue()
 {
-	return QVariant::fromValue<FabricCore::RTVal>(m_val);
+	return toVariant(m_val);
 }
 
 void RTValViewItem::AddChild(BaseViewItem* pChild)

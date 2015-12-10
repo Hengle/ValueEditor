@@ -85,5 +85,6 @@
     <ClInclude Include="RTValViewItemCreator.h">
       <Filter>ViewItems</Filter>
     </ClInclude>
+    <ClInclude Include="QVariantRTVal.h" />
   </ItemGroup>
 </Project>

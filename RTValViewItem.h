@@ -1,12 +1,7 @@
 #pragma once
 
-#pragma warning(push, 0)
-#include <FabricCore.h>
-#pragma pop
 #include "BaseViewItem.h"
-
-// Import RTVal into the QVariant types
-Q_DECLARE_METATYPE(FabricCore::RTVal);
+#include "QVariantRTVal.h"
 
 class RTValViewItem : public BaseViewItem
 {
@@ -18,6 +13,8 @@ class RTValViewItem : public BaseViewItem
 	std::vector<BaseViewItem*> m_children;
 
 	QWidget* m_parentWidget;
+
+	FabricCore::Client m_client;
 
 public:
 	RTValViewItem(QString name);

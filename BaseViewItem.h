@@ -34,11 +34,11 @@ public slots:
 
 	// Implement this slot to update the UI when the
 	// core value changes.
-	virtual void UpdateValue(QVariant value) = 0;
+	virtual void UpdateViewValue(QVariant value) = 0;
 
 signals:
 
 	// When this items widgets change, it should emit this signal
-	void ValueChanged(QVariant value, const QString& name);
+	void ViewValueChanged(QVariant value, const QString& name);
 };
 

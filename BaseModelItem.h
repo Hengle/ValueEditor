@@ -45,14 +45,14 @@ public slots:
 	// the the UI and setting them on the core object.
 	// It is guaranteed that the QVariant value here will be equivalent
 	// to the QVariant returned from GetValue
-	virtual bool SetModelValue(QVariant& value, bool commit = 1) = 0;
+	virtual bool UpdateModelValue(QVariant& value, bool commit = 1) = 0;
 
 
 signals:
 
 	// Connect to this signal to be notified
 	// when the core value changes.
-	void OnValueChanged(QVariant newValue);
+	void ModelValueChanged(QVariant newValue);
 
 };
 

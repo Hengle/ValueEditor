@@ -165,6 +165,7 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" "%(FullPath)"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc_%(Filename).cpp</Outputs>
     </CustomBuild>
+    <ClInclude Include="QVariantRTVal.h" />
     <ClInclude Include="RTValViewItemCreator.h" />
     <ClInclude Include="ViewItemFactory.h" />
   </ItemGroup>
