@@ -11,15 +11,15 @@ RTValViewItem::~RTValViewItem()
 
 }
 
-size_t RTValViewItem::NumChildren()
-{
-	return m_children.size();
-}
-
-BaseViewItem* RTValViewItem::GetChild(size_t index)
-{
-	return m_children[index];
-}
+//size_t RTValViewItem::NumChildren()
+//{
+//	return m_children.size();
+//}
+//
+//BaseViewItem* RTValViewItem::GetChild(size_t index)
+//{
+//	return m_children[index];
+//}
 
 QWidget* RTValViewItem::BuildWidgets(bool expanded)
 {
@@ -30,10 +30,11 @@ QWidget* RTValViewItem::BuildWidgets(bool expanded)
 		{
 			QWidget *parentWidget = new QWidget();
 
-			for (auto itr = m_children.begin(); itr != m_children.end(); itr++)
-			{
-				QLabel* label = new QLabel((*itr)->GetValue().toString());
-			}
+//			for (auto itr = m_children.begin(); itr != m_children.end(); itr++)
+//			{
+//				QLabel* label = new QLabel((*itr)->GetValue().toString());
+//			}
+			return parentWidget;
 		}
 	}
 	return nullptr;
@@ -52,7 +53,7 @@ void RTValViewItem::UpdateViewValue(QVariant value)
 	}
 }
 
-void RTValViewItem::OnChildChanged(QVariant value, QString childName)
+void RTValViewItem::OnChildChanged(QVariant value, QString childName, bool commit)
 {
 	QByteArray asciiName = childName.toAscii();
 	// We cannot simply create a new RTVal based on the QVariant type, as 
@@ -62,20 +63,12 @@ void RTValViewItem::OnChildChanged(QVariant value, QString childName)
 	VariantToRTVal(value, oldChildVal);
 	m_val.setMember(asciiName.data(), oldChildVal);
 
-	emit ViewValueChanged(toVariant(m_val), GetName());
+	emit ViewValueChanged(toVariant(m_val), GetName(), commit);
 }
 
 QVariant RTValViewItem::GetValue()
 {
 	return toVariant(m_val);
-}
-
-void RTValViewItem::AddChild(BaseViewItem* pChild)
-{
-	m_children.push_back(pChild);
-
-	connect(pChild, SIGNAL(ValueChanged(QVariant value, const QString& name)),
-			this,	SLOT(OnChildChanged(QVariant value, const QString& name)));
 }
 
 #include "moc_RTValViewItem.cpp"

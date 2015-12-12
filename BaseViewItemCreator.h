@@ -10,6 +10,8 @@ class BaseViewItem;
 // matches the input parameters.
 class BaseViewItemCreator
 {
+	Q_DISABLE_COPY(BaseViewItemCreator);
+
 public:
 
 	// This class will automatically register itself with the 
@@ -21,14 +23,16 @@ public:
 
 	// Implement this function to return true if this 
 	// creator can generate a viewitem for the input data.
-	virtual bool Matches(QVariant data, const char* type, const char* tag) = 0;
+	//virtual bool Matches(QVariant data, const char* type, const char* tag) = 0;
 
 	// Create the view item.
 	// NOTE - We may remove the Matches function and just rely
 	// on this function returning nullptr if it doesn't match.
-	virtual BaseViewItem* CreateItem(const QVariant& data, const char* type, const char* tag) = 0;
+	virtual BaseViewItem* CreateItem(const QVariant& data, const QString& name, const char* tag) = 0;
 
 	// Implement this function to delete this class, it will 
-	// be called when the item is released.
-	virtual void DeleteThis() = 0;
+	// be called when the item is released.  The de-allocation
+	// should be appropriate to the allocation (eg, if a class
+	// is statically allocated, then it should not be deleted at all)
+	virtual void DeleteThis() { delete this; };
 };

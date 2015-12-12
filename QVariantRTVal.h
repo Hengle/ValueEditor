@@ -3,7 +3,6 @@
 // Import RTVal into the QVariant types
 Q_DECLARE_METATYPE(FabricCore::RTVal);
 
-
 // Initially at least - A set of functions for 
 // converting RTVal <--> QVariant
 inline QVariant toVariant(const FabricCore::RTVal& val) 

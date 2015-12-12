@@ -9,10 +9,14 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include <assert.h>
 
 #pragma warning(push, 0)
 #include <QtGui/QtGui>
 #include <FabricCore.h>
 #pragma warning(pop)
+
+#include "..\..\BaseModelItem.h"
+#include "..\..\BaseViewItem.h"
 
 // TODO: reference additional headers your program requires here

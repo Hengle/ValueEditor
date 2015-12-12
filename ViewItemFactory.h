@@ -3,11 +3,14 @@
 #include <vector>
 
 class BaseViewItem;
+class BaseModelItem;
 
 // This factory is responsible for returning the appropriate BaseViewItem
 // when creating for a given data type
 class ViewItemFactory
 {
+	Q_DISABLE_COPY(ViewItemFactory)
+
 private:
 	// Friend ViewItemCreator to allow it to 
 	// register itself with us
@@ -33,6 +36,12 @@ public:
 
 	static ViewItemFactory* GetInstance();
 	//////////////////////////////////////////////////////////////////////////
+
+
+	// Call this function to build a View layer from the
+	// given Model interface.  This will not create any
+	// actual widgets
+	BaseViewItem* BuildView(BaseModelItem* model);
 	
 
 
@@ -44,5 +53,5 @@ public:
 	// \tag[optional] One more piece of metadata, just in case you want to 
 	//		only display a value for a tagged value.
 	// TODO: Perhaps just pass in a MetaData option here to represent all metadata?
-	BaseViewItem* CreateViewItem(const QVariant& data, const char* viewtype, const char* tag = nullptr);
+	BaseViewItem* CreateViewItem(const QVariant& data, const QString& name, const char* tag = nullptr);
 };

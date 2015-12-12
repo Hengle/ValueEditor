@@ -3,13 +3,11 @@
 
 class RTValViewItemCreator : public BaseViewItemCreator
 {
+public:
 	RTValViewItemCreator();
 	~RTValViewItemCreator();
 
-	virtual bool Matches(QVariant data, const char* type, const char* tag) override;
-
-	virtual BaseViewItem* CreateItem(const QVariant& data, const char* type, const char* tag) override;
-
-	virtual void DeleteThis() override;
-
+	virtual BaseViewItem* CreateItem(const QVariant& data, const QString& name, const char* tag) override;
 };
+
+#include "moc_BaseViewItem.cpp"

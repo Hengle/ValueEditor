@@ -13,22 +13,16 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="moc">
-      <UniqueIdentifier>{6dda9c94-75c9-4702-ae79-e5c4846c0440}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ViewItems">
       <UniqueIdentifier>{55af20b8-cad8-42be-b973-480d5fd10782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ViewItems\Vec3ViewItem">
+      <UniqueIdentifier>{f2f754fc-25ca-4aa6-91bd-d5c27e5d8e1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseViewItem.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="moc_BaseViewItem.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
-    <ClCompile Include="moc_BaseModelItem.cpp">
-      <Filter>moc</Filter>
     </ClCompile>
     <ClCompile Include="ViewItemFactory.cpp">
       <Filter>Source Files</Filter>
@@ -49,6 +43,21 @@
       <Filter>ViewItems</Filter>
     </ClCompile>
     <ClCompile Include="StdAfx.cpp" />
+    <ClCompile Include="BaseModelItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultViewItem.cpp">
+      <Filter>ViewItems</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultViewItemCreator.cpp">
+      <Filter>ViewItems</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3ViewItem.cpp">
+      <Filter>ViewItems\Vec3ViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3ViewItemCreator.cpp">
+      <Filter>ViewItems\Vec3ViewItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BaseModelItem.h">
@@ -79,5 +88,17 @@
     </ClInclude>
     <ClInclude Include="QVariantRTVal.h" />
     <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="DefaultViewItem.h">
+      <Filter>ViewItems</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultViewItemCreator.h">
+      <Filter>ViewItems</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec3ViewItem.h">
+      <Filter>ViewItems\Vec3ViewItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec3ViewItemCreator.h">
+      <Filter>ViewItems\Vec3ViewItem</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

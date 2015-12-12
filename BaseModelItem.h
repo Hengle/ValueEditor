@@ -6,9 +6,11 @@
 // interface for supplying data from the FabricCore, and
 // connecting notifications.  The view consumes a 
 // tree/list? of BaseModelItems to build it's UI
-class BaseModelItem : QObject
+class BaseModelItem : public QObject
 {
 	Q_OBJECT
+
+	Q_DISABLE_COPY(BaseModelItem);
 
 public:
 	BaseModelItem();
@@ -42,7 +44,7 @@ public slots:
 	// the the UI and setting them on the core object.
 	// It is guaranteed that the QVariant value here will be equivalent
 	// to the QVariant returned from GetValue
-	virtual bool UpdateModelValue(QVariant& value, bool commit = 1) = 0;
+	virtual void UpdateModelValue(QVariant /*value*/, QString /*name*/, bool /*commit*/) {};
 
 
 signals:
@@ -50,6 +52,5 @@ signals:
 	// Connect to this signal to be notified
 	// when the core value changes.
 	void ModelValueChanged(QVariant newValue);
-
 };
 

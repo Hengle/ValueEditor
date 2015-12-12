@@ -12,17 +12,11 @@ FloatViewItemCreator::~FloatViewItemCreator()
 
 }
 
-bool FloatViewItemCreator::Matches(QVariant data, const char* /*type*/, const char* /*tag*/)
+BaseViewItem* FloatViewItemCreator::CreateItem(const QVariant& data, const QString& name, const char* /*tag*/)
 {
-	return data.type() == QVariant::Double;// || data.type() == RTVal && data.asRTVal().getType() == "Scalar";
-}
-
-BaseViewItem* FloatViewItemCreator::CreateItem(const QVariant& /*data*/, const char* type, const char* /*tag*/)
-{
-	return new FloatViewItem(type);
-}
-
-void FloatViewItemCreator::DeleteThis()
-{
-	delete this;
+	if (data.type() == QVariant::Double || data.type() == QMetaType::Float)
+	{
+		return new FloatViewItem(name);
+	}
+	return nullptr;
 }
