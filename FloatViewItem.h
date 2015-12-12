@@ -11,11 +11,11 @@ public:
 	~FloatViewItem();
 
 	size_t NumChildren() override { return 0; }
-	BaseViewItem* GetChild(size_t index) override { return nullptr; };
+	BaseViewItem* GetChild(size_t /*index*/) override { return nullptr; };
 
 	QWidget* BuildWidgets(bool expanded) override;
 
-	void UpdateValue(QVariant value) override;
+	void UpdateViewValue(QVariant value) override;
 
 	QVariant GetValue();
 

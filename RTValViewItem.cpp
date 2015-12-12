@@ -1,6 +1,4 @@
 #include "RTValViewItem.h"
-#include <QtGui\QTextEdit>
-#include <QtGui\QtGui>
 
 RTValViewItem::RTValViewItem(QString name)
 	: BaseViewItem(name)
@@ -41,7 +39,7 @@ QWidget* RTValViewItem::BuildWidgets(bool expanded)
 	return nullptr;
 }
 
-void RTValViewItem::UpdateValue(QVariant value)
+void RTValViewItem::UpdateViewValue(QVariant value)
 {
 	m_val = toRTVal(value);
 	for (auto itr = m_children.begin(); itr != m_children.end(); itr++)
@@ -50,7 +48,7 @@ void RTValViewItem::UpdateValue(QVariant value)
 		QByteArray asciiName = childName.toAscii();
 		FabricCore::RTVal childVal = m_val.maybeGetMemberRef(asciiName.data());
 		// Assert childVal is valid
-		(*itr)->UpdateValue(toVariant(childVal));
+		(*itr)->UpdateViewValue(toVariant(childVal));
 	}
 }
 
@@ -61,10 +59,10 @@ void RTValViewItem::OnChildChanged(QVariant value, QString childName)
 	// we have to set the type exactly the same as the original.  Get the
 	// original child value to ensure the new value matches the internal type
 	FabricCore::RTVal oldChildVal = m_val.maybeGetMemberRef(asciiName.data());
-	VariantToRTVal(m_client, value, oldChildVal);
+	VariantToRTVal(value, oldChildVal);
 	m_val.setMember(asciiName.data(), oldChildVal);
 
-	emit OnValueChanged(toVariant(m_val), GetName());
+	emit ViewValueChanged(toVariant(m_val), GetName());
 }
 
 QVariant RTValViewItem::GetValue()

@@ -1,5 +1,4 @@
 #include "FloatViewItem.h"
-#include <QtGui/QDoubleSpinBox>
 
 FloatViewItem::FloatViewItem(QString name)
 	: m_spinner(nullptr)
@@ -24,7 +23,7 @@ QWidget * FloatViewItem::BuildWidgets(bool expanded)
 	return m_spinner;
 }
 
-void FloatViewItem::UpdateValue(QVariant value)
+void FloatViewItem::UpdateViewValue(QVariant value)
 {
 	if (m_spinner != nullptr)
 		m_spinner->setValue(value.toDouble());
@@ -37,7 +36,7 @@ QVariant FloatViewItem::GetValue()
 
 void FloatViewItem::OnSpinnerChanged(double value)
 {
-	emit ValueChanged(QVariant(value), GetName());
+	emit ViewValueChanged(QVariant(value), GetName());
 }
 
 #include "moc_FloatViewItem.cpp"

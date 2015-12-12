@@ -1,6 +1,4 @@
 #pragma once
-#include <QTCore\QObject>
-#include <QTCore\QVariant>
 
 #include <vector>
 

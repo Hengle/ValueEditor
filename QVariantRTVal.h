@@ -1,11 +1,5 @@
 #pragma once
 
-#pragma warning(push, 0)
-#include <FabricCore.h>
-#pragma pop
-#include <QtCore/qvariant.h>
-#include <assert.h>
-
 // Import RTVal into the QVariant types
 Q_DECLARE_METATYPE(FabricCore::RTVal);
 
@@ -25,7 +19,7 @@ inline FabricCore::RTVal toRTVal(const QVariant var)
 	return FabricCore::RTVal();
 }
 
-inline bool VariantToRTVal(FabricCore::Client& client, const QVariant& var, FabricCore::RTVal& val)
+inline bool VariantToRTVal(const QVariant& var, FabricCore::RTVal& val)
 {
 	if (var.userType() == qMetaTypeId<FabricCore::RTVal>())
 	{
@@ -36,11 +30,11 @@ inline bool VariantToRTVal(FabricCore::Client& client, const QVariant& var, Fabr
 	FabricCore::Context ctxt;
 	// Convert into the type of the RTVal
 	const char* ctype = val.getTypeNameCStr();
-	if (ctype == "Float32")
+	if (strcmp(ctype, "Float32") == 0)
 		val.setFloat32(var.toFloat());
-	else if (ctype == "Float64")
+	else if (strcmp(ctype, "Float64") == 0)
 		val = FabricCore::RTVal::ConstructFloat64(ctxt, var.toFloat());
-	else if (ctype == "String")
+	else if (strcmp(ctype, "String") == 0)
 	{
 		QByteArray asciiArr = var.toString().toAscii();
 		val = FabricCore::RTVal::ConstructString(ctxt, asciiArr.data());

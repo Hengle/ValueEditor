@@ -1,9 +1,6 @@
 #pragma once
 #pragma once
 
-#include <QtCore/QObject>
-#include <QtCore/qvariant>
-
 // The base model item is the base class for defining
 // items on the model.  This provides a common
 // interface for supplying data from the FabricCore, and

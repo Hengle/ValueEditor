@@ -26,7 +26,7 @@ public:
 
 	virtual QWidget* BuildWidgets(bool expanded) override;
 
-	virtual void UpdateValue(QVariant value) override;
+	virtual void UpdateViewValue(QVariant value) override;
 
 	virtual QVariant GetValue() override;
 

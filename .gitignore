@@ -1,3 +1,5 @@
 moc_*.cpp
 Debug/
 *.sdf
+x64/
+ipch/

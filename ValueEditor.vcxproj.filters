@@ -21,12 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseModelItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BaseViewItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -54,6 +48,7 @@
     <ClCompile Include="RTValViewItemCreator.cpp">
       <Filter>ViewItems</Filter>
     </ClCompile>
+    <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BaseModelItem.h">
@@ -61,9 +56,6 @@
     </CustomBuild>
     <CustomBuild Include="BaseViewItem.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="main.h">
-      <Filter>Source Files</Filter>
     </CustomBuild>
     <CustomBuild Include="FloatViewItem.h">
       <Filter>ViewItems</Filter>
@@ -86,5 +78,6 @@
       <Filter>ViewItems</Filter>
     </ClInclude>
     <ClInclude Include="QVariantRTVal.h" />
+    <ClInclude Include="StdAfx.h" />
   </ItemGroup>
 </Project>

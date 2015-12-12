@@ -1,33 +1,17 @@
-//#include "main.h"
+// SampleApp.cpp : Defines the entry point for the console application.
 //
-//#include "moc_main.cpp"
-//
-//int main(int argc, char *argv[])
-//{
-//	QApplication a(argc, argv);
-//	QTreeView w;
-//	Model m;
-//	m.appendRow("x", 1.0);
-//	m.appendRow("y", 1.0);
-//	m.appendRow("z", 1.0);
-//	m.appendRow("Selectability", true, true);
-//
-//	w.setModel(&m);
-//	w.setItemDelegateForColumn(1, new Delegate(&w));
-//	w.show();
-//
-//	return a.exec();
-//}
 
-#include <QtGui/QtGui>
-#include <QtGui/QFileDialog>
+#include "stdafx.h"
 
-const QString s1 = "Docs/Testing/textFile1.txt";
-const QString s2 = "Docs/Testing/textFile2.txt";
-const QString s3 = "Docs/Testing/textFile3.txt";
-const QString s4 = "Docs/Testing/AnotherFolder/textFile4.txt";
-const QString s5 = "ThisIsGonnaBeCrazy/WholeNewFolder/AndAnother/file.pdf";
-const QString s6 = "ThisIsGonnaBeCrazy/file.doc";
+static QTime myTimer;
+void SetStylesheet(const char* filename)
+{
+	QFile File(filename);
+	File.open(QFile::ReadOnly);
+	QString StyleSheet = QLatin1String(File.readAll());
+
+	qApp->setStyleSheet(StyleSheet);
+}
 
 class MainWindow : public QMainWindow
 {
@@ -84,7 +68,7 @@ public:
 		QTreeWidget* tree = new QTreeWidget;
 		tree->setColumnCount(2);
 
-		for (int i = 0; i < 2000; ++i) {
+		for (int i = 0; i < 1000; ++i) {
 			QTreeWidgetItem* item = new QTreeWidgetItem;
 			item->setText(0, QString::number(i));
 			tree->addTopLevelItem(item);
@@ -99,18 +83,29 @@ public:
 			layout->addWidget(label2);
 			layout->addWidget(new QSpinBox());
 
-			
+
 			tree->setItemWidget(item, 1, w);
 
 
 		}
 		setCentralWidget(tree);
 	}
+
+	virtual void showEvent(QShowEvent *ev) override
+	{
+		__super::showEvent(ev);
+		int elapsed = myTimer.elapsed();
+		printf("elapsed: %i", elapsed);
+	}
+
+
 };
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
+	SetStylesheet("styles.qss");
+	myTimer.start();
 	MainWindow w;
 	w.show();
 	return a.exec();
