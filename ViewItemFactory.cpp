@@ -36,12 +36,19 @@ BaseViewItem* ViewItemFactory::BuildView(BaseModelItem* model)
       BaseViewItem* childView = BuildView(model->GetChild(i));
       viewItem->AddChild(childView);
     }
+    viewItem->SetBaseModelItem( model );
   }
-
-  viewItem->SetBaseModelItem( model );
 
   return viewItem;
 }
+
+// sort using a custom function object
+struct {
+  bool operator()( BaseViewItemCreator* a, BaseViewItemCreator* b )
+  {
+    return a->Priority() < b->Priority();
+  }
+} CreatorSort;
 
 bool ViewItemFactory::RegisterCreator(BaseViewItemCreator* creator)
 {
@@ -51,6 +58,8 @@ bool ViewItemFactory::RegisterCreator(BaseViewItemCreator* creator)
       return false;
   }
   m_creators.push_back(creator);
+  // Sort creators in order of priority
+  std::sort( m_creators.begin(), m_creators.end(), CreatorSort );
   return true;
 }
 

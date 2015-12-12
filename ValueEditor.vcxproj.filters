@@ -28,6 +28,9 @@
     <Filter Include="ViewItems\RTValViewItem">
       <UniqueIdentifier>{90dc53e2-0cda-4f86-bef5-fd2bfcf9cddb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ViewItems\ColorViewItem">
+      <UniqueIdentifier>{0d5b7434-c299-450c-a368-f685fead4d42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseViewItem.cpp">
@@ -46,19 +49,10 @@
     <ClCompile Include="Vec3ViewItem.cpp">
       <Filter>ViewItems\Vec3ViewItem</Filter>
     </ClCompile>
-    <ClCompile Include="Vec3ViewItemCreator.cpp">
-      <Filter>ViewItems\Vec3ViewItem</Filter>
-    </ClCompile>
     <ClCompile Include="DefaultViewItem.cpp">
       <Filter>ViewItems\DefaultViewItem</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultViewItemCreator.cpp">
-      <Filter>ViewItems\DefaultViewItem</Filter>
-    </ClCompile>
     <ClCompile Include="FloatViewItem.cpp">
-      <Filter>ViewItems\FloatViewItem</Filter>
-    </ClCompile>
-    <ClCompile Include="FloatViewItemCreator.cpp">
       <Filter>ViewItems\FloatViewItem</Filter>
     </ClCompile>
     <ClCompile Include="RTValViewItem.cpp">
@@ -66,6 +60,9 @@
     </ClCompile>
     <ClCompile Include="RTValViewItemCreator.cpp">
       <Filter>ViewItems\RTValViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorViewItem.cpp">
+      <Filter>ViewItems\ColorViewItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,20 +91,17 @@
     <ClInclude Include="Vec3ViewItem.h">
       <Filter>ViewItems\Vec3ViewItem</Filter>
     </ClInclude>
-    <ClInclude Include="Vec3ViewItemCreator.h">
-      <Filter>ViewItems\Vec3ViewItem</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultViewItem.h">
       <Filter>ViewItems\DefaultViewItem</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultViewItemCreator.h">
-      <Filter>ViewItems\DefaultViewItem</Filter>
-    </ClInclude>
-    <ClInclude Include="FloatViewItemCreator.h">
-      <Filter>ViewItems\FloatViewItem</Filter>
-    </ClInclude>
     <ClInclude Include="RTValViewItemCreator.h">
       <Filter>ViewItems\RTValViewItem</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorViewItem.h">
+      <Filter>ViewItems\ColorViewItem</Filter>
+    </ClInclude>
+    <ClInclude Include="DllExport.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,11 +3,10 @@
 
 #include "stdafx.h"
 #include "..\..\ViewItemFactory.h"
-#include "..\..\DefaultViewItem.h"
-#include "..\..\DefaultViewItemCreator.h"
-#include "..\..\FloatViewItemCreator.h"
-#include "..\..\RTValViewItemCreator.h"
-#include "..\..\Vec3ViewItemCreator.h"
+//#include "..\..\DefaultViewItem.h"
+//#include "..\..\FloatViewItemCreator.h"
+//#include "..\..\RTValViewItemCreator.h"
+//#include "..\..\Vec3ViewItemCreator.h"
 #include "SampleModel.h"
 
 static QTime myTimer;
@@ -56,26 +55,6 @@ public:
 
 		BuildTree(tree, nullptr, pBaseView);
 
-		//for (int i = 0; i < 1000; ++i) {
-		//	QTreeWidgetItem* item = new QTreeWidgetItem;
-		//	item->setText(0, QString::number(i));
-		//	tree->addTopLevelItem(item);
-
-		//	//create a layout with parent
-		//	QWidget* w = new QWidget;
-		//	QHBoxLayout *layout = new QHBoxLayout(w);
-		//	//widgets that will be contained in QWidget
-		//	QLabel* label1 = new QLabel("Label 1");
-		//	QLabel* label2 = new QLabel("Label 2");
-		//	layout->addWidget(label1); //add contained widgets to layout
-		//	layout->addWidget(label2);
-		//	layout->addWidget(new QSpinBox());
-
-
-		//	tree->setItemWidget(item, 1, w);
-
-
-		//}
 		setCentralWidget(tree);
 	}
 
@@ -87,7 +66,6 @@ public:
 	}
 };
 
-
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
@@ -96,13 +74,6 @@ int main(int argc, char *argv[])
 	BaseModelItem* pSampleModel = BuildSampleModel();
 	
 	ViewItemFactory* pFactory = ViewItemFactory::GetInstance();
-	
-	// Register different adaptor types
-	DefaultViewItemCreator defCreator;
-	FloatViewItemCreator fltCreator;
-	Vec3ViewItemCreator vec3Creator;
-	// RTValViewItemCreator rtCreator;
-
 	BaseViewItem* pViewLayer = pFactory->BuildView(pSampleModel);
 
 

@@ -10,7 +10,7 @@ class BaseModelItem;
 // the core, and should be implemented to handle specific
 // UI duties (ie, showing widgets, etc).  
 
-class BaseViewItem :
+class VALUEEDIT_API BaseViewItem :
   public QObject
 {
   Q_OBJECT
@@ -24,8 +24,10 @@ class BaseViewItem :
   BaseModelItem* m_modelitem;
 
 protected:
-
+#pragma warning(push)
+#pragma warning(disable: 4251)
   std::vector<BaseViewItem*> m_children;
+#pragma warning(pop)
 
 public:
   BaseViewItem( QString name );

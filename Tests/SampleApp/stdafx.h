@@ -16,6 +16,7 @@
 #include <FabricCore.h>
 #pragma warning(pop)
 
+#include "..\..\DllExport.h"
 #include "..\..\BaseModelItem.h"
 #include "..\..\BaseViewItem.h"
 

@@ -6,7 +6,7 @@
 // interface for supplying data from the FabricCore, and
 // connecting notifications.  The view consumes a 
 // tree/list? of BaseModelItems to build it's UI
-class BaseModelItem : public QObject
+class VALUEEDIT_API BaseModelItem : public QObject
 {
 	Q_OBJECT
 

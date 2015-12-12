@@ -7,7 +7,7 @@ class BaseModelItem;
 
 // This factory is responsible for returning the appropriate BaseViewItem
 // when creating for a given data type
-class ViewItemFactory
+class VALUEEDIT_API ViewItemFactory sealed
 {
 	Q_DISABLE_COPY(ViewItemFactory)
 
@@ -16,7 +16,10 @@ private:
 	// register itself with us
 	friend class BaseViewItemCreator;
 
+#pragma warning(push)
+#pragma warning(disable: 4251)
 	std::vector<BaseViewItemCreator*> m_creators;
+#pragma warning(pop)
 
 	//////////////////////////////////////////////////////////////////////////
 	ViewItemFactory();

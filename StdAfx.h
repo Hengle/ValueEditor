@@ -15,3 +15,5 @@
 // TODO: reference additional headers your program requires here
 
 #include <assert.h>
+
+#include "DllExport.h"
