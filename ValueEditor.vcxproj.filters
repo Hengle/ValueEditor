@@ -19,6 +19,15 @@
     <Filter Include="ViewItems\Vec3ViewItem">
       <UniqueIdentifier>{f2f754fc-25ca-4aa6-91bd-d5c27e5d8e1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ViewItems\DefaultViewItem">
+      <UniqueIdentifier>{38fe4060-2895-46bf-805f-3072f248a159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ViewItems\FloatViewItem">
+      <UniqueIdentifier>{7f9386c7-d6de-4066-ba25-28326edcc65c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ViewItems\RTValViewItem">
+      <UniqueIdentifier>{90dc53e2-0cda-4f86-bef5-fd2bfcf9cddb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseViewItem.cpp">
@@ -30,33 +39,33 @@
     <ClCompile Include="BaseViewItemCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FloatViewItem.cpp">
-      <Filter>ViewItems</Filter>
-    </ClCompile>
-    <ClCompile Include="FloatViewItemCreator.cpp">
-      <Filter>ViewItems</Filter>
-    </ClCompile>
-    <ClCompile Include="RTValViewItem.cpp">
-      <Filter>ViewItems</Filter>
-    </ClCompile>
-    <ClCompile Include="RTValViewItemCreator.cpp">
-      <Filter>ViewItems</Filter>
-    </ClCompile>
     <ClCompile Include="StdAfx.cpp" />
     <ClCompile Include="BaseModelItem.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DefaultViewItem.cpp">
-      <Filter>ViewItems</Filter>
-    </ClCompile>
-    <ClCompile Include="DefaultViewItemCreator.cpp">
-      <Filter>ViewItems</Filter>
     </ClCompile>
     <ClCompile Include="Vec3ViewItem.cpp">
       <Filter>ViewItems\Vec3ViewItem</Filter>
     </ClCompile>
     <ClCompile Include="Vec3ViewItemCreator.cpp">
       <Filter>ViewItems\Vec3ViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultViewItem.cpp">
+      <Filter>ViewItems\DefaultViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultViewItemCreator.cpp">
+      <Filter>ViewItems\DefaultViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatViewItem.cpp">
+      <Filter>ViewItems\FloatViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatViewItemCreator.cpp">
+      <Filter>ViewItems\FloatViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="RTValViewItem.cpp">
+      <Filter>ViewItems\RTValViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="RTValViewItemCreator.cpp">
+      <Filter>ViewItems\RTValViewItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,10 +76,10 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="FloatViewItem.h">
-      <Filter>ViewItems</Filter>
+      <Filter>ViewItems\FloatViewItem</Filter>
     </CustomBuild>
     <CustomBuild Include="RTValViewItem.h">
-      <Filter>ViewItems</Filter>
+      <Filter>ViewItems\RTValViewItem</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -80,25 +89,25 @@
     <ClInclude Include="BaseViewItemCreator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FloatViewItemCreator.h">
-      <Filter>ViewItems</Filter>
-    </ClInclude>
-    <ClInclude Include="RTValViewItemCreator.h">
-      <Filter>ViewItems</Filter>
-    </ClInclude>
     <ClInclude Include="QVariantRTVal.h" />
     <ClInclude Include="StdAfx.h" />
-    <ClInclude Include="DefaultViewItem.h">
-      <Filter>ViewItems</Filter>
-    </ClInclude>
-    <ClInclude Include="DefaultViewItemCreator.h">
-      <Filter>ViewItems</Filter>
-    </ClInclude>
     <ClInclude Include="Vec3ViewItem.h">
       <Filter>ViewItems\Vec3ViewItem</Filter>
     </ClInclude>
     <ClInclude Include="Vec3ViewItemCreator.h">
       <Filter>ViewItems\Vec3ViewItem</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultViewItem.h">
+      <Filter>ViewItems\DefaultViewItem</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultViewItemCreator.h">
+      <Filter>ViewItems\DefaultViewItem</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatViewItemCreator.h">
+      <Filter>ViewItems\FloatViewItem</Filter>
+    </ClInclude>
+    <ClInclude Include="RTValViewItemCreator.h">
+      <Filter>ViewItems\RTValViewItem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
