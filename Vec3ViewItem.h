@@ -29,7 +29,12 @@ public:
 	QVariant GetValue() /*override*/;
 
 	void UpdateViewValue(QVariant value) /*override*/;
-	void OnChildChanged(QVariant value, QString childName, bool commit) /*override*/;
+	
+	virtual void onChildChanged(
+		QVariant const &value,
+		QString const &childName,
+		bool commit
+		) /*override*/;
 
 public slots:
 

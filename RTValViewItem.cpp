@@ -54,7 +54,11 @@ void RTValViewItem::UpdateViewValue(QVariant value)
 	}
 }
 
-void RTValViewItem::OnChildChanged(QVariant value, QString childName, bool commit)
+void RTValViewItem::onChildChanged(
+	QVariant const &value,
+	QString const &childName,
+	bool commit
+	)
 {
 	QByteArray asciiName = childName.toAscii();
 	// We cannot simply create a new RTVal based on the QVariant type, as 

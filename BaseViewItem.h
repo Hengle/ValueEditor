@@ -44,7 +44,7 @@ public:
   ChildIT childEnd() const { return m_children.end(); }
 
   // A a child to this item. If connect is true, then we will also
-  // wire up the childs ViewValueChanged to this classes OnChildChanged
+  // wire up the childs ViewValueChanged to this classes onChildChanged
   void AddChild( BaseViewItem* pItem, bool doConnect = false );
 
   // Connect this ViewItem to the passed BaseModelItem
@@ -80,7 +80,12 @@ public slots:
   virtual void UpdateViewValue( QVariant value ) = 0;
 
   // Implement this slot if we need to react when a child changes
-  virtual void OnChildChanged( QVariant value, QString name, bool commit );
+  virtual void onChildChanged(
+    QVariant const &value,
+    QString const &name,
+    bool commit
+    );
+  
 signals:
 
   // When this items widgets change, it should emit this signal

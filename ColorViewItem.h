@@ -20,5 +20,10 @@ public:
   QVariant GetValue() /*override*/;
 
   void UpdateViewValue( QVariant value ) /*override*/;
-  void OnChildChanged( QVariant, QString, bool ) /*override*/;
+
+  virtual void onChildChanged(
+    QVariant const &,
+    QString const &,
+    bool
+    ) /*override*/;
 };

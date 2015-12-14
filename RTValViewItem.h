@@ -22,5 +22,9 @@ public:
 
 	virtual QVariant GetValue() /*override*/;
 
-	void OnChildChanged(QVariant value, QString name, bool commit);
+	virtual void onChildChanged(
+		QVariant const &value,
+		QString const &name,
+		bool commit
+		) /*override*/;
 };

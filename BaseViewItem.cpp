@@ -29,8 +29,10 @@ void BaseViewItem::AddChild( BaseViewItem* pChild, bool doConnect/*=false*/ )
 
   if (doConnect)
   {
-    connect( pChild, SIGNAL( ViewValueChanged( QVariant, QString, bool ) ),
-         this, SLOT( OnChildChanged( QVariant, QString, bool ) ) );
+    connect(
+      pChild, SIGNAL( ViewValueChanged( QVariant, QString, bool ) ),
+      this, SLOT( onChildChanged( QVariant const &, QString const &, bool ) )
+      );
 
   }
 }
@@ -74,7 +76,11 @@ void BaseViewItem::UpdateValueFromModel()
   }
 }
 
-void BaseViewItem::OnChildChanged(QVariant, QString, bool)
+void BaseViewItem::onChildChanged(
+  QVariant const &,
+  QString const &,
+  bool
+  )
 {
   /* default is no-op */
 }

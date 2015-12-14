@@ -89,7 +89,11 @@ void Vec3ViewItem::OnTextEditsChanged()
   emit ViewValueChanged(m_value, GetName(), true);
 }
 
-void Vec3ViewItem::OnChildChanged(QVariant value, QString childName, bool commit)
+void Vec3ViewItem::onChildChanged(
+  QVariant const &value,
+  QString const &childName,
+  bool commit
+  )
 {
   // Assume m_value valid?
   QVector3D vec = m_value.value<QVector3D>();
