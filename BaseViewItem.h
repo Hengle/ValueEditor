@@ -13,18 +13,13 @@ class BaseModelItem;
 // the core, and should be implemented to handle specific
 // UI duties (ie, showing widgets, etc).  
 
-class VALUEEDIT_API BaseViewItem :
-  public QObject
+class VALUEEDIT_API BaseViewItem : public QObject
 {
   Q_OBJECT
 
   Q_DISABLE_COPY(BaseViewItem);
 
   QString m_name;
-
-  // A viewitem may be directly connected
-  // to a BaseModelItem
-  BaseModelItem* m_modelitem;
 
 protected:
 #pragma warning(push)
@@ -33,7 +28,8 @@ protected:
 #pragma warning(pop)
 
 public:
-  BaseViewItem( QString name );
+
+  BaseViewItem( QString const &name );
   ~BaseViewItem();
 
   size_t NumChildren();
@@ -47,30 +43,12 @@ public:
   // wire up the childs ViewValueChanged to this classes onChildViewChanged
   void AddChild( BaseViewItem* pItem, bool doConnect = false );
 
-  // Connect this ViewItem to the passed BaseModelItem
-  // This allows this ViewItem to directly query the 
-  // BaseModelItem for its values, and will wire together
-  // the bi-directional update signals.
-  void SetBaseModelItem( BaseModelItem* pItem );
-
   // Implement this function to build the widgets to
   // display the value represented by your class
-  virtual QWidget* BuildWidgets( bool expanded ) = 0;
-
-  // Implement this function to return the current widget value
-  virtual QVariant GetValue() = 0;
-
-  // If connected to a ModelItem, returns that ModelItem's
-  // value directly.  This is intended to be used to 
-  // initialize widget values.
-  QVariant GetModelValue();
+  virtual QWidget *getWidget() = 0;
 
   // Get the name of this ViewItem
   const QString& GetName();
-
-  // If connected to a model, get's its values and
-  // updates the widget values from it.
-  void UpdateValueFromModel();
 
 public slots:
 

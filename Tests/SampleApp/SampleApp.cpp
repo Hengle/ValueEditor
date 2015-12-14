@@ -37,16 +37,13 @@ class MainWindow : public QMainWindow
     else
       parent->addChild( item );
 
-    QWidget* viewWidget = pViewItem->BuildWidgets( false );
-    tree->setItemWidget( item, 1, viewWidget );
+    if ( QWidget *viewWidget = pViewItem->getWidget() )
+      tree->setItemWidget( item, 1, viewWidget );
 
     for (int i = 0; i < pViewItem->NumChildren(); i++)
     {
       BuildTree( tree, item, pViewItem->GetChild( i ) );
     }
-
-    // Once the children are added/built, update values from source
-    pViewItem->UpdateValueFromModel();
   }
 
 public:

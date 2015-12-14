@@ -10,17 +10,15 @@ class RTValViewItem : public BaseViewItem
 	// Cache the val for easier reconstruction.  Why?  cause why not?
 	FabricCore::RTVal m_val; 
 
-	QWidget* m_parentWidget;
+	QWidget *m_widget;
 
 public:
 	RTValViewItem(QString name);
 	~RTValViewItem();
 
-	virtual QWidget* BuildWidgets(bool expanded) /*override*/;
+	virtual QWidget *getWidget() /*override*/;
 
 	virtual void UpdateViewValue(QVariant value) /*override*/;
-
-	virtual QVariant GetValue() /*override*/;
 
 	virtual void onChildViewChanged(
 		QVariant const &value,

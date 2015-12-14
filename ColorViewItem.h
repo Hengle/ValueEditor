@@ -1,23 +1,20 @@
 #pragma once
 
 #include "BaseViewItem.h"
+#include <QtGui/QLabel.h>
 
 class ColorViewItem : public BaseViewItem
 {
 private:
-  // WE cache the value, and print it out.  This is so if this class is
-  // used for something it should not be, it will at least be printed
-  // out (and we can see what type it should be).
-  QVariant m_value;
+  
+  QLabel *m_label;
 
 public:
 
   ColorViewItem( const QVariant& value, const QString& name );
   ~ColorViewItem();
 
-  QWidget* BuildWidgets( bool expanded ) /*override*/;
-
-  QVariant GetValue() /*override*/;
+  virtual QWidget *getWidget() /*override*/;
 
   void UpdateViewValue( QVariant value ) /*override*/;
 

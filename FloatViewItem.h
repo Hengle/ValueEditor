@@ -6,13 +6,15 @@ class QDoubleSpinBox;
 class FloatViewItem : public BaseViewItem
 {
 	Q_OBJECT
+
 public:
+
 	FloatViewItem(QString name);
 	~FloatViewItem();
 
-	QWidget* BuildWidgets(bool expanded) /*override*/;
+	virtual QWidget *getWidget() /*override*/;
+  
 	void UpdateViewValue(QVariant value) /*override*/;
-	QVariant GetValue();
 
 private:
 

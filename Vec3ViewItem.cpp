@@ -5,88 +5,70 @@
 #include <QtGui/QLineEdit.h>
 #include <QVector3D.h>
 
-Vec3ViewItem::Vec3ViewItem(const QVariant& value, const QString& name)
-  : BaseViewItem(name)
-  , m_value(value)
-  , m_xEdit(nullptr)
-  , m_yEdit(nullptr)
-  , m_zEdit(nullptr)
-  , m_BaseW(nullptr)
+Vec3ViewItem::Vec3ViewItem(
+  QString const &name
+  )
+  : BaseViewItem( name )
+  , m_widget( new QWidget )
+  , m_layout( new QHBoxLayout( m_widget ) )
+  , m_xEdit( new QLineEdit( m_widget ) )
+  , m_yEdit( new QLineEdit( m_widget ) )
+  , m_zEdit( new QLineEdit( m_widget ) )
 {
+  QObject *widgetObject = m_widget;
+  widgetObject->setParent( this );
 
+  m_layout->addWidget( m_xEdit );
+  m_layout->addWidget( m_yEdit );
+  m_layout->addWidget( m_zEdit );
+
+  // Connect em up.
+  connect(
+    m_xEdit, SIGNAL(textEdited(QString)),
+    this, SLOT(OnTextEditsChanged())
+    );
+  connect(
+    m_yEdit, SIGNAL(textEdited(QString)),
+    this, SLOT(OnTextEditsChanged())
+    );
+  connect(
+    m_zEdit, SIGNAL(textEdited(QString)),
+    this, SLOT(OnTextEditsChanged())
+    );
 }
 
 Vec3ViewItem::~Vec3ViewItem()
 {
-
 }
 
-QWidget* Vec3ViewItem::BuildWidgets(bool /*expanded*/)
+QWidget *Vec3ViewItem::getWidget()
 {
-  if (m_BaseW == nullptr)
-  {
-    // Layout 3 edit boxes horizontally
-    m_BaseW = new QWidget;
-    QHBoxLayout *layout = new QHBoxLayout(m_BaseW);
-
-    // Create XYZ edit boxes
-    m_xEdit = new QLineEdit(m_BaseW);
-    m_yEdit = new QLineEdit(m_BaseW);
-    m_zEdit = new QLineEdit(m_BaseW);
-
-    // Connect em up.
-    connect(m_xEdit, SIGNAL(textEdited(QString)),
-        this, SLOT(OnTextEditsChanged()));
-    connect(m_yEdit, SIGNAL(textEdited(QString)),
-        this, SLOT(OnTextEditsChanged()));
-    connect(m_zEdit, SIGNAL(textEdited(QString)),
-        this, SLOT(OnTextEditsChanged()));
-
-    layout->addWidget(m_xEdit);
-    layout->addWidget(m_yEdit);
-    layout->addWidget(m_zEdit);
-
-    UpdateViewValue(m_value);
-  }
-  return m_BaseW;
+  return m_widget;
 }
 
-QVariant Vec3ViewItem::GetValue()
-{
-  return m_value;
-}
-
-void Vec3ViewItem::UpdateViewValue(QVariant value)
+void Vec3ViewItem::UpdateViewValue( QVariant value )
 {
   m_value = value;
 
   // Update our line edits
   QVector3D vec = value.value<QVector3D>();
-  if (m_xEdit != nullptr)
-    m_xEdit->setText(QString::number(vec.x()));
-  if (m_yEdit != nullptr)
-    m_yEdit->setText(QString::number(vec.y()));
-  if (m_zEdit != nullptr)
-    m_zEdit->setText(QString::number(vec.z()));
+  m_xEdit->setText( QString::number(vec.x()) );
+  m_yEdit->setText( QString::number(vec.y()) );
+  m_zEdit->setText( QString::number(vec.z()) );
 
-  GetChild(0)->UpdateViewValue(QVariant(vec.x()));
-  GetChild(1)->UpdateViewValue(QVariant(vec.y()));
-  GetChild(2)->UpdateViewValue(QVariant(vec.z()));
+  GetChild(0)->UpdateViewValue( QVariant(vec.x()) );
+  GetChild(1)->UpdateViewValue( QVariant(vec.y()) );
+  GetChild(2)->UpdateViewValue( QVariant(vec.z()) );
 }
-
 
 void Vec3ViewItem::OnTextEditsChanged()
 {
   QVector3D vec;
-  if (m_xEdit != nullptr)
-    vec.setX(m_xEdit->text().toDouble());
-  if (m_yEdit != nullptr)
-    vec.setY(m_yEdit->text().toDouble());
-  if (m_zEdit != nullptr)
-    vec.setZ(m_zEdit->text().toDouble());
+  vec.setX(m_xEdit->text().toDouble());
+  vec.setY(m_yEdit->text().toDouble());
+  vec.setZ(m_zEdit->text().toDouble());
 
-  m_value = vec;
-  emit ViewValueChanged(m_value, GetName(), true);
+  emit ViewValueChanged( QVariant( vec ), GetName(), true );
 }
 
 void Vec3ViewItem::onChildViewChanged(
@@ -105,8 +87,7 @@ void Vec3ViewItem::onChildViewChanged(
   if (childName == "Z")
     vec.setZ(value.toDouble());
 
-  m_value = vec;
-  emit ViewValueChanged(m_value, GetName(), commit);
+  emit ViewValueChanged( QVariant( vec ), GetName(), commit );
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -116,7 +97,7 @@ static Vec3ViewItem* CreateItem( const QVariant& data, const QString& name, cons
   const int qv3Dtype = ((QVariant)QVector3D()).type();
   if (data.type() == qv3Dtype)
   {
-    Vec3ViewItem* pVec3ViewItem = new Vec3ViewItem( data, name );
+    Vec3ViewItem* pVec3ViewItem = new Vec3ViewItem( name );
     QVector3D value = data.value<QVector3D>();
     // Add 3 float children as sub-controls
     ViewItemFactory* pFactory = ViewItemFactory::GetInstance();
@@ -127,6 +108,7 @@ static Vec3ViewItem* CreateItem( const QVariant& data, const QString& name, cons
     pVec3ViewItem->AddChild( pxChild, true );
     pVec3ViewItem->AddChild( pyChild, true );
     pVec3ViewItem->AddChild( pzChild, true );
+
     return pVec3ViewItem;
   }
   return nullptr;

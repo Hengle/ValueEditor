@@ -22,23 +22,33 @@ ViewItemFactory* ViewItemFactory::GetInstance()
 }
 
 
-BaseViewItem* ViewItemFactory::BuildView(BaseModelItem* model)
+BaseViewItem* ViewItemFactory::BuildView( BaseModelItem *modelItem )
 {
-  if (model == nullptr)
-    return nullptr;
+  if ( !modelItem )
+    return 0;
 
-  BaseViewItem* viewItem = CreateViewItem(model->GetValue(), model->GetName());
-
-  if (viewItem != nullptr)
+  BaseViewItem* viewItem = CreateViewItem(
+    modelItem->GetValue(),
+    modelItem->GetName()
+    );
+  if ( viewItem )
   {
-    for (int i = 0; i < model->NumChildren(); i++)
+    for ( int i = 0; i < modelItem->NumChildren(); i++ )
     {
-      BaseViewItem* childView = BuildView(model->GetChild(i));
-      viewItem->AddChild(childView);
+      BaseViewItem *childViewItem = BuildView( modelItem->GetChild( i ) );
+      viewItem->AddChild( childViewItem );
     }
-    viewItem->SetBaseModelItem( model );
-  }
 
+    QObject::connect(
+      viewItem, SIGNAL( ViewValueChanged( QVariant, QString, bool ) ),
+      modelItem, SLOT( UpdateModelValue( QVariant, QString, bool ) )
+      );
+
+    QObject::connect(
+      modelItem, SIGNAL( ModelValueChanged( QVariant ) ),
+      viewItem, SLOT( UpdateViewValue( QVariant ) )
+      );
+  }
   return viewItem;
 }
 
@@ -83,8 +93,11 @@ BaseViewItem* ViewItemFactory::CreateViewItem(const QVariant& data, const QStrin
   for ( CreatorRIT itr = creatorRBegin(); itr != creatorREnd(); itr++ )
   {
     BaseViewItem* viewItem = (*itr)->CreateItem(data, name, tag);
-    if (viewItem != nullptr)
+    if ( viewItem )
+    {
+      viewItem->UpdateViewValue( data );
       return viewItem;
+    }
   }
 
   return nullptr;

@@ -2,42 +2,37 @@
 #include "BaseViewItemCreator.h"
 #include <QtGui/QLabel.h>
 
-ColorViewItem::ColorViewItem( const QVariant& value, const QString& name )
+ColorViewItem::ColorViewItem(
+  const QVariant& value,
+  const QString& name
+  )
   : BaseViewItem( name )
-  , m_value( value )
+  , m_label( new QLabel )
 {
-
+  QObject *labelObject = m_label;
+  labelObject->setParent( this );
 }
 
 ColorViewItem::~ColorViewItem()
 {
-
 }
 
-QWidget* ColorViewItem::BuildWidgets( bool /*expanded*/ )
+QWidget *ColorViewItem::getWidget()
 {
-  if (m_value.canConvert( QVariant::String ))
-  {
-    QString string = m_value.toString();
-    QLabel* label = new QLabel( string );
-    return label;
-  }
-  return nullptr; // THe default view don't have no widgets
-}
-
-QVariant ColorViewItem::GetValue()
-{
-  return m_value;
+  return m_label;
 }
 
 void ColorViewItem::UpdateViewValue( QVariant value )
 {
-  m_value = value;
+  if ( value.canConvert( QVariant::String ) )
+  {
+    QString string = value.toString();
+    m_label->setText( string );
+  }
 }
 
 void ColorViewItem::onChildViewChanged( QVariant const &, QString const &, bool )
 {
-
 }
 
 //////////////////////////////////////////////////////////////////////////

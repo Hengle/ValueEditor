@@ -2,9 +2,8 @@
 #include "BaseModelItem.h"
 
 
-BaseViewItem::BaseViewItem( QString name )
-  : m_name(name)
-  , m_modelitem( 0 )
+BaseViewItem::BaseViewItem( QString const &name )
+  : m_name( name )
 {
 }
 
@@ -37,43 +36,9 @@ void BaseViewItem::AddChild( BaseViewItem* pChild, bool doConnect/*=false*/ )
   }
 }
 
-void BaseViewItem::SetBaseModelItem( BaseModelItem* pItem )
-{
-  m_modelitem = pItem;
-  if (pItem != nullptr)
-  {
-    connect( this, SIGNAL( ViewValueChanged( QVariant, QString, bool ) ),
-         pItem, SLOT( UpdateModelValue( QVariant, QString, bool ) ) );
-
-    connect( pItem, SIGNAL( ModelValueChanged( QVariant ) ),
-         this, SLOT( UpdateViewValue( QVariant ) ) );
-  }
-}
-
-QVariant BaseViewItem::GetModelValue()
-{
-  if (m_modelitem != nullptr)
-  {
-    return m_modelitem->GetValue();
-  }
-  return QVariant();
-}
-
 const QString& BaseViewItem::GetName()
 {
   return m_name;
-}
-
-void BaseViewItem::UpdateValueFromModel()
-{
-  if (m_modelitem != nullptr)
-  {
-    QVariant value = m_modelitem->GetValue();
-    if ( value.type() != QVariant::Invalid )
-    {
-      UpdateViewValue(value);
-    }
-  }
 }
 
 void BaseViewItem::onChildViewChanged(

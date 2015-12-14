@@ -4,12 +4,10 @@
 RTValViewItem::RTValViewItem(QString name)
 	: BaseViewItem(name)
 {
-
 }
 
 RTValViewItem::~RTValViewItem()
 {
-
 }
 
 //size_t RTValViewItem::NumChildren()
@@ -22,35 +20,21 @@ RTValViewItem::~RTValViewItem()
 //	return m_children[index];
 //}
 
-QWidget* RTValViewItem::BuildWidgets(bool expanded)
+QWidget *RTValViewItem::getWidget()
 {
-	// Possible logic - if 3 or less children, who are all numeric, display values
-	if (NumChildren() <= 3)
-	{
-		if (expanded)
-		{
-			QWidget *parentWidget = new QWidget();
-
-//			for (auto itr = m_children.begin(); itr != m_children.end(); itr++)
-//			{
-//				QLabel* label = new QLabel((*itr)->GetValue().toString());
-//			}
-			return parentWidget;
-		}
-	}
-	return nullptr;
+	return 0;
 }
 
-void RTValViewItem::UpdateViewValue(QVariant value)
+void RTValViewItem::UpdateViewValue( QVariant value )
 {
-	m_val = toRTVal(value);
-	for (ChildIT itr = childBegin(); itr != childEnd(); itr++)
+	m_val = toRTVal( value );
+	for ( ChildIT itr = childBegin(); itr != childEnd(); itr++ )
 	{
 		QString childName = (*itr)->GetName();
 		QByteArray asciiName = childName.toAscii();
 		FabricCore::RTVal childVal = m_val.maybeGetMemberRef(asciiName.data());
 		// Assert childVal is valid
-		(*itr)->UpdateViewValue(toVariant(childVal));
+		(*itr)->UpdateViewValue( toVariant(childVal) );
 	}
 }
 
@@ -69,9 +53,4 @@ void RTValViewItem::onChildViewChanged(
 	m_val.setMember(asciiName.data(), oldChildVal);
 
 	emit ViewValueChanged(toVariant(m_val), GetName(), commit);
-}
-
-QVariant RTValViewItem::GetValue()
-{
-	return toVariant(m_val);
 }

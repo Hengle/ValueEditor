@@ -3,36 +3,29 @@
 #include <QtGui/QLabel.h>
 
 DefaultViewItem::DefaultViewItem(const QVariant& value, const QString& name)
-  : BaseViewItem(name)
-  , m_value(value)
+  : BaseViewItem( name )
+  , m_label( new QLabel )
 {
-
+  QObject *labelObject = m_label;
+  labelObject->setParent( this );
 }
 
 DefaultViewItem::~DefaultViewItem()
 {
-
 }
 
-QWidget* DefaultViewItem::BuildWidgets(bool /*expanded*/)
+QWidget *DefaultViewItem::getWidget()
 {
-  if (m_value.canConvert(QVariant::String))
+  return m_label;
+}
+
+void DefaultViewItem::UpdateViewValue( QVariant value )
+{
+  if ( value.canConvert( QVariant::String ) )
   {
-    QString string = m_value.toString();
-    QLabel* label = new QLabel(string);
-    return label;
+    QString string = value.toString();
+    m_label->setText( string );
   }
-  return nullptr; // THe default view don't have no widgets
-}
-
-QVariant DefaultViewItem::GetValue()
-{
-  return m_value;
-}
-
-void DefaultViewItem::UpdateViewValue(QVariant value)
-{
-  m_value = value;
 }
 
 //////////////////////////////////////////////////////////////////////////

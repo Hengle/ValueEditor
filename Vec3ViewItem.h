@@ -16,17 +16,18 @@ private:
 	QVariant m_value;
 
 	// Cache widgets
-	QWidget* m_BaseW;
+	QWidget *m_widget;
+	QLayout *m_layout;
 	QLineEdit* m_xEdit;
 	QLineEdit* m_yEdit;
 	QLineEdit* m_zEdit;
+
 public:
 
-	Vec3ViewItem(const QVariant& value, const QString& name);
+	Vec3ViewItem( const QString& name );
 	~Vec3ViewItem();
 
-	QWidget* BuildWidgets(bool expanded) /*override*/;
-	QVariant GetValue() /*override*/;
+	virtual QWidget *getWidget() /*override*/;
 
 	void UpdateViewValue(QVariant value) /*override*/;
 	
