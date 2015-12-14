@@ -9,12 +9,17 @@ class FloatViewItem : public BaseViewItem
 
 public:
 
-	FloatViewItem(QString name);
+	FloatViewItem(
+    QString const &name,
+    QVariant const &value
+    );
 	~FloatViewItem();
 
 	virtual QWidget *getWidget() /*override*/;
   
 	void UpdateViewValue(QVariant value) /*override*/;
+
+  virtual bool hasChildren() const { return false; }
 
 private:
 

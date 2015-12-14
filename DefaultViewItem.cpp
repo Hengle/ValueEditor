@@ -1,15 +1,20 @@
 #include "BaseModelItem.h"
 #include "DefaultViewItem.h"
 #include "BaseViewItemCreator.h"
+#include "ViewItemFactory.h"
 #include <QtGui/QLabel.h>
 
-DefaultViewItem::DefaultViewItem( BaseModelItem *modelItem )
-  : BaseViewItem( modelItem->GetName() )
+DefaultViewItem::DefaultViewItem(
+  BaseModelItem *modelItem,
+  QString const &name,
+  QVariant const &value
+  )
+  : BaseViewItem( name )
   , m_modelItem( modelItem )
-  , m_label( new QLabel )
 {
-  QObject *labelObject = m_label;
-  labelObject->setParent( this );
+  m_label = new QLabel;
+
+  UpdateViewValue( value );
 }
 
 DefaultViewItem::~DefaultViewItem()
@@ -30,6 +35,33 @@ void DefaultViewItem::UpdateViewValue( QVariant value )
   }
 }
 
+bool DefaultViewItem::hasChildren() const
+{
+  if ( m_modelItem )
+    return m_modelItem->NumChildren() > 0;
+  else
+    return 0;
+}
+
+QList<BaseViewItem *> DefaultViewItem::createChildViewItems() const
+{
+  QList<BaseViewItem *> result;
+  if ( m_modelItem )
+  {
+    ViewItemFactory *viewItemFactory = ViewItemFactory::GetInstance();
+
+    int numChildren = m_modelItem->NumChildren();
+    result.reserve( numChildren );
+
+    for ( int i = 0; i < numChildren; ++i )
+    {
+      BaseModelItem *childModelItem = m_modelItem->GetChild( i );
+      result.append( viewItemFactory->BuildView( childModelItem ) );
+    }
+  }
+  return result;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Expose the ViewItem to the UI layer
 static BaseViewItem* CreateItem(
@@ -39,10 +71,7 @@ static BaseViewItem* CreateItem(
   char const *tag
   )
 {
-  if ( modelItem )
-    return new DefaultViewItem( modelItem );
-  else
-    return 0;
+  return new DefaultViewItem( modelItem, name, value );
 }
 
 EXPOSE_VIEW_ITEM(DefaultViewItem, CreateItem, 0);

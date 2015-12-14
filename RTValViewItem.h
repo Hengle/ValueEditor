@@ -13,6 +13,7 @@ class RTValViewItem : public BaseViewItem
 	QWidget *m_widget;
 
 public:
+	
 	RTValViewItem(QString name);
 	~RTValViewItem();
 
@@ -25,4 +26,6 @@ public:
 		QString const &name,
 		bool commit
 		) /*override*/;
+
+  virtual bool hasChildren() const { return true; }
 };

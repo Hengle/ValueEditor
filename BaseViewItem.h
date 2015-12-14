@@ -3,6 +3,7 @@
 #include <DllExport.h>
 #include <QtCore/QObject.h>
 #include <QtCore/QVariant.h>
+#include <QtGui/QTreeWidget.h>
 #include <vector>
 
 class BaseModelItem;
@@ -29,6 +30,22 @@ protected:
 
 public:
 
+  class TreeWidgetItem : public QTreeWidgetItem
+  {
+  public:
+
+    TreeWidgetItem( BaseViewItem *viewItem )
+      : m_viewItem( viewItem )
+      {}
+
+    BaseViewItem *getViewItem() const
+      { return m_viewItem; }
+
+  private:
+
+    BaseViewItem *m_viewItem;
+  };
+
   BaseViewItem( QString const &name );
   ~BaseViewItem();
 
@@ -49,6 +66,15 @@ public:
 
   // Get the name of this ViewItem
   const QString& GetName();
+
+  virtual bool hasChildren() const = 0;
+
+  virtual QList<BaseViewItem *> createChildViewItems() const;
+
+  void addToTreeWidget(
+    QTreeWidget *treeWidget,
+    TreeWidgetItem *parentTreeWidgetItem
+    );
 
 public slots:
 

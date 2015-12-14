@@ -9,6 +9,7 @@
 //#include "..\..\RTValViewItemCreator.h"
 //#include "..\..\Vec3ViewItemCreator.h"
 #include "SampleModel.h"
+#include <VETreeWidget.h>
 
 static QTime myTimer;
 void SetStylesheet(const char* filename)
@@ -23,39 +24,14 @@ void SetStylesheet(const char* filename)
 class MainWindow : public QMainWindow
 {
   typedef QMainWindow Super;
-  
-  void BuildTree( QTreeWidget* tree, QTreeWidgetItem* parent, BaseViewItem* pViewItem )
-  {
-    if (pViewItem == nullptr)
-      return;
-
-    QTreeWidgetItem* item = new QTreeWidgetItem;
-    item->setText( 0, pViewItem->GetName() );
-
-    if (parent == nullptr)
-      tree->addTopLevelItem( item );
-    else
-      parent->addChild( item );
-
-    if ( QWidget *viewWidget = pViewItem->getWidget() )
-      tree->setItemWidget( item, 1, viewWidget );
-
-    for (int i = 0; i < pViewItem->NumChildren(); i++)
-    {
-      BuildTree( tree, item, pViewItem->GetChild( i ) );
-    }
-  }
 
 public:
-	MainWindow(BaseViewItem* pBaseView)
+
+	MainWindow( BaseViewItem *rootViewItem )
 	{
+		VETreeWidget *treeWidget = new VETreeWidget( rootViewItem );
 
-		QTreeWidget* tree = new QTreeWidget;
-		tree->setColumnCount(2);
-
-		BuildTree(tree, nullptr, pBaseView);
-
-		setCentralWidget(tree);
+		setCentralWidget( treeWidget );
 	}
 
 	virtual void showEvent(QShowEvent *ev) /*override*/

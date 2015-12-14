@@ -30,12 +30,6 @@ BaseViewItem *ViewItemFactory::BuildView( BaseModelItem *modelItem )
   BaseViewItem* viewItem = CreateViewItem( modelItem );
   if ( viewItem )
   {
-    for ( int i = 0; i < modelItem->NumChildren(); i++ )
-    {
-      BaseViewItem *childViewItem = BuildView( modelItem->GetChild( i ) );
-      viewItem->AddChild( childViewItem );
-    }
-
     QObject::connect(
       viewItem, SIGNAL( ViewValueChanged( QVariant, QString, bool ) ),
       modelItem, SLOT( UpdateModelValue( QVariant, QString, bool ) )
@@ -96,10 +90,7 @@ BaseViewItem *ViewItemFactory::CreateViewItem(
   {
     BaseViewItem* viewItem = (*itr)->CreateItem( modelItem, name, value, tag );
     if ( viewItem )
-    {
-      viewItem->UpdateViewValue( value );
       return viewItem;
-    }
   }
 
   return nullptr;

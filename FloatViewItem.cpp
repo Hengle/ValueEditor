@@ -1,14 +1,15 @@
 #include "FloatViewItem.h"
 #include "BaseViewItemCreator.h"
 #include <QtGui/QSpinBox.h>
+#include <assert.h>
 
-FloatViewItem::FloatViewItem(QString name)
+FloatViewItem::FloatViewItem(
+  QString const &name,
+  QVariant const &value
+  )
   : BaseViewItem(name)
-  , m_spinner( new QDoubleSpinBox )
 {
-  QObject *spinnerObject = m_spinner;
-  spinnerObject->setParent( this );
-
+  m_spinner = new QDoubleSpinBox;
   connect(
     m_spinner, SIGNAL( valueChanged( double ) ), 
     this, SLOT( OnSpinnerChanged( double ) )
@@ -17,6 +18,7 @@ FloatViewItem::FloatViewItem(QString name)
     m_spinner, SIGNAL( editingFinished() ), 
     this, SLOT( OnEditFinished() )
     );
+  UpdateViewValue( value );
 }
 
 FloatViewItem::~FloatViewItem()
@@ -63,7 +65,7 @@ static FloatViewItem* CreateItem(
   if ( value.type() == QVariant::Double
     || value.type() == QMetaType::Float )
   {
-    return new FloatViewItem( name );
+    return new FloatViewItem( name, value );
   }
   return nullptr;
 }

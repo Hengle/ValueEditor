@@ -5,7 +5,7 @@ PROJECT(FileMenu)
 FIND_PACKAGE(Qt4 REQUIRED)
 INCLUDE(${QT_USE_FILE})
  
-QT4_WRAP_CPP(MOCSrcs BaseModelItem.h BaseViewItem.h FloatViewItem.h RTValViewItem.h Vec3ViewItem.h)
+QT4_WRAP_CPP(MOCSrcs VETreeWidget.h BaseModelItem.h BaseViewItem.h FloatViewItem.h RTValViewItem.h Vec3ViewItem.h)
  
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${root_SOURCE_DIR}/include)

@@ -14,7 +14,11 @@ private:
 
 public:
 
-	DefaultViewItem( BaseModelItem *modelItem );
+	DefaultViewItem(
+    BaseModelItem *modelItem,
+    QString const &name,
+    QVariant const &value
+    );
 	~DefaultViewItem();
 
 	virtual QWidget *getWidget() /*override*/;
@@ -27,4 +31,8 @@ public:
     bool
     ) /*override*/
 	  {}
+
+  virtual bool hasChildren() const /*override*/;
+
+  virtual QList<BaseViewItem *> createChildViewItems() const;
 };

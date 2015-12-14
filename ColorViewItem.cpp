@@ -1,16 +1,15 @@
 #include "ColorViewItem.h"
 #include "BaseViewItemCreator.h"
 #include <QtGui/QLabel.h>
+#include <assert.h>
 
 ColorViewItem::ColorViewItem(
   const QVariant& value,
   const QString& name
   )
   : BaseViewItem( name )
-  , m_label( new QLabel )
+  , m_label( 0 )
 {
-  QObject *labelObject = m_label;
-  labelObject->setParent( this );
 }
 
 ColorViewItem::~ColorViewItem()
@@ -19,6 +18,8 @@ ColorViewItem::~ColorViewItem()
 
 QWidget *ColorViewItem::getWidget()
 {
+  assert( !m_label );
+  m_label = new QLabel;
   return m_label;
 }
 
@@ -27,6 +28,7 @@ void ColorViewItem::UpdateViewValue( QVariant value )
   if ( value.canConvert( QVariant::String ) )
   {
     QString string = value.toString();
+    assert( m_label );
     m_label->setText( string );
   }
 }
