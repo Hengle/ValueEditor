@@ -10,37 +10,42 @@ RTValViewItemCreator::~RTValViewItemCreator()
 {
 }
 
-BaseViewItem* RTValViewItemCreator::CreateItem(const QVariant& data, const QString& name, const char* tag)
+BaseViewItem* RTValViewItemCreator::CreateItem(
+  BaseModelItem *modelItem,
+  QString const &name,
+  QVariant const &value,
+  char const *tag
+  )
 {
-	if (data.type() != QVariant::UserType)
-		return nullptr;
-	if (data.userType() == qMetaTypeId<FabricCore::RTVal>())
-		return nullptr;
+	if (value.type() != QVariant::UserType)
+		return 0;
+	if (value.userType() == qMetaTypeId<FabricCore::RTVal>())
+		return 0;
 
-	FabricCore::RTVal val = data.value<FabricCore::RTVal>();
-	const char* ctype = val.getTypeNameCStr();
+	FabricCore::RTVal rtVal = value.value<FabricCore::RTVal>();
+	const char* ctype = rtVal.getTypeNameCStr();
 
-	if (val.isObject() || val.isStruct())
+	if (rtVal.isObject() || rtVal.isStruct())
 	{
 		RTValViewItem* pViewItem = new RTValViewItem(QString(name));
 
-		FabricCore::RTVal desc = val.getDesc();
+		FabricCore::RTVal desc = rtVal.getDesc();
 		const char* cdesc = desc.getStringCString();
 		// TODO: parse cdesc, Build children from desc.
 
 		// For thinking, assume 2 children, name "X", "Y"
-		FabricCore::RTVal xval = val.maybeGetMemberRef("X");
+		FabricCore::RTVal xval = rtVal.maybeGetMemberRef("X");
 		QVariant xvariant = QVariant::fromValue<FabricCore::RTVal>(xval);
-		BaseViewItem* pxChild = ViewItemFactory::GetInstance()->CreateViewItem(xvariant, "X");
+		BaseViewItem* pxChild = ViewItemFactory::GetInstance()->CreateViewItem( "X", xvariant );
 		pViewItem->AddChild(pxChild);
 
-		FabricCore::RTVal yval = val.maybeGetMemberRef("Y");
+		FabricCore::RTVal yval = rtVal.maybeGetMemberRef("Y");
 		QVariant yvariant = QVariant::fromValue<FabricCore::RTVal>(yval);
-		BaseViewItem* pyChild = ViewItemFactory::GetInstance()->CreateViewItem(xvariant, "Y");
+		BaseViewItem* pyChild = ViewItemFactory::GetInstance()->CreateViewItem( "Y", yvariant );
 		pViewItem->AddChild(pyChild);
 
 		return pViewItem;
 	}
 
-	return nullptr;
+	return 0;
 }

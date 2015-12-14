@@ -7,5 +7,10 @@ public:
 	RTValViewItemCreator();
 	~RTValViewItemCreator();
 
-	virtual BaseViewItem* CreateItem(const QVariant& data, const QString& name, const char* tag) /*override*/;
+	virtual BaseViewItem* CreateItem(
+    BaseModelItem *modelItem,
+    QString const &name,
+    QVariant const &value,
+    char const *tag
+    ) /*override*/;
 };

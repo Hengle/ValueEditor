@@ -48,6 +48,21 @@ protected:
 	// automatically when an item is released.
 	void DeRegisterCreator(BaseViewItemCreator* creator);
 
+	// Create the most appropriate value editor given the following data
+	// \data The data being edited.  We create a BaseViewItem that matches the
+	//	type of this data.
+	// \viewtype[optional] What dimension the data represents.  For example, a 
+	//		float can represent any of an angle/ratio/distance etc.
+	// \tag[optional] One more piece of metadata, just in case you want to 
+	//		only display a value for a tagged value.
+	// TODO: Perhaps just pass in a MetaData option here to represent all metadata?
+	BaseViewItem* CreateViewItem(
+	  BaseModelItem *modelItem,
+		QString const &name,
+		QVariant const &value,
+	  char const *tag
+	  );
+
 public:
 
 	static ViewItemFactory* GetInstance();
@@ -59,8 +74,6 @@ public:
 	// actual widgets
 	BaseViewItem* BuildView(BaseModelItem* model);
 	
-
-
 	// Create the most appropriate value editor given the following data
 	// \data The data being edited.  We create a BaseViewItem that matches the
 	//	type of this data.
@@ -69,5 +82,22 @@ public:
 	// \tag[optional] One more piece of metadata, just in case you want to 
 	//		only display a value for a tagged value.
 	// TODO: Perhaps just pass in a MetaData option here to represent all metadata?
-	BaseViewItem* CreateViewItem(const QVariant& data, const QString& name, const char* tag = nullptr);
+	BaseViewItem* CreateViewItem(
+	  BaseModelItem *modelItem,
+	  char const *tag = 0
+	  );
+	
+	// Create the most appropriate value editor given the following data
+	// \data The data being edited.  We create a BaseViewItem that matches the
+	//	type of this data.
+	// \viewtype[optional] What dimension the data represents.  For example, a 
+	//		float can represent any of an angle/ratio/distance etc.
+	// \tag[optional] One more piece of metadata, just in case you want to 
+	//		only display a value for a tagged value.
+	// TODO: Perhaps just pass in a MetaData option here to represent all metadata?
+	BaseViewItem* CreateViewItem(
+		QString const &name,
+		QVariant const &value,
+	  char const *tag = 0
+	  );
 };

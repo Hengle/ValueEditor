@@ -22,15 +22,12 @@ ViewItemFactory* ViewItemFactory::GetInstance()
 }
 
 
-BaseViewItem* ViewItemFactory::BuildView( BaseModelItem *modelItem )
+BaseViewItem *ViewItemFactory::BuildView( BaseModelItem *modelItem )
 {
   if ( !modelItem )
     return 0;
 
-  BaseViewItem* viewItem = CreateViewItem(
-    modelItem->GetValue(),
-    modelItem->GetName()
-    );
+  BaseViewItem* viewItem = CreateViewItem( modelItem );
   if ( viewItem )
   {
     for ( int i = 0; i < modelItem->NumChildren(); i++ )
@@ -86,16 +83,21 @@ void ViewItemFactory::DeRegisterCreator(BaseViewItemCreator* creator)
   }
 }
 
-BaseViewItem* ViewItemFactory::CreateViewItem(const QVariant& data, const QString& name, const char* tag)
+BaseViewItem *ViewItemFactory::CreateViewItem(
+  BaseModelItem *modelItem,
+  QString const &name,
+  QVariant const &value,
+  char const *tag
+  )
 {
   // iterate in reverse.  This ensures we test the most-specialized types
   // before testing the more generalized types
   for ( CreatorRIT itr = creatorRBegin(); itr != creatorREnd(); itr++ )
   {
-    BaseViewItem* viewItem = (*itr)->CreateItem(data, name, tag);
+    BaseViewItem* viewItem = (*itr)->CreateItem( modelItem, name, value, tag );
     if ( viewItem )
     {
-      viewItem->UpdateViewValue( data );
+      viewItem->UpdateViewValue( value );
       return viewItem;
     }
   }
@@ -103,3 +105,29 @@ BaseViewItem* ViewItemFactory::CreateViewItem(const QVariant& data, const QStrin
   return nullptr;
 }
 
+BaseViewItem *ViewItemFactory::CreateViewItem(
+  BaseModelItem *modelItem,
+  char const *tag
+  )
+{
+  return CreateViewItem(
+    modelItem,
+    modelItem->GetName(),
+    modelItem->GetValue(),
+    tag
+    );
+}
+
+BaseViewItem *ViewItemFactory::CreateViewItem(
+  QString const &name,
+  QVariant const &value,
+  char const *tag
+  )
+{
+  return CreateViewItem(
+    0,
+    name,
+    value,
+    tag
+    );
+}

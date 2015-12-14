@@ -92,18 +92,23 @@ void Vec3ViewItem::onChildViewChanged(
 
 //////////////////////////////////////////////////////////////////////////
 // 
-static Vec3ViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag )
+static Vec3ViewItem* CreateItem(
+  BaseModelItem *modelItem,
+  QString const &name,
+  QVariant const &value,
+  char const *tag
+  )
 {
   const int qv3Dtype = ((QVariant)QVector3D()).type();
-  if (data.type() == qv3Dtype)
+  if (value.type() == qv3Dtype)
   {
     Vec3ViewItem* pVec3ViewItem = new Vec3ViewItem( name );
-    QVector3D value = data.value<QVector3D>();
+    QVector3D vec = value.value<QVector3D>();
     // Add 3 float children as sub-controls
     ViewItemFactory* pFactory = ViewItemFactory::GetInstance();
-    BaseViewItem* pxChild = pFactory->CreateViewItem( QVariant( value.x() ), QString( "X" ) );
-    BaseViewItem* pyChild = pFactory->CreateViewItem( QVariant( value.y() ), QString( "Y" ) );
-    BaseViewItem* pzChild = pFactory->CreateViewItem( QVariant( value.z() ), QString( "Z" ) );
+    BaseViewItem* pxChild = pFactory->CreateViewItem( "X", QVariant( vec.x() ) );
+    BaseViewItem* pyChild = pFactory->CreateViewItem( "Y", QVariant( vec.y() ) );
+    BaseViewItem* pzChild = pFactory->CreateViewItem( "Z", QVariant( vec.z() ) );
 
     pVec3ViewItem->AddChild( pxChild, true );
     pVec3ViewItem->AddChild( pyChild, true );

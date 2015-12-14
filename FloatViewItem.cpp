@@ -53,9 +53,15 @@ void FloatViewItem::OnEditFinished()
 
 //////////////////////////////////////////////////////////////////////////
 // 
-static FloatViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag )
+static FloatViewItem* CreateItem(
+  BaseModelItem *modelItem,
+  QString const &name,
+  QVariant const &value,
+  char const *tag
+  )
 {
-  if (data.type() == QVariant::Double || data.type() == QMetaType::Float)
+  if ( value.type() == QVariant::Double
+    || value.type() == QMetaType::Float )
   {
     return new FloatViewItem( name );
   }

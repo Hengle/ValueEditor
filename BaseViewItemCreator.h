@@ -2,6 +2,7 @@
 
 #include <QtCore/QObject.h>
 
+class BaseModelItem;
 class BaseViewItem;
 
 // A ViewItemCreator allows plugging in custom ViewItem implementations.
@@ -27,7 +28,12 @@ public:
   //virtual bool Matches(QVariant data, const char* type, const char* tag) = 0;
 
   // Create the view item.
-  virtual BaseViewItem* CreateItem(const QVariant& data, const QString& name, const char* tag) = 0;
+  virtual BaseViewItem* CreateItem(
+    BaseModelItem *modelItem,
+    QString const &name,
+    QVariant const &value,
+    char const *tag
+    ) = 0;
 
   // Implement this function to delete this class, it will 
   // be called when the item is released.  The de-allocation
@@ -56,8 +62,13 @@ public:
 class Creator_##ViewItemClass : public BaseViewItemCreator { \
 public: \
   Creator_##ViewItemClass() {} \
-  BaseViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag ) /*override*/ \
-  { return ::CreatorFn(data, name, tag); } \
+  BaseViewItem* CreateItem( \
+    BaseModelItem *modelItem, \
+    QString const &name, \
+    QVariant const &value, \
+    char const *tag \
+    ) /*override*/ \
+  { return ::CreatorFn( modelItem, name, value, tag ); } \
   int Priority() /*override*/ { return _priority; } \
 }; \
 static Creator_##ViewItemClass s_CreatorInstance;

@@ -1,17 +1,20 @@
 #pragma once
 
 #include "BaseViewItem.h"
-#include <QtGui/QLabel.h>
+
+class BaseModelItem;
+class QLabel;
 
 class DefaultViewItem : public BaseViewItem
 {
 private:
 	
+  BaseModelItem *m_modelItem;
   QLabel *m_label;
 
 public:
 
-	DefaultViewItem( const QVariant& value, const QString& name );
+	DefaultViewItem( BaseModelItem *modelItem );
 	~DefaultViewItem();
 
 	virtual QWidget *getWidget() /*override*/;
