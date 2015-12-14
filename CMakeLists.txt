@@ -11,10 +11,14 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${root_SOURCE_DIR}/include)
 
 include_directories($ENV{FABRIC_DIR}/include)
+link_directories($ENV{FABRIC_DIR}/lib)
 add_definitions(-DFEC_SHARED)
 
-ADD_EXECUTABLE(TestProject Tests/SampleApp/SampleApp.cpp Tests/SampleApp/SampleModel.cpp ${MOCSrcs})
-TARGET_LINK_LIBRARIES(TestProject ${QT_QTMAIN_LIBRARY} ${QT_LIBRARIES})
+file(GLOB AppSrcs Tests/SampleApp/*.cpp)
+file(GLOB LibSrcs *.cpp)
+
+ADD_EXECUTABLE(TestProject ${AppSrcs} ${LibSrcs} ${MOCSrcs})
+TARGET_LINK_LIBRARIES(TestProject ${QT_QTMAIN_LIBRARY} ${QT_LIBRARIES} FabricCore)
  
 IF(WIN32) # Check if we are on Windows
   if(MSVC) # Check if we are using the Visual Studio compiler

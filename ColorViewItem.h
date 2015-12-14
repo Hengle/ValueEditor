@@ -15,10 +15,10 @@ public:
   ColorViewItem( const QVariant& value, const QString& name );
   ~ColorViewItem();
 
-  QWidget* BuildWidgets( bool expanded ) override;
+  QWidget* BuildWidgets( bool expanded ) /*override*/;
 
-  QVariant GetValue() override;
+  QVariant GetValue() /*override*/;
 
-  void UpdateViewValue( QVariant value ) override;
-  void OnChildChanged( QVariant, QString, bool ) override;;
+  void UpdateViewValue( QVariant value ) /*override*/;
+  void OnChildChanged( QVariant, QString, bool ) /*override*/;
 };

@@ -4,7 +4,10 @@
 
 RTValViewItemCreator::RTValViewItemCreator()
 {
+}
 
+RTValViewItemCreator::~RTValViewItemCreator()
+{
 }
 
 BaseViewItem* RTValViewItemCreator::CreateItem(const QVariant& data, const QString& name, const char* tag)

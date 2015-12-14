@@ -1,5 +1,6 @@
 #include "FloatViewItem.h"
 #include "BaseViewItemCreator.h"
+#include <QtGui/QSpinBox.h>
 
 FloatViewItem::FloatViewItem(QString name)
   : m_spinner(nullptr)
@@ -48,11 +49,10 @@ void FloatViewItem::OnEditFinished()
 {
   emit ViewValueChanged( QVariant( GetValue() ), GetName(), 1 );
 }
-#include "moc_FloatViewItem.cpp"
 
 //////////////////////////////////////////////////////////////////////////
 // 
-FloatViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag )
+static FloatViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag )
 {
   if (data.type() == QVariant::Double || data.type() == QMetaType::Float)
   {

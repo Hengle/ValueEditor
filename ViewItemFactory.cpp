@@ -43,29 +43,30 @@ BaseViewItem* ViewItemFactory::BuildView(BaseModelItem* model)
 }
 
 // sort using a custom function object
-struct {
+struct CreatorSort
+{
   bool operator()( BaseViewItemCreator* a, BaseViewItemCreator* b )
   {
     return a->Priority() < b->Priority();
   }
-} CreatorSort;
+};
 
 bool ViewItemFactory::RegisterCreator(BaseViewItemCreator* creator)
 {
-  for (auto itr = m_creators.begin(); itr != m_creators.end(); itr++)
+  for ( CreatorIT itr = creatorBegin(); itr != creatorEnd(); itr++ )
   {
     if (*itr == creator)
       return false;
   }
   m_creators.push_back(creator);
   // Sort creators in order of priority
-  std::sort( m_creators.begin(), m_creators.end(), CreatorSort );
+  std::sort( m_creators.begin(), m_creators.end(), CreatorSort() );
   return true;
 }
 
 void ViewItemFactory::DeRegisterCreator(BaseViewItemCreator* creator)
 {
-  for (auto itr = m_creators.begin(); itr != m_creators.end(); itr++)
+  for ( CreatorIT itr = creatorBegin(); itr != creatorEnd(); itr++ )
   {
     if (*itr == creator)
     {
@@ -79,7 +80,7 @@ BaseViewItem* ViewItemFactory::CreateViewItem(const QVariant& data, const QStrin
 {
   // iterate in reverse.  This ensures we test the most-specialized types
   // before testing the more generalized types
-  for (auto itr = m_creators.rbegin(); itr != m_creators.rend(); itr++)
+  for ( CreatorRIT itr = creatorRBegin(); itr != creatorREnd(); itr++ )
   {
     BaseViewItem* viewItem = (*itr)->CreateItem(data, name, tag);
     if (viewItem != nullptr)

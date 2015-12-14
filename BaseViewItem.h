@@ -39,6 +39,10 @@ public:
   size_t NumChildren();
   BaseViewItem* GetChild( size_t i );
 
+  typedef std::vector<BaseViewItem*>::const_iterator ChildIT;
+  ChildIT childBegin() const { return m_children.begin(); }
+  ChildIT childEnd() const { return m_children.end(); }
+
   // A a child to this item. If connect is true, then we will also
   // wire up the childs ViewValueChanged to this classes OnChildChanged
   void AddChild( BaseViewItem* pItem, bool doConnect = false );

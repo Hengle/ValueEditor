@@ -1,4 +1,5 @@
 #include "RTValViewItem.h"
+#include <QtGui/QWidget.h>
 
 RTValViewItem::RTValViewItem(QString name)
 	: BaseViewItem(name)
@@ -43,7 +44,7 @@ QWidget* RTValViewItem::BuildWidgets(bool expanded)
 void RTValViewItem::UpdateViewValue(QVariant value)
 {
 	m_val = toRTVal(value);
-	for (auto itr = m_children.begin(); itr != m_children.end(); itr++)
+	for (ChildIT itr = childBegin(); itr != childEnd(); itr++)
 	{
 		QString childName = (*itr)->GetName();
 		QByteArray asciiName = childName.toAscii();
@@ -70,5 +71,3 @@ QVariant RTValViewItem::GetValue()
 {
 	return toVariant(m_val);
 }
-
-#include "moc_RTValViewItem.cpp"

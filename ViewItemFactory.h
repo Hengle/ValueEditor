@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include "DllExport.h"
+#include <QtCore/QVariant.h>
 
 class BaseViewItemCreator;
 class BaseViewItem;
@@ -21,6 +23,16 @@ private:
 #pragma warning(disable: 4251)
 	std::vector<BaseViewItemCreator*> m_creators;
 #pragma warning(pop)
+
+protected:
+
+	typedef std::vector<BaseViewItemCreator*>::const_iterator CreatorIT;
+	CreatorIT creatorBegin() const { return m_creators.begin(); }
+	CreatorIT creatorEnd() const { return m_creators.end(); }
+
+	typedef std::vector<BaseViewItemCreator*>::const_reverse_iterator CreatorRIT;
+	CreatorRIT creatorRBegin() const { return m_creators.rbegin(); }
+	CreatorRIT creatorREnd() const { return m_creators.rend(); }
 
 	//////////////////////////////////////////////////////////////////////////
 	ViewItemFactory();

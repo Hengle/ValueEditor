@@ -4,6 +4,7 @@
 
 BaseViewItem::BaseViewItem( QString name )
   : m_name(name)
+  , m_modelitem( 0 )
 {
 }
 

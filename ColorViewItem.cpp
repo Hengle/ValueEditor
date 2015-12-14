@@ -1,5 +1,6 @@
 #include "ColorViewItem.h"
 #include "BaseViewItemCreator.h"
+#include <QtGui/QLabel.h>
 
 ColorViewItem::ColorViewItem( const QVariant& value, const QString& name )
   : BaseViewItem( name )
@@ -42,7 +43,7 @@ void ColorViewItem::OnChildChanged( QVariant, QString, bool )
 //////////////////////////////////////////////////////////////////////////
 //
 
-ColorViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag )
+static ColorViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag )
 {
   return nullptr;
 }

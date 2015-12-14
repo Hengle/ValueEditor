@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QtCore/QObject.h>
 
 class BaseViewItem;
 
@@ -19,7 +20,7 @@ public:
   BaseViewItemCreator();
   // This class will automatically remove itself from the 
   // ViewItemFactory on release.
-  ~BaseViewItemCreator();
+  virtual ~BaseViewItemCreator();
 
   // Implement this function to return true if this 
   // creator can generate a viewitem for the input data.
@@ -55,8 +56,8 @@ public:
 class Creator_##ViewItemClass : public BaseViewItemCreator { \
 public: \
   Creator_##ViewItemClass() {} \
-  BaseViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag ) override \
+  BaseViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag ) /*override*/ \
   { return ::CreatorFn(data, name, tag); } \
-  int Priority() override { return _priority; } \
+  int Priority() /*override*/ { return _priority; } \
 }; \
 static Creator_##ViewItemClass s_CreatorInstance;

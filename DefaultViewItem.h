@@ -15,10 +15,14 @@ public:
 	DefaultViewItem( const QVariant& value, const QString& name );
 	~DefaultViewItem();
 
-	QWidget* BuildWidgets( bool expanded ) override;
+	QWidget* BuildWidgets( bool expanded ) /*override*/
+	;
 
-	QVariant GetValue() override;
+	QVariant GetValue() /*override*/
+	;
 
-	void UpdateViewValue( QVariant value ) override;
-	void OnChildChanged( QVariant, QString, bool ) override {};
+	void UpdateViewValue( QVariant value ) /*override*/
+	;
+	void OnChildChanged( QVariant, QString, bool ) /*override*/
+	 {};
 };

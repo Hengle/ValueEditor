@@ -6,7 +6,9 @@
 #pragma once
 
 #include <stdio.h>
-#include <tchar.h>
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
+# include <tchar.h>
+#endif
 
 #pragma warning(push, 0)
 #include <QtGui/QtGui>

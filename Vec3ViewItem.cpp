@@ -1,6 +1,9 @@
 #include "Vec3ViewItem.h"
 #include "BaseViewItemCreator.h"
 #include "ViewItemFactory.h"
+#include <QtGui/QBoxLayout.h>
+#include <QtGui/QLineEdit.h>
+#include <QVector3D.h>
 
 Vec3ViewItem::Vec3ViewItem(const QVariant& value, const QString& name)
   : BaseViewItem(name)
@@ -102,11 +105,9 @@ void Vec3ViewItem::OnChildChanged(QVariant value, QString childName, bool commit
   emit ViewValueChanged(m_value, GetName(), commit);
 }
 
-#include "moc_Vec3ViewItem.cpp"
-
 //////////////////////////////////////////////////////////////////////////
 // 
-Vec3ViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag )
+static Vec3ViewItem* CreateItem( const QVariant& data, const QString& name, const char* tag )
 {
   const int qv3Dtype = ((QVariant)QVector3D()).type();
   if (data.type() == qv3Dtype)

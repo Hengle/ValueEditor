@@ -1,5 +1,6 @@
 #include "DefaultViewItem.h"
 #include "BaseViewItemCreator.h"
+#include <QtGui/QLabel.h>
 
 DefaultViewItem::DefaultViewItem(const QVariant& value, const QString& name)
   : BaseViewItem(name)
@@ -36,7 +37,7 @@ void DefaultViewItem::UpdateViewValue(QVariant value)
 
 //////////////////////////////////////////////////////////////////////////
 // Expose the ViewItem to the UI layer
-BaseViewItem* CreateItem( const QVariant& data, const QString& name, const char* )
+static BaseViewItem* CreateItem( const QVariant& data, const QString& name, const char* )
 {
   return new DefaultViewItem( data, name );
 }
