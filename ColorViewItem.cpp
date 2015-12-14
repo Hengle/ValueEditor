@@ -35,7 +35,7 @@ void ColorViewItem::UpdateViewValue( QVariant value )
   m_value = value;
 }
 
-void ColorViewItem::onChildChanged( QVariant const &, QString const &, bool )
+void ColorViewItem::onChildViewChanged( QVariant const &, QString const &, bool )
 {
 
 }

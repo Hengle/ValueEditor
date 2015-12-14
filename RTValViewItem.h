@@ -22,7 +22,7 @@ public:
 
 	virtual QVariant GetValue() /*override*/;
 
-	virtual void onChildChanged(
+	virtual void onChildViewChanged(
 		QVariant const &value,
 		QString const &name,
 		bool commit

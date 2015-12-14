@@ -89,7 +89,7 @@ void Vec3ViewItem::OnTextEditsChanged()
   emit ViewValueChanged(m_value, GetName(), true);
 }
 
-void Vec3ViewItem::onChildChanged(
+void Vec3ViewItem::onChildViewChanged(
   QVariant const &value,
   QString const &childName,
   bool commit

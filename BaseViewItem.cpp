@@ -31,7 +31,7 @@ void BaseViewItem::AddChild( BaseViewItem* pChild, bool doConnect/*=false*/ )
   {
     connect(
       pChild, SIGNAL( ViewValueChanged( QVariant, QString, bool ) ),
-      this, SLOT( onChildChanged( QVariant const &, QString const &, bool ) )
+      this, SLOT( onChildViewChanged( QVariant const &, QString const &, bool ) )
       );
 
   }
@@ -76,7 +76,7 @@ void BaseViewItem::UpdateValueFromModel()
   }
 }
 
-void BaseViewItem::onChildChanged(
+void BaseViewItem::onChildViewChanged(
   QVariant const &,
   QString const &,
   bool

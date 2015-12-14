@@ -30,7 +30,7 @@ public:
 
 	void UpdateViewValue(QVariant value) /*override*/;
 	
-	virtual void onChildChanged(
+	virtual void onChildViewChanged(
 		QVariant const &value,
 		QString const &childName,
 		bool commit

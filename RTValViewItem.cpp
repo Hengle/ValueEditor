@@ -54,7 +54,7 @@ void RTValViewItem::UpdateViewValue(QVariant value)
 	}
 }
 
-void RTValViewItem::onChildChanged(
+void RTValViewItem::onChildViewChanged(
 	QVariant const &value,
 	QString const &childName,
 	bool commit
