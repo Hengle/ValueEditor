@@ -1,5 +1,7 @@
 #pragma once
 
+#include <assert.h>
+
 //////////////////////////////////////////////////////////////////////////
 // This sample model implementation allows us to create a test
 // model to run the UI against without loading FE
@@ -19,32 +21,32 @@ public:
 
 	}
 
-	virtual size_t NumChildren() override
+	virtual size_t NumChildren() /*override*/
 	{
 		return m_children.size();
 	}
 
-	virtual BaseModelItem* GetChild(size_t i) override
+	virtual BaseModelItem* GetChild(size_t i) /*override*/
 	{
 		return m_children[i];
 	}
 
-	virtual QString GetName() override
+	virtual QString GetName() /*override*/
 	{
 		return m_name;
 	}
 
-	virtual QString GetMetadata(QString string) override
+	virtual QString GetMetadata(QString string) /*override*/
 	{
 		return QString();
 	}
 
-	virtual QVariant GetValue() override
+	virtual QVariant GetValue() /*override*/
 	{
 		return m_value;
 	}
 
-	virtual void UpdateModelValue(QVariant value, QString name, bool commit = 1) override
+	virtual void UpdateModelValue(QVariant value, QString name, bool commit = 1) /*override*/
 	{
 		if (value != m_value || commit == 1)
 		{

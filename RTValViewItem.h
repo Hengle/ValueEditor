@@ -16,11 +16,11 @@ public:
 	RTValViewItem(QString name);
 	~RTValViewItem();
 
-	virtual QWidget* BuildWidgets(bool expanded) override;
+	virtual QWidget* BuildWidgets(bool expanded) /*override*/;
 
-	virtual void UpdateViewValue(QVariant value) override;
+	virtual void UpdateViewValue(QVariant value) /*override*/;
 
-	virtual QVariant GetValue() override;
+	virtual QVariant GetValue() /*override*/;
 
 	void OnChildChanged(QVariant value, QString name, bool commit);
 };

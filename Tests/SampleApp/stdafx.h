@@ -8,7 +8,9 @@
 #include "targetver.h"
 
 #include <stdio.h>
-#include <tchar.h>
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
+# include <tchar.h>
+#endif
 #include <assert.h>
 
 #pragma warning(push, 0)
@@ -16,8 +18,8 @@
 #include <FabricCore.h>
 #pragma warning(pop)
 
-#include "..\..\DllExport.h"
-#include "..\..\BaseModelItem.h"
-#include "..\..\BaseViewItem.h"
+#include <DllExport.h>
+#include <BaseModelItem.h>
+#include <BaseViewItem.h>
 
 // TODO: reference additional headers your program requires here

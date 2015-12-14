@@ -2,7 +2,8 @@
 //
 
 #include "stdafx.h"
-#include "..\..\ViewItemFactory.h"
+
+#include <ViewItemFactory.h>
 //#include "..\..\DefaultViewItem.h"
 //#include "..\..\FloatViewItemCreator.h"
 //#include "..\..\RTValViewItemCreator.h"
@@ -21,6 +22,8 @@ void SetStylesheet(const char* filename)
 
 class MainWindow : public QMainWindow
 {
+  typedef QMainWindow Super;
+  
   void BuildTree( QTreeWidget* tree, QTreeWidgetItem* parent, BaseViewItem* pViewItem )
   {
     if (pViewItem == nullptr)
@@ -58,9 +61,9 @@ public:
 		setCentralWidget(tree);
 	}
 
-	virtual void showEvent(QShowEvent *ev) override
+	virtual void showEvent(QShowEvent *ev) /*override*/
 	{
-		__super::showEvent(ev);
+		Super::showEvent(ev);
 		int elapsed = myTimer.elapsed();
 		printf("elapsed: %i\n", elapsed);
 	}

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BaseViewItem.h"
+#include <QtGui/QLineEdit.h>
 
 class Vec3ViewItem : public BaseViewItem
 {
@@ -24,11 +25,11 @@ public:
 	Vec3ViewItem(const QVariant& value, const QString& name);
 	~Vec3ViewItem();
 
-	QWidget* BuildWidgets(bool expanded) override;
-	QVariant GetValue() override;
+	QWidget* BuildWidgets(bool expanded) /*override*/;
+	QVariant GetValue() /*override*/;
 
-	void UpdateViewValue(QVariant value) override;
-	void OnChildChanged(QVariant value, QString childName, bool commit) override;
+	void UpdateViewValue(QVariant value) /*override*/;
+	void OnChildChanged(QVariant value, QString childName, bool commit) /*override*/;
 
 public slots:
 

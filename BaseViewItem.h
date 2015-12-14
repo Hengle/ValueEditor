@@ -1,5 +1,8 @@
 #pragma once
 
+#include <DllExport.h>
+#include <QtCore/QObject.h>
+#include <QtCore/QVariant.h>
 #include <vector>
 
 class BaseModelItem;

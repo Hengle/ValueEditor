@@ -2,12 +2,13 @@
 
 #include <vector>
 
+class BaseViewItemCreator;
 class BaseViewItem;
 class BaseModelItem;
 
 // This factory is responsible for returning the appropriate BaseViewItem
 // when creating for a given data type
-class VALUEEDIT_API ViewItemFactory sealed
+class VALUEEDIT_API ViewItemFactory /*sealed*/
 {
 	Q_DISABLE_COPY(ViewItemFactory)
 

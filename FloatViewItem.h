@@ -10,8 +10,8 @@ public:
 	FloatViewItem(QString name);
 	~FloatViewItem();
 
-	QWidget* BuildWidgets(bool expanded) override;
-	void UpdateViewValue(QVariant value) override;
+	QWidget* BuildWidgets(bool expanded) /*override*/;
+	void UpdateViewValue(QVariant value) /*override*/;
 	QVariant GetValue();
 
 private:
