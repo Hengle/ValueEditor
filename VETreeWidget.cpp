@@ -3,6 +3,7 @@
 
 VETreeWidget::VETreeWidget( BaseViewItem *rootViewItem )
 {
+  rootViewItem->setParent( this );
   setColumnCount( 2 );
   connect(
     this, SIGNAL( itemExpanded( QTreeWidgetItem * ) ),
