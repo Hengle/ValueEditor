@@ -12,6 +12,18 @@ ViewItemChildRouter::ViewItemChildRouter(
   setParent( viewItem );
 }
 
+void ViewItemChildRouter::connectToChild( BaseViewItem *childViewItem )
+{
+  connect(
+    this, SIGNAL(modelValueChanged(QVariant const &)),
+    childViewItem, SLOT(onModelValueChanged(QVariant const &))
+    );
+  connect(
+    childViewItem, SIGNAL(viewValueChanged(QVariant const &, bool)),
+    this, SLOT(onViewValueChanged(QVariant const &, bool))
+    );
+}
+
 void ViewItemChildRouter::emitModelValueChanged( QVariant const &value )
 {
   emit modelValueChanged( value );

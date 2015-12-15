@@ -23,6 +23,8 @@ public:
     int index
     );
 
+  void connectToChild( BaseViewItem *childViewItem );
+
   void emitModelValueChanged( QVariant const &value );
 
 signals:

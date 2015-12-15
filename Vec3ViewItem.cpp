@@ -130,14 +130,7 @@ QList<BaseViewItem *> Vec3ViewItem::createChildViewItems() const
   children[2] = factory->CreateViewItem( "Z", QVariant( m_vec3dValue.z() ) );
   for ( int i = 0; i < 3; ++i )
   {
-    connect(
-      m_childRouters[i], SIGNAL(modelValueChanged(QVariant const &)),
-      children[i], SLOT(onModelValueChanged(QVariant const &))
-      );
-    connect(
-      children[i], SIGNAL(viewValueChanged(QVariant const &, bool)),
-      m_childRouters[i], SLOT(onViewValueChanged(QVariant const &, bool))
-      );
+    m_childRouters[i]->connectToChild( children[i] );
     result.append( children[i] );
   }
 
