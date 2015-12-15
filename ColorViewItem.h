@@ -16,9 +16,9 @@ public:
 
   virtual QWidget *getWidget() /*override*/;
 
-  void UpdateViewValue( QVariant value ) /*override*/;
+  virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 
-  virtual void onChildViewChanged(
+  virtual void onChildViewValueChanged(
     QVariant const &,
     QString const &,
     bool

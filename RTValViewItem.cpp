@@ -25,7 +25,7 @@ QWidget *RTValViewItem::getWidget()
 	return 0;
 }
 
-void RTValViewItem::UpdateViewValue( QVariant value )
+void RTValViewItem::onModelValueChanged( QVariant const &value )
 {
 	m_val = toRTVal( value );
 	// for ( ChildIT itr = childBegin(); itr != childEnd(); itr++ )
@@ -38,7 +38,7 @@ void RTValViewItem::UpdateViewValue( QVariant value )
 	// }
 }
 
-void RTValViewItem::onChildViewChanged(
+void RTValViewItem::onChildViewValueChanged(
 	QVariant const &value,
 	QString const &childName,
 	bool commit

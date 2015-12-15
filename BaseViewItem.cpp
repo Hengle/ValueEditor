@@ -12,7 +12,7 @@ BaseViewItem::~BaseViewItem()
 {
 }
 
-void BaseViewItem::onChildViewChanged(
+void BaseViewItem::onChildViewValueChanged(
   QVariant const &,
   QString const &,
   bool

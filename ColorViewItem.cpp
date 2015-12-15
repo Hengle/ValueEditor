@@ -23,7 +23,7 @@ QWidget *ColorViewItem::getWidget()
   return m_label;
 }
 
-void ColorViewItem::UpdateViewValue( QVariant value )
+void ColorViewItem::onModelValueChanged( QVariant const &value )
 {
   if ( value.canConvert( QVariant::String ) )
   {
@@ -33,7 +33,7 @@ void ColorViewItem::UpdateViewValue( QVariant value )
   }
 }
 
-void ColorViewItem::onChildViewChanged( QVariant const &, QString const &, bool )
+void ColorViewItem::onChildViewValueChanged( QVariant const &, QString const &, bool )
 {
 }
 

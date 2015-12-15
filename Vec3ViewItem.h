@@ -34,9 +34,9 @@ public:
 
 	virtual QWidget *getWidget() /*override*/;
 
-	void UpdateViewValue(QVariant value) /*override*/;
+	virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 	
-	virtual void onChildViewChanged(
+	virtual void onChildViewValueChanged(
 		QVariant const &value,
 		QString const &childName,
 		bool commit

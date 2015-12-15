@@ -65,10 +65,10 @@ public slots:
   // Implement this slot to update the UI to the
   // passed variant.  If necessary, pass the update
   // down to this items children as well.
-  virtual void UpdateViewValue( QVariant value ) = 0;
+  virtual void onModelValueChanged( QVariant const &value ) = 0;
 
   // Implement this slot if we need to react when a child changes
-  virtual void onChildViewChanged(
+  virtual void onChildViewValueChanged(
     QVariant const &value,
     QString const &name,
     bool commit

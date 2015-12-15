@@ -14,9 +14,9 @@ Vec3ViewItem::Vec3ViewItem(
 {
   m_widget = new QWidget;
 
-  m_xEdit = new QLineEdit( QString::number( m_vec3dValue.x() ), m_widget );
-  m_yEdit = new QLineEdit( QString::number( m_vec3dValue.y() ), m_widget );
-  m_zEdit = new QLineEdit( QString::number( m_vec3dValue.z() ), m_widget );
+  m_xEdit = new QLineEdit( m_widget );
+  m_yEdit = new QLineEdit( m_widget );
+  m_zEdit = new QLineEdit( m_widget );
 
   // Connect em up.
   connect(
@@ -36,6 +36,8 @@ Vec3ViewItem::Vec3ViewItem(
   layout->addWidget( m_xEdit );
   layout->addWidget( m_yEdit );
   layout->addWidget( m_zEdit );
+
+  onModelValueChanged( value );
 }
 
 Vec3ViewItem::~Vec3ViewItem()
@@ -47,7 +49,7 @@ QWidget *Vec3ViewItem::getWidget()
   return m_widget;
 }
 
-void Vec3ViewItem::UpdateViewValue( QVariant value )
+void Vec3ViewItem::onModelValueChanged( QVariant const &value )
 {
   QVector3D newVec3dValue = value.value<QVector3D>();
   if ( newVec3dValue.x() != m_vec3dValue.x() )
@@ -85,7 +87,7 @@ void Vec3ViewItem::onTextEditZChanged()
   emit ViewValueChanged( QVariant( vec3d ), getName(), true );
 }
 
-void Vec3ViewItem::onChildViewChanged(
+void Vec3ViewItem::onChildViewValueChanged(
   QVariant const &value,
   QString const &childName,
   bool commit
@@ -113,33 +115,33 @@ QList<BaseViewItem *> Vec3ViewItem::createChildViewItems() const
   BaseViewItem *xChild = factory->CreateViewItem( "X", QVariant( m_vec3dValue.x() ) );
   connect(
     this, SIGNAL(modelValueXChanged(QVariant)),
-    xChild, SLOT(UpdateViewValue(QVariant))
+    xChild, SLOT(onModelValueChanged(QVariant))
     );
   connect(
     xChild, SIGNAL(ViewValueChanged(QVariant, QString, bool)),
-    this, SLOT(onChildViewChanged(QVariant, QString, bool))
+    this, SLOT(onChildViewValueChanged(QVariant, QString, bool))
     );
   result.append( xChild );
 
   BaseViewItem *yChild = factory->CreateViewItem( "Y", QVariant( m_vec3dValue.y() ) );
   connect(
     this, SIGNAL(modelValueYChanged(QVariant)),
-    yChild, SLOT(UpdateViewValue(QVariant))
+    yChild, SLOT(onModelValueChanged(QVariant))
     );
   connect(
     yChild, SIGNAL(ViewValueChanged(QVariant, QString, bool)),
-    this, SLOT(onChildViewChanged(QVariant, QString, bool))
+    this, SLOT(onChildViewValueChanged(QVariant, QString, bool))
     );
   result.append( yChild );
 
   BaseViewItem *zChild = factory->CreateViewItem( "Z", QVariant( m_vec3dValue.z() ) );
   connect(
     this, SIGNAL(modelValueZChanged(QVariant)),
-    zChild, SLOT(UpdateViewValue(QVariant))
+    zChild, SLOT(onModelValueChanged(QVariant))
     );
   connect(
     zChild, SIGNAL(ViewValueChanged(QVariant, QString, bool)),
-    this, SLOT(onChildViewChanged(QVariant, QString, bool))
+    this, SLOT(onChildViewValueChanged(QVariant, QString, bool))
     );
   result.append( zChild );
 

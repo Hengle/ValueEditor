@@ -36,8 +36,8 @@ BaseViewItem *ViewItemFactory::BuildView( BaseModelItem *modelItem )
       );
 
     QObject::connect(
-      modelItem, SIGNAL( ModelValueChanged( QVariant ) ),
-      viewItem, SLOT( UpdateViewValue( QVariant ) )
+      modelItem, SIGNAL( modelValueChanged( QVariant const & ) ),
+      viewItem, SLOT( onModelValueChanged( QVariant const & ) )
       );
   }
   return viewItem;

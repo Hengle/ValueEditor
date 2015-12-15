@@ -17,7 +17,7 @@ public:
 
 	virtual QWidget *getWidget() /*override*/;
   
-	void UpdateViewValue(QVariant value) /*override*/;
+	virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 
   virtual bool hasChildren() const { return false; }
 

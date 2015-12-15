@@ -18,7 +18,7 @@ FloatViewItem::FloatViewItem(
     m_spinner, SIGNAL( editingFinished() ), 
     this, SLOT( OnEditFinished() )
     );
-  UpdateViewValue( value );
+  onModelValueChanged( value );
 }
 
 FloatViewItem::~FloatViewItem()
@@ -30,7 +30,7 @@ QWidget *FloatViewItem::getWidget()
   return m_spinner;
 }
 
-void FloatViewItem::UpdateViewValue( QVariant value )
+void FloatViewItem::onModelValueChanged( QVariant const &value )
 {
   m_spinner->setValue( value.toDouble() );
 }

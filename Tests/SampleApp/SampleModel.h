@@ -54,7 +54,7 @@ public:
       m_value = value;
 
 			// Our value has changed, so notify the world
-			emit ModelValueChanged(m_value);
+			emit modelValueChanged( m_value );
 		}
 	}
 
@@ -68,7 +68,7 @@ public:
 	{
 		assert(value.type() == m_value.type());
 		m_value = value;
-		emit ModelValueChanged(m_value);
+		emit modelValueChanged( m_value );
 	}
 };
 

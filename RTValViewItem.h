@@ -13,15 +13,15 @@ class RTValViewItem : public BaseViewItem
 	QWidget *m_widget;
 
 public:
-	
+
 	RTValViewItem(QString name);
 	~RTValViewItem();
 
 	virtual QWidget *getWidget() /*override*/;
 
-	virtual void UpdateViewValue(QVariant value) /*override*/;
+	virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 
-	virtual void onChildViewChanged(
+	virtual void onChildViewValueChanged(
 		QVariant const &value,
 		QString const &name,
 		bool commit

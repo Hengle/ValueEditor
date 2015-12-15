@@ -14,7 +14,7 @@ DefaultViewItem::DefaultViewItem(
 {
   m_label = new QLabel;
 
-  UpdateViewValue( value );
+  onModelValueChanged( value );
 }
 
 DefaultViewItem::~DefaultViewItem()
@@ -26,7 +26,7 @@ QWidget *DefaultViewItem::getWidget()
   return m_label;
 }
 
-void DefaultViewItem::UpdateViewValue( QVariant value )
+void DefaultViewItem::onModelValueChanged( QVariant const &value )
 {
   if ( value.canConvert( QVariant::String ) )
   {
