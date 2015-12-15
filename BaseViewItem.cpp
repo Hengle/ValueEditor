@@ -1,6 +1,26 @@
 #include "BaseViewItem.h"
 #include "BaseModelItem.h"
+#include <assert.h>
 
+ViewItemChildRouter::ViewItemChildRouter(
+  BaseViewItem *viewItem,
+  int index
+  )
+  : m_viewItem( viewItem )
+  , m_index( index )
+{
+  setParent( viewItem );
+}
+
+void ViewItemChildRouter::emitModelValueChanged( QVariant const &value )
+{
+  emit modelValueChanged( value );
+}
+
+void ViewItemChildRouter::onViewValueChanged( QVariant const &value, bool commit )
+{
+  m_viewItem->onChildViewValueChanged( m_index, value, commit );
+}
 
 BaseViewItem::BaseViewItem( QString const &name )
   : m_name( name )
@@ -13,12 +33,12 @@ BaseViewItem::~BaseViewItem()
 }
 
 void BaseViewItem::onChildViewValueChanged(
-  QVariant const &,
-  QString const &,
-  bool
+  int index,
+  QVariant const &value,
+  bool commit
   )
 {
-  /* default is no-op */
+  assert( false );
 }
 
 QList<BaseViewItem *> BaseViewItem::createChildViewItems() const

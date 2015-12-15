@@ -46,7 +46,10 @@ public:
 		return m_value;
 	}
 
-	virtual void onViewValueChanged(QVariant value, QString name, bool commit = 1) /*override*/
+	virtual void onViewValueChanged(
+		QVariant const &value,
+		bool commit
+		) /*override*/
 	{
 		if (value != m_value || commit == 1)
 		{

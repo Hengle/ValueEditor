@@ -31,8 +31,8 @@ BaseViewItem *ViewItemFactory::BuildView( BaseModelItem *modelItem )
   if ( viewItem )
   {
     QObject::connect(
-      viewItem, SIGNAL( viewValueChanged( QVariant, QString, bool ) ),
-      modelItem, SLOT( onViewValueChanged( QVariant, QString, bool ) )
+      viewItem, SIGNAL( viewValueChanged( QVariant const &, bool ) ),
+      modelItem, SLOT( onViewValueChanged( QVariant const &, bool ) )
       );
 
     QObject::connect(

@@ -17,6 +17,7 @@ class VALUEEDIT_API BaseModelItem : public QObject
 	Q_DISABLE_COPY(BaseModelItem);
 
 public:
+
 	BaseModelItem();
 	virtual ~BaseModelItem();
 
@@ -48,8 +49,11 @@ public slots:
 	// the the UI and setting them on the core object.
 	// It is guaranteed that the QVariant value here will be equivalent
 	// to the QVariant returned from GetValue
-	virtual void onViewValueChanged(QVariant /*value*/, QString /*name*/, bool /*commit*/) {};
-
+	virtual void onViewValueChanged(
+		QVariant const &value,
+		bool commit
+		)
+		{}
 
 signals:
 

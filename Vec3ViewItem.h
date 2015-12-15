@@ -24,6 +24,9 @@ private:
 	QLineEdit* m_yEdit;
 	QLineEdit* m_zEdit;
 
+	// Child routing
+	ChildRouter *m_childRouters[3];
+
 public:
 
 	Vec3ViewItem(
@@ -37,8 +40,8 @@ public:
 	virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 	
 	virtual void onChildViewValueChanged(
+		int index,
 		QVariant const &value,
-		QString const &childName,
 		bool commit
 		) /*override*/;
 
@@ -51,10 +54,4 @@ public slots:
 	void onTextEditXChanged();
 	void onTextEditYChanged();
 	void onTextEditZChanged();
-
-signals:
-	
-	void modelValueXChanged( QVariant value );
-	void modelValueYChanged( QVariant value );
-	void modelValueZChanged( QVariant value );
 };
