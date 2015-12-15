@@ -28,14 +28,14 @@ QWidget *RTValViewItem::getWidget()
 void RTValViewItem::UpdateViewValue( QVariant value )
 {
 	m_val = toRTVal( value );
-	for ( ChildIT itr = childBegin(); itr != childEnd(); itr++ )
-	{
-		QString childName = (*itr)->GetName();
-		QByteArray asciiName = childName.toAscii();
-		FabricCore::RTVal childVal = m_val.maybeGetMemberRef(asciiName.data());
-		// Assert childVal is valid
-		(*itr)->UpdateViewValue( toVariant(childVal) );
-	}
+	// for ( ChildIT itr = childBegin(); itr != childEnd(); itr++ )
+	// {
+	// 	QString childName = (*itr)->GetName();
+	// 	QByteArray asciiName = childName.toAscii();
+	// 	FabricCore::RTVal childVal = m_val.maybeGetMemberRef(asciiName.data());
+	// 	// Assert childVal is valid
+	// 	(*itr)->UpdateViewValue( toVariant(childVal) );
+	// }
 }
 
 void RTValViewItem::onChildViewChanged(
@@ -52,5 +52,5 @@ void RTValViewItem::onChildViewChanged(
 	VariantToRTVal(value, oldChildVal);
 	m_val.setMember(asciiName.data(), oldChildVal);
 
-	emit ViewValueChanged(toVariant(m_val), GetName(), commit);
+	emit ViewValueChanged(toVariant(m_val), getName(), commit);
 }

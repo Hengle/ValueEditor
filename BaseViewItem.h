@@ -22,12 +22,6 @@ class VALUEEDIT_API BaseViewItem : public QObject
 
   QString m_name;
 
-protected:
-#pragma warning(push)
-#pragma warning(disable: 4251)
-  std::vector<BaseViewItem*> m_children;
-#pragma warning(pop)
-
 public:
 
   class TreeWidgetItem : public QTreeWidgetItem
@@ -49,23 +43,13 @@ public:
   BaseViewItem( QString const &name );
   ~BaseViewItem();
 
-  size_t NumChildren();
-  BaseViewItem* GetChild( size_t i );
-
-  typedef std::vector<BaseViewItem*>::const_iterator ChildIT;
-  ChildIT childBegin() const { return m_children.begin(); }
-  ChildIT childEnd() const { return m_children.end(); }
-
-  // A a child to this item. If connect is true, then we will also
-  // wire up the childs ViewValueChanged to this classes onChildViewChanged
-  void AddChild( BaseViewItem* pItem, bool doConnect = false );
-
   // Implement this function to build the widgets to
   // display the value represented by your class
   virtual QWidget *getWidget() = 0;
 
   // Get the name of this ViewItem
-  const QString& GetName();
+  QString const &getName() const
+    { return m_name; }
 
   virtual bool hasChildren() const = 0;
 

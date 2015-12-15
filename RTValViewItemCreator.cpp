@@ -37,12 +37,12 @@ BaseViewItem* RTValViewItemCreator::CreateItem(
 		FabricCore::RTVal xval = rtVal.maybeGetMemberRef("X");
 		QVariant xvariant = QVariant::fromValue<FabricCore::RTVal>(xval);
 		BaseViewItem* pxChild = ViewItemFactory::GetInstance()->CreateViewItem( "X", xvariant );
-		pViewItem->AddChild(pxChild);
+		// pViewItem->AddChild(pxChild);
 
 		FabricCore::RTVal yval = rtVal.maybeGetMemberRef("Y");
 		QVariant yvariant = QVariant::fromValue<FabricCore::RTVal>(yval);
 		BaseViewItem* pyChild = ViewItemFactory::GetInstance()->CreateViewItem( "Y", yvariant );
-		pViewItem->AddChild(pyChild);
+		// pViewItem->AddChild(pyChild);
 
 		return pViewItem;
 	}
