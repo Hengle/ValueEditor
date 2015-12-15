@@ -52,5 +52,5 @@ void RTValViewItem::onChildViewValueChanged(
 	VariantToRTVal(value, oldChildVal);
 	m_val.setMember(asciiName.data(), oldChildVal);
 
-	emit ViewValueChanged(toVariant(m_val), getName(), commit);
+	emit viewValueChanged(toVariant(m_val), getName(), commit);
 }

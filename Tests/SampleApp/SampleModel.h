@@ -46,11 +46,11 @@ public:
 		return m_value;
 	}
 
-	virtual void UpdateModelValue(QVariant value, QString name, bool commit = 1) /*override*/
+	virtual void onViewValueChanged(QVariant value, QString name, bool commit = 1) /*override*/
 	{
 		if (value != m_value || commit == 1)
 		{
-      printf( "UpdateModelValue commit=%i\n", commit );
+      printf( "onViewValueChanged commit=%i\n", commit );
       m_value = value;
 
 			// Our value has changed, so notify the world

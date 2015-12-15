@@ -77,6 +77,6 @@ public slots:
 signals:
 
   // When this items widgets change, it should emit this signal
-  void ViewValueChanged( QVariant value, QString name, bool commit );
+  void viewValueChanged( QVariant value, QString name, bool commit );
 };
 

@@ -37,7 +37,7 @@ void FloatViewItem::onModelValueChanged( QVariant const &value )
 
 void FloatViewItem::OnSpinnerChanged( double value )
 {
-  emit ViewValueChanged(
+  emit viewValueChanged(
     QVariant::fromValue<double>( m_spinner->value() ),
     getName(),
     0
@@ -46,7 +46,7 @@ void FloatViewItem::OnSpinnerChanged( double value )
 
 void FloatViewItem::OnEditFinished()
 {
-  emit ViewValueChanged(
+  emit viewValueChanged(
     QVariant::fromValue<double>( m_spinner->value() ),
     getName(),
     1

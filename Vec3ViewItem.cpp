@@ -70,21 +70,21 @@ void Vec3ViewItem::onTextEditXChanged()
 {
   QVector3D vec3d = m_vec3dValue;
   vec3d.setX( m_xEdit->text().toDouble() );
-  emit ViewValueChanged( QVariant( vec3d ), getName(), true );
+  emit viewValueChanged( QVariant( vec3d ), getName(), true );
 }
 
 void Vec3ViewItem::onTextEditYChanged()
 {
   QVector3D vec3d = m_vec3dValue;
   vec3d.setY( m_yEdit->text().toDouble() );
-  emit ViewValueChanged( QVariant( vec3d ), getName(), true );
+  emit viewValueChanged( QVariant( vec3d ), getName(), true );
 }
 
 void Vec3ViewItem::onTextEditZChanged()
 {
   QVector3D vec3d = m_vec3dValue;
   vec3d.setZ( m_zEdit->text().toDouble() );
-  emit ViewValueChanged( QVariant( vec3d ), getName(), true );
+  emit viewValueChanged( QVariant( vec3d ), getName(), true );
 }
 
 void Vec3ViewItem::onChildViewValueChanged(
@@ -102,7 +102,7 @@ void Vec3ViewItem::onChildViewValueChanged(
   if (childName == "Z")
     vec3d.setZ(value.toDouble());
 
-  emit ViewValueChanged( QVariant( vec3d ), getName(), commit );
+  emit viewValueChanged( QVariant( vec3d ), getName(), commit );
 }
 
 QList<BaseViewItem *> Vec3ViewItem::createChildViewItems() const
@@ -118,7 +118,7 @@ QList<BaseViewItem *> Vec3ViewItem::createChildViewItems() const
     xChild, SLOT(onModelValueChanged(QVariant))
     );
   connect(
-    xChild, SIGNAL(ViewValueChanged(QVariant, QString, bool)),
+    xChild, SIGNAL(viewValueChanged(QVariant, QString, bool)),
     this, SLOT(onChildViewValueChanged(QVariant, QString, bool))
     );
   result.append( xChild );
@@ -129,7 +129,7 @@ QList<BaseViewItem *> Vec3ViewItem::createChildViewItems() const
     yChild, SLOT(onModelValueChanged(QVariant))
     );
   connect(
-    yChild, SIGNAL(ViewValueChanged(QVariant, QString, bool)),
+    yChild, SIGNAL(viewValueChanged(QVariant, QString, bool)),
     this, SLOT(onChildViewValueChanged(QVariant, QString, bool))
     );
   result.append( yChild );
@@ -140,7 +140,7 @@ QList<BaseViewItem *> Vec3ViewItem::createChildViewItems() const
     zChild, SLOT(onModelValueChanged(QVariant))
     );
   connect(
-    zChild, SIGNAL(ViewValueChanged(QVariant, QString, bool)),
+    zChild, SIGNAL(viewValueChanged(QVariant, QString, bool)),
     this, SLOT(onChildViewValueChanged(QVariant, QString, bool))
     );
   result.append( zChild );

@@ -48,7 +48,7 @@ public slots:
 	// the the UI and setting them on the core object.
 	// It is guaranteed that the QVariant value here will be equivalent
 	// to the QVariant returned from GetValue
-	virtual void UpdateModelValue(QVariant /*value*/, QString /*name*/, bool /*commit*/) {};
+	virtual void onViewValueChanged(QVariant /*value*/, QString /*name*/, bool /*commit*/) {};
 
 
 signals:
