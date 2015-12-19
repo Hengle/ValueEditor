@@ -31,6 +31,9 @@
     <Filter Include="ViewItems\ColorViewItem">
       <UniqueIdentifier>{0d5b7434-c299-450c-a368-f685fead4d42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="moc">
+      <UniqueIdentifier>{74cbd16b-8508-4bcb-be51-85a6692f1ef7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseViewItem.cpp">
@@ -64,20 +67,27 @@
     <ClCompile Include="ColorViewItem.cpp">
       <Filter>ViewItems\ColorViewItem</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="BaseModelItem.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="BaseViewItem.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="FloatViewItem.h">
-      <Filter>ViewItems\FloatViewItem</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RTValViewItem.h">
-      <Filter>ViewItems\RTValViewItem</Filter>
-    </CustomBuild>
+    <ClCompile Include="moc_BaseModelItem.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_BaseViewItem.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_FloatViewItem.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_RTValViewItem.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_Vec3ViewItem.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
+    <ClCompile Include="VETreeWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_VETreeWidget.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ViewItemFactory.h">
@@ -88,20 +98,37 @@
     </ClInclude>
     <ClInclude Include="QVariantRTVal.h" />
     <ClInclude Include="StdAfx.h" />
-    <ClInclude Include="Vec3ViewItem.h">
-      <Filter>ViewItems\Vec3ViewItem</Filter>
-    </ClInclude>
-    <ClInclude Include="DefaultViewItem.h">
-      <Filter>ViewItems\DefaultViewItem</Filter>
-    </ClInclude>
     <ClInclude Include="RTValViewItemCreator.h">
       <Filter>ViewItems\RTValViewItem</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorViewItem.h">
-      <Filter>ViewItems\ColorViewItem</Filter>
     </ClInclude>
     <ClInclude Include="DllExport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMOC Include="BaseModelItem.h">
+      <Filter>Header Files</Filter>
+    </QtMOC>
+    <QtMOC Include="BaseViewItem.h">
+      <Filter>Header Files</Filter>
+    </QtMOC>
+    <QtMOC Include="VETreeWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMOC>
+    <QtMOC Include="ColorViewItem.h">
+      <Filter>ViewItems\ColorViewItem</Filter>
+    </QtMOC>
+    <QtMOC Include="DefaultViewItem.h">
+      <Filter>ViewItems\DefaultViewItem</Filter>
+    </QtMOC>
+    <QtMOC Include="FloatViewItem.h">
+      <Filter>ViewItems\FloatViewItem</Filter>
+    </QtMOC>
+    <QtMOC Include="RTValViewItem.h">
+      <Filter>ViewItems\RTValViewItem</Filter>
+    </QtMOC>
+    <QtMOC Include="Vec3ViewItem.h">
+      <Filter>ViewItems\Vec3ViewItem</Filter>
+    </QtMOC>
   </ItemGroup>
 </Project>

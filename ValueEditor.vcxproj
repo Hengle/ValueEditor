@@ -31,6 +31,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="QtMoc\QtMocRule.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -61,61 +62,45 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="BaseModelItem.h">
-      <Command>$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" "%(FullPath)"</Command>
-      <Outputs>moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" -DVALUEEDITOR_BUILD "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" -DVALUEEDITOR_BUILD "%(FullPath)"</Command>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="BaseModelItem.cpp" />
     <ClCompile Include="BaseViewItem.cpp" />
     <ClCompile Include="ColorViewItem.cpp" />
     <ClCompile Include="DefaultViewItem.cpp" />
     <ClCompile Include="FloatViewItem.cpp" />
     <ClCompile Include="BaseViewItemCreator.cpp" />
+    <ClCompile Include="moc_BaseModelItem.cpp" />
+    <ClCompile Include="moc_BaseViewItem.cpp" />
+    <ClCompile Include="moc_FloatViewItem.cpp" />
+    <ClCompile Include="moc_RTValViewItem.cpp" />
+    <ClCompile Include="moc_Vec3ViewItem.cpp" />
+    <ClCompile Include="moc_VETreeWidget.cpp" />
     <ClCompile Include="RTValViewItem.cpp" />
     <ClCompile Include="RTValViewItemCreator.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Vec3ViewItem.cpp" />
+    <ClCompile Include="VETreeWidget.cpp" />
     <ClCompile Include="ViewItemFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="BaseViewItem.h">
-      <Command>$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" "%(FullPath)"</Command>
-      <Outputs>moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" -DVALUEEDITOR_BUILD "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" -DVALUEEDITOR_BUILD "%(FullPath)"</Command>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
+    <QtMOC Include="BaseViewItem.h" />
     <ClInclude Include="BaseViewItemCreator.h" />
-    <ClInclude Include="ColorViewItem.h" />
-    <ClInclude Include="DefaultViewItem.h" />
+    <QtMOC Include="ColorViewItem.h" />
+    <QtMOC Include="DefaultViewItem.h" />
     <ClInclude Include="DllExport.h" />
-    <CustomBuild Include="RTValViewItem.h">
-      <Command>$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" "%(FullPath)"</Command>
-      <Outputs>moc_%(Filename).cpp</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="FloatViewItem.h">
-      <Command>$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" "%(FullPath)"</Command>
-      <Outputs>moc_%(Filename).cpp</Outputs>
-    </CustomBuild>
+    <QtMOC Include="BaseModelItem.h" />
+    <QtMOC Include="RTValViewItem.h" />
+    <QtMOC Include="FloatViewItem.h" />
     <ClInclude Include="QVariantRTVal.h" />
     <ClInclude Include="RTValViewItemCreator.h" />
     <ClInclude Include="StdAfx.h" />
-    <CustomBuild Include="Vec3ViewItem.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" "%(FullPath)"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_DIR)/bin/moc -o "%(RelativeDir)moc_%(Filename).cpp" "%(FullPath)"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc_%(Filename).cpp</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">moc_%(Filename).cpp</Outputs>
-    </CustomBuild>
+    <QtMOC Include="Vec3ViewItem.h" />
+    <QtMOC Include="VETreeWidget.h" />
     <ClInclude Include="ViewItemFactory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="QtMoc\QtMocRule.targets" />
   </ImportGroup>
 </Project>

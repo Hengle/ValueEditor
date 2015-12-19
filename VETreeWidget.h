@@ -4,7 +4,7 @@
 
 class BaseViewItem;
 
-class VETreeWidget : public QTreeWidget
+class VALUEEDIT_API VETreeWidget : public QTreeWidget
 {
   Q_OBJECT
 

@@ -4,7 +4,7 @@
 
 #include "BaseViewItem.h"
 #include <QtGui/QLineEdit.h>
-#include <QVector3D.h>
+#include <QtGui/QVector3D.h>
 
 class Vec3ViewItem : public BaseViewItem
 {

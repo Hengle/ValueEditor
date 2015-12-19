@@ -1,7 +1,7 @@
 #pragma once
 #pragma once
 
-#include <DllExport.h>
+#include "DllExport.h"
 #include <QtCore/QObject.h>
 #include <QtCore/QVariant.h>
 
