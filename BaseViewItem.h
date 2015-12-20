@@ -59,22 +59,6 @@ protected:
 
 public:
 
-  class TreeWidgetItem : public QTreeWidgetItem
-  {
-  public:
-
-    TreeWidgetItem( BaseViewItem *viewItem )
-      : m_viewItem( viewItem )
-      {}
-
-    BaseViewItem *getViewItem() const
-      { return m_viewItem; }
-
-  private:
-
-    BaseViewItem *m_viewItem;
-  };
-
   BaseViewItem( QString const &name );
   ~BaseViewItem();
 
@@ -90,10 +74,9 @@ public:
 
   virtual QList<BaseViewItem *> createChildViewItems() const;
 
-  void addToTreeWidget(
-    QTreeWidget *treeWidget,
-    TreeWidgetItem *parentTreeWidgetItem
-    );
+  virtual void setWidgetsOnTreeItem(
+    QTreeWidget* treeWidget,
+    QTreeWidgetItem * treeWidgetItem );
 
 public slots:
 

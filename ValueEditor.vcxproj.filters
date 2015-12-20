@@ -104,6 +104,9 @@
     <ClInclude Include="DllExport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VETreeWidgetItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMOC Include="BaseModelItem.h">

@@ -1,6 +1,7 @@
 #include "BaseViewItem.h"
 #include "BaseModelItem.h"
 #include <assert.h>
+#include <QtGui\QTreeWidget.h>
 
 ViewItemChildRouter::ViewItemChildRouter(
   BaseViewItem *viewItem,
@@ -45,9 +46,9 @@ BaseViewItem::~BaseViewItem()
 }
 
 void BaseViewItem::onChildViewValueChanged(
-  int index,
-  QVariant const &value,
-  bool commit
+  int /*index*/,
+  QVariant const& /*value*/,
+  bool /*commit*/
   )
 {
   assert( false );
@@ -58,20 +59,11 @@ QList<BaseViewItem *> BaseViewItem::createChildViewItems() const
   return QList<BaseViewItem *>();
 }
 
-void BaseViewItem::addToTreeWidget(
+void BaseViewItem::setWidgetsOnTreeItem(
   QTreeWidget *treeWidget,
-  TreeWidgetItem *parentTreeWidgetItem
+  QTreeWidgetItem *treeWidgetItem
   )
 {
-  TreeWidgetItem *treeWidgetItem = new TreeWidgetItem( this );
-  if ( hasChildren() )
-    treeWidgetItem->setChildIndicatorPolicy( QTreeWidgetItem::ShowIndicator );
-  else
-    treeWidgetItem->setChildIndicatorPolicy( QTreeWidgetItem::DontShowIndicator );
   treeWidgetItem->setText( 0, m_name );
-  if ( parentTreeWidgetItem )
-    parentTreeWidgetItem->addChild( treeWidgetItem );
-  else
-    treeWidget->addTopLevelItem( treeWidgetItem );
   treeWidget->setItemWidget( treeWidgetItem, 1, getWidget() );
 }

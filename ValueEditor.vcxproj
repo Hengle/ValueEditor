@@ -97,6 +97,7 @@
     <ClInclude Include="StdAfx.h" />
     <QtMOC Include="Vec3ViewItem.h" />
     <QtMOC Include="VETreeWidget.h" />
+    <ClInclude Include="VETreeWidgetItem.h" />
     <ClInclude Include="ViewItemFactory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -50,8 +50,8 @@ public slots:
 	// It is guaranteed that the QVariant value here will be equivalent
 	// to the QVariant returned from GetValue
 	virtual void onViewValueChanged(
-		QVariant const &value,
-		bool commit
+		QVariant const& /*value*/,
+		bool /*commit*/
 		)
 		{}
 

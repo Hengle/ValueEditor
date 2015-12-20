@@ -1,4 +1,5 @@
 #include "VETreeWidget.h"
+#include "VETreeWidgetItem.h"
 #include "BaseViewItem.h"
 
 VETreeWidget::VETreeWidget( BaseViewItem *rootViewItem )
@@ -13,33 +14,44 @@ VETreeWidget::VETreeWidget( BaseViewItem *rootViewItem )
     this, SIGNAL( itemCollapsed( QTreeWidgetItem * ) ),
     this, SLOT( onTreeWidgetItemCollapsed( QTreeWidgetItem * ) )
     );
-  rootViewItem->addToTreeWidget( this, 0 );
+
+  createTreeWidgetItem( rootViewItem, NULL );
 }
 
+void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parentTreeWidgetItem )
+{
+  VETreeWidgetItem *treeWidgetItem = new VETreeWidgetItem( viewItem );
+  if (viewItem->hasChildren())
+    treeWidgetItem->setChildIndicatorPolicy( QTreeWidgetItem::ShowIndicator );
+  else
+    treeWidgetItem->setChildIndicatorPolicy( QTreeWidgetItem::DontShowIndicator );
+
+  viewItem->setWidgetsOnTreeItem( this, treeWidgetItem );
+  if (parentTreeWidgetItem)
+    parentTreeWidgetItem->addChild( treeWidgetItem );
+  else
+    addTopLevelItem( treeWidgetItem );
+}
 void VETreeWidget::onTreeWidgetItemExpanded( QTreeWidgetItem *_treeWidgetItem )
 {
-  BaseViewItem::TreeWidgetItem *treeWidgetItem =
-    static_cast<BaseViewItem::TreeWidgetItem *>( _treeWidgetItem );
+  VETreeWidgetItem *treeWidgetItem =
+    static_cast<VETreeWidgetItem *>( _treeWidgetItem );
   BaseViewItem *viewItem = treeWidgetItem->getViewItem();
   QList<BaseViewItem *> childViewItems = viewItem->createChildViewItems();
-  QTreeWidget *treeWidget = treeWidgetItem->treeWidget();
   for ( int i = 0; i < childViewItems.size(); ++i )
   {
     BaseViewItem *childViewItem = childViewItems.at( i );
     childViewItem->setParent( viewItem );
-    childViewItem->addToTreeWidget( treeWidget, treeWidgetItem );
+    createTreeWidgetItem( childViewItem, treeWidgetItem );
   }
 }
 
-void VETreeWidget::onTreeWidgetItemCollapsed( QTreeWidgetItem *_treeWidgetItem )
+void VETreeWidget::onTreeWidgetItemCollapsed( QTreeWidgetItem *treeWidgetItem )
 {
-  BaseViewItem::TreeWidgetItem *treeWidgetItem =
-    static_cast<BaseViewItem::TreeWidgetItem *>( _treeWidgetItem );
-  BaseViewItem *viewItem = treeWidgetItem->getViewItem();
   for ( int i = treeWidgetItem->childCount(); i--; )
   {
-    BaseViewItem::TreeWidgetItem *childTreeWidgetItem =
-      static_cast<BaseViewItem::TreeWidgetItem *>( treeWidgetItem->child( i ) );
+    VETreeWidgetItem *childTreeWidgetItem =
+      static_cast<VETreeWidgetItem *>( treeWidgetItem->child( i ) );
     treeWidgetItem->removeChild( childTreeWidgetItem );
     BaseViewItem *childViewItem = childTreeWidgetItem->getViewItem();
     delete childTreeWidgetItem;

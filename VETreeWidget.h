@@ -12,7 +12,9 @@ public:
 
   VETreeWidget( BaseViewItem *rootViewItem );
 
-protected slots:
+  void createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parent );
+
+  protected slots:
 
   void onTreeWidgetItemExpanded( QTreeWidgetItem *_treeWidgetItem );
 

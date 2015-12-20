@@ -50,7 +50,7 @@ QList<BaseViewItem *> DefaultViewItem::createChildViewItems() const
   {
     ViewItemFactory *viewItemFactory = ViewItemFactory::GetInstance();
 
-    int numChildren = m_modelItem->NumChildren();
+    size_t numChildren = m_modelItem->NumChildren();
     result.reserve( numChildren );
 
     for ( int i = 0; i < numChildren; ++i )
