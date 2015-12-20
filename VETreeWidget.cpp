@@ -26,12 +26,14 @@ void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem
   else
     treeWidgetItem->setChildIndicatorPolicy( QTreeWidgetItem::DontShowIndicator );
 
-  viewItem->setWidgetsOnTreeItem( this, treeWidgetItem );
   if (parentTreeWidgetItem)
     parentTreeWidgetItem->addChild( treeWidgetItem );
   else
     addTopLevelItem( treeWidgetItem );
+
+  viewItem->setWidgetsOnTreeItem( this, treeWidgetItem );
 }
+
 void VETreeWidget::onTreeWidgetItemExpanded( QTreeWidgetItem *_treeWidgetItem )
 {
   VETreeWidgetItem *treeWidgetItem =
