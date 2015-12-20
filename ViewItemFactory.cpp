@@ -88,9 +88,12 @@ BaseViewItem *ViewItemFactory::CreateViewItem(
   // before testing the more generalized types
   for ( CreatorRIT itr = creatorRBegin(); itr != creatorREnd(); itr++ )
   {
-    BaseViewItem* viewItem = (*itr)->CreateItem( modelItem, name, value, tag );
-    if ( viewItem )
+    BaseViewItem* viewItem = (*itr)->CreateItem( name, value, tag );
+    if (viewItem)
+    {
+      viewItem->setBaseModelItem( modelItem );
       return viewItem;
+    }
   }
 
   return nullptr;

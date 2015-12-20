@@ -117,12 +117,9 @@ void Vec3ViewItem::onChildViewValueChanged(
   emit viewValueChanged( QVariant( vec3d ), commit );
 }
 
-QList<BaseViewItem *> Vec3ViewItem::createChildViewItems() const
+void Vec3ViewItem::appendChildViewItems(QList<BaseViewItem *> items) const
 {
   ViewItemFactory* factory = ViewItemFactory::GetInstance();
-
-  QList<BaseViewItem *> result;
-  result.reserve( 3 );
 
   BaseViewItem *children[3];
   children[0] = factory->CreateViewItem( "X", QVariant( m_vec3dValue.x() ) );
@@ -131,16 +128,13 @@ QList<BaseViewItem *> Vec3ViewItem::createChildViewItems() const
   for ( int i = 0; i < 3; ++i )
   {
     m_childRouters[i]->connectToChild( children[i] );
-    result.append( children[i] );
+    items.append( children[i] );
   }
-
-  return result;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // 
 static Vec3ViewItem* CreateItem(
-  BaseModelItem *modelItem,
   QString const &name,
   QVariant const &value,
   char const *tag

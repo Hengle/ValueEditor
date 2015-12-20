@@ -19,8 +19,6 @@ public:
   
 	virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 
-  virtual bool hasChildren() const { return false; }
-
 private:
 
 	QDoubleSpinBox* m_spinner;

@@ -45,9 +45,7 @@ public:
 		bool commit
 		) /*override*/;
 
-  virtual bool hasChildren() const { return true; }
-
-  virtual QList<BaseViewItem *> createChildViewItems() const;
+  virtual void appendChildViewItems( QList<BaseViewItem *> items ) const;
 
 public slots:
 

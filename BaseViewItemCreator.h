@@ -29,7 +29,6 @@ public:
 
   // Create the view item.
   virtual BaseViewItem* CreateItem(
-    BaseModelItem *modelItem,
     QString const &name,
     QVariant const &value,
     char const *tag
@@ -63,12 +62,11 @@ class Creator_##ViewItemClass : public BaseViewItemCreator { \
 public: \
   Creator_##ViewItemClass() {} \
   BaseViewItem* CreateItem( \
-    BaseModelItem *modelItem, \
     QString const &name, \
     QVariant const &value, \
     char const *tag \
     ) /*override*/ \
-  { return ::CreatorFn( modelItem, name, value, tag ); } \
+  { return ::CreatorFn( name, value, tag ); } \
   int Priority() /*override*/ { return _priority; } \
 }; \
 static Creator_##ViewItemClass s_CreatorInstance;

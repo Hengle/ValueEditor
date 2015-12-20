@@ -54,7 +54,6 @@ void FloatViewItem::OnEditFinished()
 //////////////////////////////////////////////////////////////////////////
 // 
 static FloatViewItem* CreateItem(
-  BaseModelItem *modelItem,
   QString const &name,
   QVariant const &value,
   char const *tag

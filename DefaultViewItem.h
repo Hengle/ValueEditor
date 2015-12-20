@@ -9,13 +9,11 @@ class DefaultViewItem : public BaseViewItem
 {
 private:
 	
-  BaseModelItem *m_modelItem;
   QLabel *m_label;
 
 public:
 
 	DefaultViewItem(
-    BaseModelItem *modelItem,
     QString const &name,
     QVariant const &value
     );
@@ -31,8 +29,4 @@ public:
     bool
     ) /*override*/
 	  {}
-
-  virtual bool hasChildren() const /*override*/;
-
-  virtual QList<BaseViewItem *> createChildViewItems() const;
 };

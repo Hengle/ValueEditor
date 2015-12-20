@@ -39,7 +39,8 @@ void VETreeWidget::onTreeWidgetItemExpanded( QTreeWidgetItem *_treeWidgetItem )
   VETreeWidgetItem *treeWidgetItem =
     static_cast<VETreeWidgetItem *>( _treeWidgetItem );
   BaseViewItem *viewItem = treeWidgetItem->getViewItem();
-  QList<BaseViewItem *> childViewItems = viewItem->createChildViewItems();
+  QList<BaseViewItem *> childViewItems;
+  viewItem->appendChildViewItems( childViewItems );
   for ( int i = 0; i < childViewItems.size(); ++i )
   {
     BaseViewItem *childViewItem = childViewItems.at( i );

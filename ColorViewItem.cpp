@@ -41,7 +41,6 @@ void ColorViewItem::onChildViewValueChanged( QVariant const &, QString const &, 
 //
 
 static ColorViewItem* CreateItem(
-  BaseModelItem *modelItem,
   QString const &name,
   QVariant const &value,
   char const *tag

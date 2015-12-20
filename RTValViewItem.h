@@ -27,5 +27,4 @@ public:
 		bool commit
 		) /*override*/;
 
-  virtual bool hasChildren() const { return true; }
 };
