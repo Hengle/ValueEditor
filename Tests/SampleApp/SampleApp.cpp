@@ -45,7 +45,7 @@ public:
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	//SetStylesheet("styles.qss");
+	SetStylesheet("styles.qss");
 
 	BaseModelItem* pSampleModel = BuildSampleModel();
 	

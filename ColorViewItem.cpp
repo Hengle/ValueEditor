@@ -16,7 +16,8 @@ ColorViewItem::ColorViewItem(
   , m_button( NULL )
 {
   m_button = new QPushButton();
-  m_button->setObjectName( "btnColorPicker" );
+  m_button->setObjectName( name );
+  m_button->setProperty( "class", QString( "colorSwatch" ) );
   m_button->setAutoFillBackground( true );
 
   // Connect button signal to appropriate slot
