@@ -37,7 +37,15 @@ void FloatSliderViewItem::onModelValueChanged( QVariant const &value )
   m_slider->setDoubleValue( value.toDouble() );
 }
 
-inline void FloatSliderViewItem::updateMetadata( FTL::JSONObject * ) {}
+void FloatSliderViewItem::updateMetadata( FTL::JSONObject* metaData ) 
+{
+  if (metaData->has( "min" ) && metaData->has( "max" ))
+  {
+    double min = metaData->getFloat64( "min" );
+    double max = metaData->getFloat64( "max" );
+    m_slider->setResolution( 100, min, max );
+  }
+}
 
 void FloatSliderViewItem::OnSpinnerChanged( double value )
 {
