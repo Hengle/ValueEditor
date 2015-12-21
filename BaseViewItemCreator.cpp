@@ -4,13 +4,13 @@
 BaseViewItemCreator::BaseViewItemCreator()
 {
 	ViewItemFactory* factory = ViewItemFactory::GetInstance();
-	if (factory != nullptr)
+	if ( !!factory )
 		factory->RegisterCreator(this);
 }
 
 BaseViewItemCreator::~BaseViewItemCreator()
 {
 	ViewItemFactory* factory = ViewItemFactory::GetInstance();
-	if (factory != nullptr) 
+	if ( !!factory ) 
 		factory->DeRegisterCreator(this);
 }

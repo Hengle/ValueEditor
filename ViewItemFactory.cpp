@@ -97,7 +97,7 @@ BaseViewItem *ViewItemFactory::CreateViewItem(
     }
   }
 
-  return nullptr;
+  return 0;
 }
 
 BaseViewItem *ViewItemFactory::CreateViewItem(

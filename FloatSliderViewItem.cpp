@@ -2,7 +2,7 @@
 #include "BaseViewItemCreator.h"
 #include "DoubleSlider.h"
 #pragma warning(push, 0)
-#include <FTL\JSONValue.h>
+#include <FTL/JSONValue.h>
 #pragma warning(pop)
 
 FloatSliderViewItem::FloatSliderViewItem(
