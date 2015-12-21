@@ -37,6 +37,8 @@ void FloatSliderViewItem::onModelValueChanged( QVariant const &value )
   m_slider->setDoubleValue( value.toDouble() );
 }
 
+inline void FloatSliderViewItem::updateMetadata( FTL::JSONObject * ) {}
+
 void FloatSliderViewItem::OnSpinnerChanged( double value )
 {
   emit viewValueChanged(
@@ -68,8 +70,12 @@ static FloatSliderViewItem* CreateItem(
        || value.type() == QMetaType::Float)
   {
     // We can only create the UI if we have a defined Min & Max
-    if (metaData->has("min") && metaData->has( "max" ))
-      return new FloatSliderViewItem( name, value );
+    if (metaData->has( "min" ) && metaData->has( "max" ))
+    {
+      FloatSliderViewItem* item = new FloatSliderViewItem( name, value );
+      item->updateMetadata( metaData );
+      return item;
+    }
   }
   return NULL;
 }
