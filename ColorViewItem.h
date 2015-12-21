@@ -1,13 +1,15 @@
 #pragma once
-
 #include "BaseViewItem.h"
-#include <QtGui/QLabel.h>
+
+class QPushButton;
 
 class ColorViewItem : public BaseViewItem
 {
 private:
-  
-  QLabel *m_label;
+
+  Q_OBJECT
+
+  QPushButton* m_button;
 
 public:
 
@@ -18,9 +20,12 @@ public:
 
   virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 
-  virtual void onChildViewValueChanged(
-    QVariant const &,
-    QString const &,
-    bool
-    ) /*override*/;
+  void setButtonColor( const QColor & color );
+
+public slots:
+
+  // Slot triggered when pushing background button
+  void pickColor();
+  void onColorChanged( QColor color );
+  void onColorSelected( QColor color );
 };

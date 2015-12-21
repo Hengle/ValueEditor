@@ -70,6 +70,7 @@
     <ClCompile Include="BaseViewItemCreator.cpp" />
     <ClCompile Include="moc_BaseModelItem.cpp" />
     <ClCompile Include="moc_BaseViewItem.cpp" />
+    <ClCompile Include="moc_ColorViewItem.cpp" />
     <ClCompile Include="moc_FloatViewItem.cpp" />
     <ClCompile Include="moc_RTValViewItem.cpp" />
     <ClCompile Include="moc_Vec3ViewItem.cpp" />

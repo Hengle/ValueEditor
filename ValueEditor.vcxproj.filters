@@ -88,6 +88,9 @@
     <ClCompile Include="moc_VETreeWidget.cpp">
       <Filter>moc</Filter>
     </ClCompile>
+    <ClCompile Include="moc_ColorViewItem.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ViewItemFactory.h">
