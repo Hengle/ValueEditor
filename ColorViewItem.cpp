@@ -47,21 +47,21 @@ void ColorViewItem::setButtonColor( const QColor& color )
 
 void ColorViewItem::pickColor()
 {
-  QColorDialog *qcd = new QColorDialog( QColor::fromRgb( 0, 0, 0, 255 ), NULL );
-  connect( qcd, SIGNAL( colorSelected( QColor ) ), 
+  QColor currColor = m_button->palette().color( QPalette::Button );
+  QColorDialog qcd( currColor, NULL );
+  connect( &qcd, SIGNAL( colorSelected( QColor ) ), 
            this, SLOT( onColorSelected( QColor ) ) );
-  connect( qcd, SIGNAL( currentColorChanged( QColor ) ), 
+  connect( &qcd, SIGNAL( currentColorChanged( QColor ) ), 
            this, SLOT( onColorChanged( QColor ) ) );
-  qcd->open();
+  qcd.exec();
 
-  ////QColorDialog colorDialog;
-  //QColor currColor = m_button->palette().color( QPalette::Button );
-  //QColor color = QColorDialog::getColor( currColor );
-  //if (color.isValid())
-  //{
-  //  setButtonColor( color );
-  //  onColorSelected( color );
-  //}
+  // If the user hits cancel, we wish to restore
+  // the current state to the previous value
+  QColor outColor = qcd.selectedColor();
+  if (!outColor.isValid())
+  {
+    onColorChanged( currColor );
+  }
 }
 
 void ColorViewItem::onColorChanged( QColor color )
