@@ -37,7 +37,7 @@ void FloatSliderViewItem::onModelValueChanged( QVariant const &value )
   m_slider->setDoubleValue( value.toDouble() );
 }
 
-inline void FloatSliderViewItem::updateMetadata( FTL::JSONObject * ) {}
+void FloatSliderViewItem::updateMetadata( FTL::JSONObject * ) {}
 
 void FloatSliderViewItem::OnSpinnerChanged( double value )
 {
