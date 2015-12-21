@@ -1,15 +1,17 @@
 #pragma once
-#include "BaseViewItem.h"
+#include "BaseComplexViewItem.h"
 
 class QPushButton;
 
-class ColorViewItem : public BaseViewItem
+class ColorViewItem : public BaseComplexViewItem
 {
 private:
 
   Q_OBJECT
 
   QPushButton* m_button;
+  
+  QColor m_color;
 
 public:
 
@@ -19,6 +21,14 @@ public:
   virtual QWidget *getWidget() /*override*/;
 
   virtual void onModelValueChanged( QVariant const &value ) /*override*/;
+
+  virtual void onChildViewValueChanged(
+    int index,
+    QVariant const &value,
+    bool commit
+    ) /*override*/;
+
+  virtual void doAppendChildViewItems( QList<BaseViewItem *>& items );
 
   void setButtonColor( const QColor & color );
 

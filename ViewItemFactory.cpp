@@ -81,17 +81,18 @@ BaseViewItem *ViewItemFactory::CreateViewItem(
   BaseModelItem *modelItem,
   QString const &name,
   QVariant const &value,
-  char const *tag
+  FTL::JSONObject* metaData
   )
 {
   // iterate in reverse.  This ensures we test the most-specialized types
   // before testing the more generalized types
   for ( CreatorRIT itr = creatorRBegin(); itr != creatorREnd(); itr++ )
   {
-    BaseViewItem* viewItem = (*itr)->CreateItem( name, value, tag );
+    BaseViewItem* viewItem = (*itr)->CreateItem( name, value, metaData );
     if (viewItem)
     {
       viewItem->setBaseModelItem( modelItem );
+      viewItem->updateMetadata( metaData );
       return viewItem;
     }
   }
@@ -100,28 +101,27 @@ BaseViewItem *ViewItemFactory::CreateViewItem(
 }
 
 BaseViewItem *ViewItemFactory::CreateViewItem(
-  BaseModelItem *modelItem,
-  char const *tag
+  BaseModelItem *modelItem
   )
 {
   return CreateViewItem(
     modelItem,
     modelItem->GetName(),
     modelItem->GetValue(),
-    tag
+    modelItem->GetMetadata()
     );
 }
 
 BaseViewItem *ViewItemFactory::CreateViewItem(
   QString const &name,
   QVariant const &value,
-  char const *tag
+  FTL::JSONObject* metaData
   )
 {
   return CreateViewItem(
     0,
     name,
     value,
-    tag
+    metaData
     );
 }

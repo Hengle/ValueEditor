@@ -9,32 +9,9 @@
 class BaseModelItem;
 class BaseViewItem;
 
-class VALUEEDIT_API ViewItemChildRouter : public QObject
-{
-  Q_OBJECT
-
-  BaseViewItem *m_viewItem;
-  int m_index;
-
-public:
-
-  ViewItemChildRouter(
-    BaseViewItem *viewItem,
-    int index
-    );
-
-  void connectToChild( BaseViewItem *childViewItem );
-
-  void emitModelValueChanged( QVariant const &value );
-
-signals:
-
-  void modelValueChanged( QVariant const &value );
-
-public slots:
-
-  void onViewValueChanged( QVariant const &value, bool commit );
-};
+namespace FTL {
+  class JSONObject;
+}
 
 // The base item for the view-side of the equation.
 // A BaseViewItem essentially represents a row in the
@@ -65,17 +42,10 @@ private:
   void setBaseModelItem( BaseModelItem* item )
     { m_modelItem = item; }
 
-protected:
-
-  typedef ViewItemChildRouter ChildRouter;
-
-  ChildRouter *createChildRouter( int index )
-    { return new ChildRouter( this, index ); }
-
 public:
 
   BaseViewItem( QString const &name );
-  ~BaseViewItem();
+  virtual ~BaseViewItem();
 
   // Returns a matching ModelItem for this ViewItem
   // May be null.
@@ -97,7 +67,7 @@ public:
   // Implement this function to add additional ViewItem
   // as children.  Default implementation adds ViewItems
   // for each child of the model item (if present)
-  virtual void appendChildViewItems( QList<BaseViewItem *>& items) const;
+  virtual void appendChildViewItems( QList<BaseViewItem *>& items);
 
   // Add the viewItems widgets to the tree item.  The default
   // implementation simply calls GetWidget and adds this
@@ -107,19 +77,17 @@ public:
     QTreeWidget* treeWidget,
     QTreeWidgetItem * treeWidgetItem );
 
+  // Implement this function if ViewItem uses metadata to
+  // set its behaviour.  This function may be called at any
+  // time if the metadata associated with this item changes.
+  virtual void updateMetadata( FTL::JSONObject* /*metaData*/ ) {};
+
 public slots:
 
   // Implement this slot to update the UI to the
   // passed variant.  If necessary, pass the update
   // down to this items children as well.
   virtual void onModelValueChanged( QVariant const &value ) = 0;
-
-  // Implement this slot if we need to react when a child changes
-  virtual void onChildViewValueChanged(
-    int index,
-    QVariant const &value,
-    bool commit
-    );
   
 signals:
 

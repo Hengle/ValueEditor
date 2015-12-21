@@ -29,7 +29,7 @@ BaseModelItem* BuildSampleModel()
 	SampleModelItem* diffFloat = new SampleModelItem("diffFloat", QVariant(7.9f));
 	pSubGroup->AddChild(diffFloat);
 
-	colorVar = QVariant::fromValue(QColor(50, 0, 200));
+	colorVar = QVariant::fromValue(QColor::fromHsvF(0.3, 0, 0.85));
 	SampleModelItem* subColor = new SampleModelItem("aColour", colorVar);
 	pSubGroup->AddChild(subColor);
 

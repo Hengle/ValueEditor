@@ -38,7 +38,7 @@ void DefaultViewItem::onModelValueChanged( QVariant const &value )
 static BaseViewItem* CreateItem(
   QString const &name,
   QVariant const &value,
-  char const *tag
+  FTL::JSONObject* /*metaData*/
   )
 {
   return new DefaultViewItem( name, value );

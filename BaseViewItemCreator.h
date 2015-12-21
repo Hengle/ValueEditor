@@ -5,6 +5,10 @@
 class BaseModelItem;
 class BaseViewItem;
 
+namespace FTL {
+  class JSONObject;
+}
+
 // A ViewItemCreator allows plugging in custom ViewItem implementations.
 // An instance of this class should be registered with the ViewItemFactor.
 // Whenever the system needs to create a ViewItem for a piece of data,
@@ -31,7 +35,7 @@ public:
   virtual BaseViewItem* CreateItem(
     QString const &name,
     QVariant const &value,
-    char const *tag
+    FTL::JSONObject* metaData
     ) = 0;
 
   // Implement this function to delete this class, it will 
@@ -64,9 +68,9 @@ public: \
   BaseViewItem* CreateItem( \
     QString const &name, \
     QVariant const &value, \
-    char const *tag \
+    FTL::JSONObject* metaData \
     ) /*override*/ \
-  { return ::CreatorFn( name, value, tag ); } \
+  { return ::CreatorFn( name, value, metaData ); } \
   int Priority() /*override*/ { return _priority; } \
 }; \
 static Creator_##ViewItemClass s_CreatorInstance;

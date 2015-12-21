@@ -1,4 +1,5 @@
 #include "RTValViewItem.h"
+#include "BaseViewItemCreator.h"
 #include <QtGui/QWidget.h>
 
 RTValViewItem::RTValViewItem(QString name)
@@ -54,3 +55,45 @@ void RTValViewItem::onChildViewValueChanged(
 
 	emit viewValueChanged( toVariant(m_val), commit );
 }
+
+//////////////////////////////////////////////////////////
+//
+static BaseViewItem* CreateItem(
+  QString const &name,
+  QVariant const &value,
+  FTL::JSONObject* /*metaData*/
+  )
+{
+  if (value.type() != QVariant::UserType)
+    return NULL;
+  if (value.userType() == qMetaTypeId<FabricCore::RTVal>())
+    return NULL;
+
+  FabricCore::RTVal rtVal = value.value<FabricCore::RTVal>();
+  //const char* ctype = rtVal.getTypeNameCStr();
+
+  if (rtVal.isObject() || rtVal.isStruct())
+  {
+    RTValViewItem* pViewItem = new RTValViewItem( QString( name ) );
+
+    FabricCore::RTVal desc = rtVal.getDesc();
+    //const char* cdesc = desc.getStringCString();
+    // TODO: parse cdesc, Build children from desc.
+
+   /* // For thinking, assume 2 children, name "X", "Y"
+    FabricCore::RTVal xval = rtVal.maybeGetMemberRef( "X" );
+    QVariant xvariant = QVariant::fromValue<FabricCore::RTVal>( xval );
+    BaseViewItem* pxChild = ViewItemFactory::GetInstance()->CreateViewItem( "X", xvariant );
+    // pViewItem->AddChild(pxChild);
+
+    FabricCore::RTVal yval = rtVal.maybeGetMemberRef( "Y" );
+    QVariant yvariant = QVariant::fromValue<FabricCore::RTVal>( yval );
+    BaseViewItem* pyChild = ViewItemFactory::GetInstance()->CreateViewItem( "Y", yvariant );
+    // pViewItem->AddChild(pyChild);
+    */
+    return pViewItem;
+  }
+  return NULL;
+}
+
+EXPOSE_VIEW_ITEM( RTValViewItem, CreateItem, 1 );

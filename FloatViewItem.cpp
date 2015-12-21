@@ -38,7 +38,7 @@ void FloatViewItem::onModelValueChanged( QVariant const &value )
 void FloatViewItem::OnSpinnerChanged( double value )
 {
   emit viewValueChanged(
-    QVariant::fromValue<double>( m_spinner->value() ),
+    QVariant::fromValue<double>( value ),
     0
     );
 }
@@ -56,7 +56,7 @@ void FloatViewItem::OnEditFinished()
 static FloatViewItem* CreateItem(
   QString const &name,
   QVariant const &value,
-  char const *tag
+  FTL::JSONObject* /*metaData*/
   )
 {
   if ( value.type() == QVariant::Double

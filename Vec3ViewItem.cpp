@@ -9,7 +9,7 @@ Vec3ViewItem::Vec3ViewItem(
   QString const &name,
   QVariant const &value
   )
-  : BaseViewItem( name )
+  : BaseComplexViewItem( name )
   , m_vec3dValue( value.value<QVector3D>() )
 {
   m_widget = new QWidget;
@@ -36,9 +36,6 @@ Vec3ViewItem::Vec3ViewItem(
   layout->addWidget( m_xEdit );
   layout->addWidget( m_yEdit );
   layout->addWidget( m_zEdit );
-
-  for ( int i = 0; i < 3; ++i )
-    m_childRouters[i] = createChildRouter( i );
 }
 
 Vec3ViewItem::~Vec3ViewItem()
@@ -56,17 +53,17 @@ void Vec3ViewItem::onModelValueChanged( QVariant const &value )
   if ( newVec3dValue.x() != m_vec3dValue.x() )
   {
     m_xEdit->setText( QString::number( newVec3dValue.x() ) );
-    m_childRouters[0]->emitModelValueChanged( QVariant( newVec3dValue.x() ) );
+    routeModelValueChanged( 0, QVariant( newVec3dValue.x() ) );
   }
   if ( newVec3dValue.y() != m_vec3dValue.y() )
   {
     m_yEdit->setText( QString::number( newVec3dValue.y() ) );
-    m_childRouters[1]->emitModelValueChanged( QVariant( newVec3dValue.y() ) );
+    routeModelValueChanged( 1, QVariant( newVec3dValue.y() ) );
   }
   if ( newVec3dValue.z() != m_vec3dValue.z() )
   {
     m_zEdit->setText( QString::number( newVec3dValue.z() ) );
-    m_childRouters[2]->emitModelValueChanged( QVariant( newVec3dValue.z() ) );
+    routeModelValueChanged( 2, QVariant( newVec3dValue.z() ) );
   }
   m_vec3dValue = newVec3dValue;
 }
@@ -117,7 +114,7 @@ void Vec3ViewItem::onChildViewValueChanged(
   emit viewValueChanged( QVariant( vec3d ), commit );
 }
 
-void Vec3ViewItem::appendChildViewItems(QList<BaseViewItem *> items) const
+void Vec3ViewItem::doAppendChildViewItems(QList<BaseViewItem *>& items)
 {
   ViewItemFactory* factory = ViewItemFactory::GetInstance();
 
@@ -127,7 +124,7 @@ void Vec3ViewItem::appendChildViewItems(QList<BaseViewItem *> items) const
   children[2] = factory->CreateViewItem( "Z", QVariant( m_vec3dValue.z() ) );
   for ( int i = 0; i < 3; ++i )
   {
-    m_childRouters[i]->connectToChild( children[i] );
+    connectChild( i, children[i] );
     items.append( children[i] );
   }
 }
@@ -137,7 +134,7 @@ void Vec3ViewItem::appendChildViewItems(QList<BaseViewItem *> items) const
 static Vec3ViewItem* CreateItem(
   QString const &name,
   QVariant const &value,
-  char const *tag
+  FTL::JSONObject* 
   )
 {
   const int qv3Dtype = ((QVariant)QVector3D()).type();

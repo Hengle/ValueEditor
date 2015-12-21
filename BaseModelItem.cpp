@@ -9,7 +9,7 @@ BaseModelItem::~BaseModelItem()
 {
 }
 
-QString BaseModelItem::GetMetadata(QString string)
+FTL::JSONObject* BaseModelItem::GetMetadata()
 {
-	return QString();
+  return NULL;
 }

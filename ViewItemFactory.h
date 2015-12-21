@@ -8,6 +8,10 @@ class BaseViewItemCreator;
 class BaseViewItem;
 class BaseModelItem;
 
+namespace FTL {
+  class JSONObject;
+}
+
 // This factory is responsible for returning the appropriate BaseViewItem
 // when creating for a given data type
 class VALUEEDIT_API ViewItemFactory /*sealed*/
@@ -60,7 +64,7 @@ protected:
 	  BaseModelItem *modelItem,
 		QString const &name,
 		QVariant const &value,
-	  char const *tag
+    FTL::JSONObject* metaData
 	  );
 
 public:
@@ -75,16 +79,9 @@ public:
 	BaseViewItem* BuildView(BaseModelItem* model);
 	
 	// Create the most appropriate value editor given the following data
-	// \data The data being edited.  We create a BaseViewItem that matches the
-	//	type of this data.
-	// \viewtype[optional] What dimension the data represents.  For example, a 
-	//		float can represent any of an angle/ratio/distance etc.
-	// \tag[optional] One more piece of metadata, just in case you want to 
-	//		only display a value for a tagged value.
-	// TODO: Perhaps just pass in a MetaData option here to represent all metadata?
+	// \data The modelitem to represent in the UI
 	BaseViewItem* CreateViewItem(
-	  BaseModelItem *modelItem,
-	  char const *tag = 0
+	  BaseModelItem *modelItem
 	  );
 	
 	// Create the most appropriate value editor given the following data
@@ -92,12 +89,11 @@ public:
 	//	type of this data.
 	// \viewtype[optional] What dimension the data represents.  For example, a 
 	//		float can represent any of an angle/ratio/distance etc.
-	// \tag[optional] One more piece of metadata, just in case you want to 
+	// \metadata[optional] One more piece of metadata, just in case you want to 
 	//		only display a value for a tagged value.
-	// TODO: Perhaps just pass in a MetaData option here to represent all metadata?
 	BaseViewItem* CreateViewItem(
 		QString const &name,
 		QVariant const &value,
-	  char const *tag = 0
+    FTL::JSONObject* metaData = NULL
 	  );
 };

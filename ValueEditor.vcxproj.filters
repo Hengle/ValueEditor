@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -34,21 +26,19 @@
     <Filter Include="moc">
       <UniqueIdentifier>{74cbd16b-8508-4bcb-be51-85a6692f1ef7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VETreeWidget">
+      <UniqueIdentifier>{238bf36f-147c-454a-ae58-e5dcb640d393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseClasses">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="ViewItems\FloatSliderViewItem">
+      <UniqueIdentifier>{d0650ba1-51dc-4e12-88c7-bcc66619c730}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseViewItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ViewItemFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseViewItemCreator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StdAfx.cpp" />
-    <ClCompile Include="BaseModelItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Vec3ViewItem.cpp">
       <Filter>ViewItems\Vec3ViewItem</Filter>
     </ClCompile>
@@ -59,9 +49,6 @@
       <Filter>ViewItems\FloatViewItem</Filter>
     </ClCompile>
     <ClCompile Include="RTValViewItem.cpp">
-      <Filter>ViewItems\RTValViewItem</Filter>
-    </ClCompile>
-    <ClCompile Include="RTValViewItemCreator.cpp">
       <Filter>ViewItems\RTValViewItem</Filter>
     </ClCompile>
     <ClCompile Include="ColorViewItem.cpp">
@@ -82,44 +69,72 @@
     <ClCompile Include="moc_Vec3ViewItem.cpp">
       <Filter>moc</Filter>
     </ClCompile>
-    <ClCompile Include="VETreeWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="moc_VETreeWidget.cpp">
       <Filter>moc</Filter>
     </ClCompile>
     <ClCompile Include="moc_ColorViewItem.cpp">
       <Filter>moc</Filter>
     </ClCompile>
+    <ClCompile Include="BaseModelItem.cpp">
+      <Filter>BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseViewItem.cpp">
+      <Filter>BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseViewItemCreator.cpp">
+      <Filter>BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewItemChildRouter.cpp">
+      <Filter>BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewItemFactory.cpp">
+      <Filter>BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="VETreeWidget.cpp">
+      <Filter>VETreeWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComplexViewItem.cpp">
+      <Filter>BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_ViewItemChildRouter.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatSliderViewItem.cpp">
+      <Filter>ViewItems\FloatSliderViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_FloatSliderViewItem.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
+    <ClCompile Include="DoubleSlider.cpp">
+      <Filter>ViewItems\FloatSliderViewItem</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_DoubleSlider.cpp">
+      <Filter>moc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ViewItemFactory.h">
-      <Filter>Header Files</Filter>
+      <Filter>BaseClasses</Filter>
     </ClInclude>
     <ClInclude Include="BaseViewItemCreator.h">
-      <Filter>Header Files</Filter>
+      <Filter>BaseClasses</Filter>
     </ClInclude>
     <ClInclude Include="QVariantRTVal.h" />
     <ClInclude Include="StdAfx.h" />
-    <ClInclude Include="RTValViewItemCreator.h">
-      <Filter>ViewItems\RTValViewItem</Filter>
-    </ClInclude>
-    <ClInclude Include="DllExport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VETreeWidgetItem.h">
-      <Filter>Header Files</Filter>
+      <Filter>VETreeWidget</Filter>
+    </ClInclude>
+    <ClInclude Include="DllExport.h" />
+    <ClInclude Include="BaseComplexViewItem.h">
+      <Filter>BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMOC Include="BaseModelItem.h">
-      <Filter>Header Files</Filter>
+      <Filter>BaseClasses</Filter>
     </QtMOC>
     <QtMOC Include="BaseViewItem.h">
-      <Filter>Header Files</Filter>
-    </QtMOC>
-    <QtMOC Include="VETreeWidget.h">
-      <Filter>Header Files</Filter>
+      <Filter>BaseClasses</Filter>
     </QtMOC>
     <QtMOC Include="ColorViewItem.h">
       <Filter>ViewItems\ColorViewItem</Filter>
@@ -135,6 +150,18 @@
     </QtMOC>
     <QtMOC Include="Vec3ViewItem.h">
       <Filter>ViewItems\Vec3ViewItem</Filter>
+    </QtMOC>
+    <QtMOC Include="VETreeWidget.h">
+      <Filter>VETreeWidget</Filter>
+    </QtMOC>
+    <QtMOC Include="ViewItemChildRouter.h">
+      <Filter>BaseClasses</Filter>
+    </QtMOC>
+    <QtMOC Include="FloatSliderViewItem.h">
+      <Filter>ViewItems\FloatSliderViewItem</Filter>
+    </QtMOC>
+    <QtMOC Include="DoubleSlider.h">
+      <Filter>ViewItems\FloatSliderViewItem</Filter>
     </QtMOC>
   </ItemGroup>
 </Project>
