@@ -76,4 +76,4 @@ public:
 };
 
 
-extern BaseModelItem* BuildSampleModel();
+extern BaseModelItem* BuildSampleModel( FabricCore::Client& client );

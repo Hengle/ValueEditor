@@ -1,30 +1,35 @@
 #pragma once
 
-#include "BaseViewItem.h"
-#include "QVariantRTVal.h"
+#include "BaseComplexViewItem.h"
 
-class RTValViewItem : public BaseViewItem
+typedef std::vector<std::string> NameList;
+
+// A default RTVal implementation that can display any RTVal class
+class RTValViewItem : public BaseComplexViewItem
 {
-	Q_OBJECT
-
 	// Cache the val for easier reconstruction.  Why?  cause why not?
 	FabricCore::RTVal m_val; 
 
-	QWidget *m_widget;
+  // A composite widget to represent any/all values in UI
+	QLabel *m_widget;
+
+  // A list of 
+  NameList m_childNames;
 
 public:
 
-	RTValViewItem(QString name);
+	RTValViewItem(QString name, const FabricCore::RTVal& value );
 	~RTValViewItem();
 
-	virtual QWidget *getWidget() /*override*/;
+  virtual QWidget *getWidget() /*override*/;
 
-	virtual void onModelValueChanged( QVariant const &value ) /*override*/;
+  virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 
-	virtual void onChildViewValueChanged(
-		QVariant const &value,
-		QString const &name,
-		bool commit
-		) /*override*/;
+  virtual void doAppendChildViewItems( QList<BaseViewItem *>& items );
 
+  virtual void onChildViewValueChanged(
+    int index,
+    QVariant const &value,
+    bool commit
+    ) /*override*/;
 };

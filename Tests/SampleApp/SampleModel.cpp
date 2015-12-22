@@ -1,8 +1,8 @@
 #include "StdAfx.h"
-
+#include "../../QVariantRTVal.h"
 #include "SampleModel.h"
 
-BaseModelItem* BuildSampleModel()
+BaseModelItem* BuildSampleModel( FabricCore::Client& client )
 {
 	SampleModelItem* rootItem = new SampleModelItem("RootNode", QVariant());
 
@@ -32,6 +32,13 @@ BaseModelItem* BuildSampleModel()
 	colorVar = QVariant::fromValue(QColor::fromHsvF(0.3, 0, 0.85));
 	SampleModelItem* subColor = new SampleModelItem("aColour", colorVar);
 	pSubGroup->AddChild(subColor);
+
+  client.loadExtension( "Math", NULL, 0 );
+  FabricCore::RTVal val =
+    FabricCore::RTVal::Construct( client, "Xfo", 0, NULL );
+  QVariant xfoVar = toVariant( val );
+  SampleModelItem* subXfo = new SampleModelItem( "transform", xfoVar );
+  pSubGroup->AddChild( subXfo );
 
 	return rootItem;
 }

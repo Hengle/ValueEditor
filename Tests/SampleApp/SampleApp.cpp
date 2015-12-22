@@ -47,7 +47,16 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 	SetStylesheet("styles.qss");
 
-	BaseModelItem* pSampleModel = BuildSampleModel();
+  // We create a FabricInstance in order to test
+  FabricCore::Initialize();
+
+  FabricCore::Client::CreateOptions createOptions;
+  memset( &createOptions, 0, sizeof( createOptions ) );
+  createOptions.guarded = true;
+
+  FabricCore::Client client( NULL, NULL, &createOptions );
+
+	BaseModelItem* pSampleModel = BuildSampleModel( client );
 	
 	ViewItemFactory* pFactory = ViewItemFactory::GetInstance();
 	BaseViewItem* pViewLayer = pFactory->BuildView(pSampleModel);

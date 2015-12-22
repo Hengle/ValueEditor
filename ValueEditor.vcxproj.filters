@@ -63,9 +63,6 @@
     <ClCompile Include="moc_FloatViewItem.cpp">
       <Filter>moc</Filter>
     </ClCompile>
-    <ClCompile Include="moc_RTValViewItem.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
     <ClCompile Include="moc_Vec3ViewItem.cpp">
       <Filter>moc</Filter>
     </ClCompile>
@@ -128,6 +125,9 @@
     <ClInclude Include="BaseComplexViewItem.h">
       <Filter>BaseClasses</Filter>
     </ClInclude>
+    <ClInclude Include="RTValViewItem.h">
+      <Filter>ViewItems\RTValViewItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMOC Include="BaseModelItem.h">
@@ -144,9 +144,6 @@
     </QtMOC>
     <QtMOC Include="FloatViewItem.h">
       <Filter>ViewItems\FloatViewItem</Filter>
-    </QtMOC>
-    <QtMOC Include="RTValViewItem.h">
-      <Filter>ViewItems\RTValViewItem</Filter>
     </QtMOC>
     <QtMOC Include="Vec3ViewItem.h">
       <Filter>ViewItems\Vec3ViewItem</Filter>

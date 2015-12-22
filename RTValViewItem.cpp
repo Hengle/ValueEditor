@@ -1,60 +1,108 @@
 #include "RTValViewItem.h"
 #include "BaseViewItemCreator.h"
+#include "ViewItemFactory.h"
 #include <QtGui/QWidget.h>
+#include "QVariantRTVal.h"
+#pragma warning(push, 0)
+#include <FTL/JSONValue.h>
+#pragma warning(pop)
 
-RTValViewItem::RTValViewItem(QString name)
-	: BaseViewItem(name)
+RTValViewItem::RTValViewItem( QString name, const FabricCore::RTVal& value )
+  : BaseComplexViewItem( name )
+  , m_val(value)
 {
+  const char* valStr = value.getDesc().getStringCString();
+  m_widget = new QLabel( valStr );
 }
 
 RTValViewItem::~RTValViewItem()
 {
 }
 
-//size_t RTValViewItem::NumChildren()
-//{
-//	return m_children.size();
-//}
-//
-//BaseViewItem* RTValViewItem::GetChild(size_t index)
-//{
-//	return m_children[index];
-//}
-
 QWidget *RTValViewItem::getWidget()
 {
-	return 0;
+  return m_widget;
 }
 
 void RTValViewItem::onModelValueChanged( QVariant const &value )
 {
-	m_val = toRTVal( value );
-	// for ( ChildIT itr = childBegin(); itr != childEnd(); itr++ )
-	// {
-	// 	QString childName = (*itr)->GetName();
-	// 	QByteArray asciiName = childName.toAscii();
-	// 	FabricCore::RTVal childVal = m_val.maybeGetMemberRef(asciiName.data());
-	// 	// Assert childVal is valid
-	// 	(*itr)->UpdateViewValue( toVariant(childVal) );
-	// }
+  m_val = toRTVal( value );
+  for (int i = 0; i < m_childNames.size(); i++)
+  {
+    const char* childName = m_childNames[i].data();
+    FabricCore::RTVal childVal = m_val.maybeGetMemberRef( childName );
+    assert( childVal.isValid() );
+
+    routeModelValueChanged( i, toVariant( childVal ) );
+  }
+
+  const char* valStr = m_val.getDesc().getStringCString();
+  m_widget->setText( valStr );
 }
 
 void RTValViewItem::onChildViewValueChanged(
-	QVariant const &value,
-	QString const &childName,
-	bool commit
-	)
+  int index,
+  QVariant const &value,
+  bool commit
+  )
 {
-	QByteArray asciiName = childName.toAscii();
-	// We cannot simply create a new RTVal based on the QVariant type, as 
-	// we have to set the type exactly the same as the original.  Get the
-	// original child value to ensure the new value matches the internal type
-	FabricCore::RTVal oldChildVal = m_val.maybeGetMemberRef(asciiName.data());
-	VariantToRTVal(value, oldChildVal);
-	m_val.setMember(asciiName.data(), oldChildVal);
 
-	emit viewValueChanged( toVariant(m_val), commit );
+  assert( index < m_childNames.size() );
+  const char* childName = m_childNames[index].data();
+
+  // We cannot simply create a new RTVal based on the QVariant type, as 
+  // we have to set the type exactly the same as the original.  Get the
+  // original child value to ensure the new value matches the internal type
+  FabricCore::RTVal oldChildVal = m_val.maybeGetMemberRef( childName );
+  VariantToRTVal( value, oldChildVal );
+  m_val.setMember( childName, oldChildVal );
+
+  const char* valStr = m_val.getDesc().getStringCString();
+  m_widget->setText( valStr );
+
+  emit viewValueChanged( toVariant( m_val ), commit );
 }
+
+void RTValViewItem::doAppendChildViewItems( QList<BaseViewItem*>& items )
+{
+  if (!m_val.isValid())
+    return;
+
+  FabricCore::RTVal desc = m_val.getJSON();
+  const char* cdesc = desc.getStringCString();
+
+  // TODO: parse cdesc, Build children from desc.
+  try {
+    FTL::JSONValue* value = FTL::JSONValue::Decode( cdesc );
+    FTL::JSONObject* obj = value->cast<FTL::JSONObject>();
+
+    // Construct a child for each instance
+    ViewItemFactory* factory = ViewItemFactory::GetInstance();
+    for (FTL::JSONObject::const_iterator itr = obj->begin(); itr != obj->end(); itr++)
+    {
+      const char* childName = itr->first.c_str();
+      FabricCore::RTVal childVal = m_val.maybeGetMemberRef( childName );
+      if (childVal.isValid())
+      {
+        BaseViewItem* childItem = factory->CreateViewItem( childName, toVariant( childVal ), NULL );
+        if (childItem != NULL)
+        {
+          int index = m_childNames.size();
+          m_childNames.push_back( childName );
+          connectChild( index, childItem );
+
+          items.push_back( childItem );
+        }
+      }
+    }
+  }
+  catch (FabricCore::Exception e)
+  {
+    const char* error = e.getDesc_cstr();
+    printf( error );
+  }
+}
+
 
 //////////////////////////////////////////////////////////
 //
@@ -66,31 +114,13 @@ static BaseViewItem* CreateItem(
 {
   if (value.type() != QVariant::UserType)
     return NULL;
-  if (value.userType() == qMetaTypeId<FabricCore::RTVal>())
+  if (value.userType() != qMetaTypeId<FabricCore::RTVal>())
     return NULL;
 
   FabricCore::RTVal rtVal = value.value<FabricCore::RTVal>();
-  //const char* ctype = rtVal.getTypeNameCStr();
-
   if (rtVal.isObject() || rtVal.isStruct())
   {
-    RTValViewItem* pViewItem = new RTValViewItem( QString( name ) );
-
-    FabricCore::RTVal desc = rtVal.getDesc();
-    //const char* cdesc = desc.getStringCString();
-    // TODO: parse cdesc, Build children from desc.
-
-   /* // For thinking, assume 2 children, name "X", "Y"
-    FabricCore::RTVal xval = rtVal.maybeGetMemberRef( "X" );
-    QVariant xvariant = QVariant::fromValue<FabricCore::RTVal>( xval );
-    BaseViewItem* pxChild = ViewItemFactory::GetInstance()->CreateViewItem( "X", xvariant );
-    // pViewItem->AddChild(pxChild);
-
-    FabricCore::RTVal yval = rtVal.maybeGetMemberRef( "Y" );
-    QVariant yvariant = QVariant::fromValue<FabricCore::RTVal>( yval );
-    BaseViewItem* pyChild = ViewItemFactory::GetInstance()->CreateViewItem( "Y", yvariant );
-    // pViewItem->AddChild(pyChild);
-    */
+    RTValViewItem* pViewItem = new RTValViewItem( QString( name ), rtVal );
     return pViewItem;
   }
   return NULL;

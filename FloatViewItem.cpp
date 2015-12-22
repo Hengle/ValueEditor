@@ -2,6 +2,7 @@
 #include "BaseViewItemCreator.h"
 #include <QtGui/QSpinBox.h>
 #include <assert.h>
+#include "QVariantRTVal.h"
 
 FloatViewItem::FloatViewItem(
   QString const &name,
@@ -32,7 +33,7 @@ QWidget *FloatViewItem::getWidget()
 
 void FloatViewItem::onModelValueChanged( QVariant const &value )
 {
-  m_spinner->setValue( value.toDouble() );
+  m_spinner->setValue( getDouble(value) );
 }
 
 void FloatViewItem::OnSpinnerChanged( double value )
@@ -59,8 +60,7 @@ static FloatViewItem* CreateItem(
   FTL::JSONObject* /*metaData*/
   )
 {
-  if ( value.type() == QVariant::Double
-    || value.type() == QMetaType::Float )
+  if ( isDouble(value) )
   {
     return new FloatViewItem( name, value );
   }

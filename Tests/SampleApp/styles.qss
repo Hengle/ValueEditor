@@ -1,6 +1,5 @@
 QLabel {
     padding-right: 10px;
-    color: #e1ffff;
 }
 
 QToolBar::separator {

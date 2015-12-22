@@ -77,7 +77,6 @@
     <ClCompile Include="moc_DoubleSlider.cpp" />
     <ClCompile Include="moc_FloatSliderViewItem.cpp" />
     <ClCompile Include="moc_FloatViewItem.cpp" />
-    <ClCompile Include="moc_RTValViewItem.cpp" />
     <ClCompile Include="moc_Vec3ViewItem.cpp" />
     <ClCompile Include="moc_VETreeWidget.cpp" />
     <ClCompile Include="moc_ViewItemChildRouter.cpp" />
@@ -98,7 +97,7 @@
     <QtMOC Include="DefaultViewItem.h" />
     <ClInclude Include="DllExport.h" />
     <QtMOC Include="BaseModelItem.h" />
-    <QtMOC Include="RTValViewItem.h" />
+    <ClInclude Include="RTValViewItem.h" />
     <QtMOC Include="FloatViewItem.h" />
     <QtMOC Include="FloatSliderViewItem.h" />
     <QtMOC Include="DoubleSlider.h" />
