@@ -64,7 +64,7 @@ static FloatViewItem* CreateItem(
   {
     return new FloatViewItem( name, value );
   }
-  return nullptr;
+  return 0;
 }
 
 EXPOSE_VIEW_ITEM( FloatViewItem, CreateItem, 3 );

@@ -30,9 +30,9 @@ private:
 
 protected:
 
-	typedef std::vector<BaseViewItemCreator*>::const_iterator CreatorIT;
-	CreatorIT creatorBegin() const { return m_creators.begin(); }
-	CreatorIT creatorEnd() const { return m_creators.end(); }
+	typedef std::vector<BaseViewItemCreator*>::iterator CreatorIT;
+	CreatorIT creatorBegin() { return m_creators.begin(); }
+	CreatorIT creatorEnd() { return m_creators.end(); }
 
 	typedef std::vector<BaseViewItemCreator*>::const_reverse_iterator CreatorRIT;
 	CreatorRIT creatorRBegin() const { return m_creators.rbegin(); }

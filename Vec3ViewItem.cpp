@@ -141,7 +141,7 @@ static Vec3ViewItem* CreateItem(
   if (value.type() == qv3Dtype)
     return new Vec3ViewItem( name, value );
   else
-    return nullptr;
+    return 0;
 }
 
 EXPOSE_VIEW_ITEM( Vec3ViewItem, CreateItem, 3 );

@@ -1,7 +1,7 @@
 #include "BaseViewItem.h"
 #include "BaseModelItem.h"
 #include <assert.h>
-#include <QtGui\QTreeWidget.h>
+#include <QtGui/QTreeWidget.h>
 #include "ViewItemFactory.h"
 
 BaseViewItem::BaseViewItem( QString const &name )
@@ -16,14 +16,14 @@ BaseViewItem::~BaseViewItem()
 
 bool BaseViewItem::hasChildren() const
 {
-  if (m_modelItem != nullptr)
+  if ( !!m_modelItem )
     return m_modelItem->NumChildren() > 0;
   return false;
 }
 
 void BaseViewItem::appendChildViewItems( QList<BaseViewItem *>& items )
 {
-  if (m_modelItem)
+  if ( !!m_modelItem )
   {
     ViewItemFactory *viewItemFactory = ViewItemFactory::GetInstance();
 

@@ -1,11 +1,12 @@
 #include "ColorViewItem.h"
 #include "BaseViewItemCreator.h"
 #include "ViewItemFactory.h"
-#include <QtGui\QColorDialog>
+#include <QtGui/QColorDialog>
+#include <QtGui/QPushButton>
 #include <assert.h>
 
 #pragma warning(push, 0)
-#include <FTL\JSONValue.h>
+#include <FTL/JSONValue.h>
 #pragma warning(pop)
 
 ColorViewItem::ColorViewItem(
@@ -182,6 +183,6 @@ static ColorViewItem* CreateItem(
   {
     return new ColorViewItem( value, name );
   }
-  return nullptr;
+  return 0;
 }
 EXPOSE_VIEW_ITEM( ColorViewItem, CreateItem, 3 );
