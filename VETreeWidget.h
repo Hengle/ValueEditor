@@ -4,6 +4,7 @@
 #include "DllExport.h"
 
 class BaseViewItem;
+class BaseModelItem;
 
 class VALUEEDIT_API VETreeWidget : public QTreeWidget
 {
@@ -11,11 +12,16 @@ class VALUEEDIT_API VETreeWidget : public QTreeWidget
 
 public:
 
-  VETreeWidget( BaseViewItem *rootViewItem );
+  VETreeWidget( );
 
   void createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parent );
 
-  protected slots:
+public slots:
+  // Signal to this slot whenever you want the
+  // UI to update to a new Model
+  void onSetModelItem( BaseModelItem* pItem );
+
+protected slots:
 
   void onTreeWidgetItemExpanded( QTreeWidgetItem *_treeWidgetItem );
 

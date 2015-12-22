@@ -1,10 +1,11 @@
 #include "VETreeWidget.h"
 #include "VETreeWidgetItem.h"
 #include "BaseViewItem.h"
+#include "BaseModelItem.h"
+#include "ViewItemFactory.h"
 
-VETreeWidget::VETreeWidget( BaseViewItem *rootViewItem )
+VETreeWidget::VETreeWidget( )
 {
-  rootViewItem->setParent( this );
   setColumnCount( 2 );
   connect(
     this, SIGNAL( itemExpanded( QTreeWidgetItem * ) ),
@@ -14,8 +15,6 @@ VETreeWidget::VETreeWidget( BaseViewItem *rootViewItem )
     this, SIGNAL( itemCollapsed( QTreeWidgetItem * ) ),
     this, SLOT( onTreeWidgetItemCollapsed( QTreeWidgetItem * ) )
     );
-
-  createTreeWidgetItem( rootViewItem, NULL );
 }
 
 void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parentTreeWidgetItem )
@@ -32,6 +31,15 @@ void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem
     addTopLevelItem( treeWidgetItem );
 
   viewItem->setWidgetsOnTreeItem( this, treeWidgetItem );
+}
+
+void VETreeWidget::onSetModelItem( BaseModelItem* pItem )
+{
+  ViewItemFactory* pFactory = ViewItemFactory::GetInstance();
+  BaseViewItem* pViewLayer = pFactory->BuildView( pItem );
+
+  pViewLayer->setParent( this );
+  createTreeWidgetItem( pViewLayer, NULL );
 }
 
 void VETreeWidget::onTreeWidgetItemExpanded( QTreeWidgetItem *_treeWidgetItem )

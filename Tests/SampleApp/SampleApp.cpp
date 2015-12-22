@@ -25,14 +25,17 @@ class MainWindow : public QMainWindow
 {
   typedef QMainWindow Super;
 
+  VETreeWidget m_treeWidget;
 public:
 
-	MainWindow( BaseViewItem *rootViewItem )
+	MainWindow( )
 	{
-		VETreeWidget *treeWidget = new VETreeWidget( rootViewItem );
-
-		setCentralWidget( treeWidget );
+		setCentralWidget( &m_treeWidget );
 	}
+  void setModelItem( BaseModelItem *model )
+  {
+    m_treeWidget.onSetModelItem( model );
+  }
 
 	virtual void showEvent(QShowEvent *ev) /*override*/
 	{
@@ -57,13 +60,11 @@ int main(int argc, char *argv[])
   FabricCore::Client client( NULL, NULL, &createOptions );
 
 	BaseModelItem* pSampleModel = BuildSampleModel( client );
-	
-	ViewItemFactory* pFactory = ViewItemFactory::GetInstance();
-	BaseViewItem* pViewLayer = pFactory->BuildView(pSampleModel);
-
 
 	myTimer.start();
-	MainWindow w(pViewLayer);
+	MainWindow w;
+
+  w.setModelItem( pSampleModel );
 
 	// Now everything is connected up, try modifying a model value
 	BaseModelItem* pAModel = pSampleModel->GetChild(1);
