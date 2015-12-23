@@ -11,8 +11,7 @@ RTValViewItem::RTValViewItem( QString name, const FabricCore::RTVal& value )
   : BaseComplexViewItem( name )
   , m_val(value)
 {
-  const char* valStr = value.getDesc().getStringCString();
-  m_widget = new QLabel( valStr );
+  UpdateWidget();
 }
 
 RTValViewItem::~RTValViewItem()
@@ -36,8 +35,7 @@ void RTValViewItem::onModelValueChanged( QVariant const &value )
     routeModelValueChanged( i, toVariant( childVal ) );
   }
 
-  const char* valStr = m_val.getDesc().getStringCString();
-  m_widget->setText( valStr );
+  UpdateWidget();
 }
 
 void RTValViewItem::onChildViewValueChanged(
@@ -57,9 +55,6 @@ void RTValViewItem::onChildViewValueChanged(
   VariantToRTVal( value, oldChildVal );
   m_val.setMember( childName, oldChildVal );
 
-  const char* valStr = m_val.getDesc().getStringCString();
-  m_widget->setText( valStr );
-
   emit viewValueChanged( toVariant( m_val ), commit );
 }
 
@@ -68,11 +63,15 @@ void RTValViewItem::doAppendChildViewItems( QList<BaseViewItem*>& items )
   if (!m_val.isValid())
     return;
 
-  FabricCore::RTVal desc = m_val.getJSON();
-  const char* cdesc = desc.getStringCString();
-
-  // TODO: parse cdesc, Build children from desc.
   try {
+
+    FabricCore::RTVal desc = m_val.getJSON();
+    if (!desc.isValid())
+      return;
+
+    const char* cdesc = desc.getStringCString();
+
+    // parse cdesc, Build children from desc.
     FTL::JSONValue* value = FTL::JSONValue::Decode( cdesc );
     FTL::JSONObject* obj = value->cast<FTL::JSONObject>();
 
@@ -103,6 +102,17 @@ void RTValViewItem::doAppendChildViewItems( QList<BaseViewItem*>& items )
   }
 }
 
+void RTValViewItem::UpdateWidget()
+{
+  FabricCore::RTVal desc = m_val.getDesc();
+  QString str = desc.getStringCString();
+
+  // We chew up tonnes of perf if we don't limit the length
+  const int maxLen = 50;
+  if (str.length() > maxLen)
+    str.resize( maxLen );
+  m_widget = new QLabel( str );
+}
 
 //////////////////////////////////////////////////////////
 //

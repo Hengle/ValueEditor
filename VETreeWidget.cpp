@@ -38,6 +38,8 @@ void VETreeWidget::onSetModelItem( BaseModelItem* pItem )
   ViewItemFactory* pFactory = ViewItemFactory::GetInstance();
   BaseViewItem* pViewLayer = pFactory->BuildView( pItem );
 
+  clear();
+
   pViewLayer->setParent( this );
   createTreeWidgetItem( pViewLayer, NULL );
 }

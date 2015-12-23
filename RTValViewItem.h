@@ -32,4 +32,8 @@ public:
     QVariant const &value,
     bool commit
     ) /*override*/;
+
+private:
+
+  void UpdateWidget();
 };

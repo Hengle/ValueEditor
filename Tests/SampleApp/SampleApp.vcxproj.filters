@@ -24,6 +24,9 @@
     <ClInclude Include="SampleModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SampleApp.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

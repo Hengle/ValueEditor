@@ -2,14 +2,9 @@
 //
 
 #include "stdafx.h"
-
+#include "SampleApp.h"
 #include <ViewItemFactory.h>
-//#include "..\..\DefaultViewItem.h"
-//#include "..\..\FloatViewItemCreator.h"
-//#include "..\..\RTValViewItemCreator.h"
-//#include "..\..\Vec3ViewItemCreator.h"
 #include "SampleModel.h"
-#include <VETreeWidget.h>
 
 static QTime myTimer;
 void SetStylesheet(const char* filename)
@@ -20,30 +15,6 @@ void SetStylesheet(const char* filename)
 
 	qApp->setStyleSheet(StyleSheet);
 }
-
-class MainWindow : public QMainWindow
-{
-  typedef QMainWindow Super;
-
-  VETreeWidget m_treeWidget;
-public:
-
-	MainWindow( )
-	{
-		setCentralWidget( &m_treeWidget );
-	}
-  void setModelItem( BaseModelItem *model )
-  {
-    m_treeWidget.onSetModelItem( model );
-  }
-
-	virtual void showEvent(QShowEvent *ev) /*override*/
-	{
-		Super::showEvent(ev);
-		int elapsed = myTimer.elapsed();
-		printf("elapsed: %i\n", elapsed);
-	}
-};
 
 int main(int argc, char *argv[])
 {
@@ -77,3 +48,23 @@ int main(int argc, char *argv[])
 	w.show();
 	return a.exec();
 }
+
+MainWindow::MainWindow()
+{
+  setCentralWidget( &m_treeWidget );
+
+  bool var = connect(
+    this, SIGNAL( modelChanged( BaseModelItem* ) ),
+    &m_treeWidget, SLOT( onSetModelItem( BaseModelItem* ) )
+    );
+
+  printf( "%i", var );
+}
+
+void MainWindow::setModelItem( BaseModelItem *model )
+{
+  emit modelChanged( model );
+  //m_treeWidget.onSetModelItem( model );
+}
+
+#include "moc_SampleApp.cpp"

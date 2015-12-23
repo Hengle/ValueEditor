@@ -17,8 +17,7 @@ public:
   void createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parent );
 
 public slots:
-  // Signal to this slot whenever you want the
-  // UI to update to a new Model
+
   void onSetModelItem( BaseModelItem* pItem );
 
 protected slots:
