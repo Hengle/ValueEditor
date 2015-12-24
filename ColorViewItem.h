@@ -32,6 +32,8 @@ public:
 
   void setButtonColor( const QColor & color );
 
+  void deleteMe() { delete this; }
+
 public slots:
 
   // Slot triggered when pushing background button

@@ -108,6 +108,9 @@
     <ClCompile Include="moc_DoubleSlider.cpp">
       <Filter>moc</Filter>
     </ClCompile>
+    <ClCompile Include="VETreeWidgetItem.cpp">
+      <Filter>VETreeWidget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ViewItemFactory.h">

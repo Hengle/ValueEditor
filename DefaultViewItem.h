@@ -29,4 +29,6 @@ public:
     bool
     ) /*override*/
 	  {}
+
+  void deleteMe() { delete this; }
 };

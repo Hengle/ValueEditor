@@ -33,6 +33,8 @@ public:
     bool commit
     ) /*override*/;
 
+  void deleteMe() { delete this; }
+
 private:
 
   void UpdateWidget();

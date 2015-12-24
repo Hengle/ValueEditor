@@ -4,14 +4,30 @@
 #include <QtGui/QTreeWidget.h>
 #include "ViewItemFactory.h"
 
+
+static int s_nInstances = 0;
 BaseViewItem::BaseViewItem( QString const &name )
   : m_name( name )
 {
+  s_nInstances++;
 }
 
 
 BaseViewItem::~BaseViewItem()
 {
+  s_nInstances--;
+}
+
+// El-cheapo mem leak detection.
+// A static instance of this class verifies on 
+// Shutdown that there are no leaked entities
+static class Counter {
+public: ~Counter() { assert( s_nInstances == 0 ); }
+} InstCounter;
+
+int BaseViewItem::numInstances() 
+{
+  return s_nInstances;
 }
 
 bool BaseViewItem::hasChildren() const

@@ -8,14 +8,10 @@ class VETreeWidgetItem : public QTreeWidgetItem
 {
 public:
 
-  VETreeWidgetItem( BaseViewItem *viewItem )
-    : m_viewItem( viewItem )
-  {}
+  VETreeWidgetItem( BaseViewItem *viewItem );
+  ~VETreeWidgetItem();
 
-  BaseViewItem *getViewItem() const
-  {
-    return m_viewItem;
-  }
+  BaseViewItem *getViewItem() const;
 
 private:
 

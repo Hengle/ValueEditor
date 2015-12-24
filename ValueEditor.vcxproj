@@ -141,6 +141,7 @@ copy *.h "$(FABRIC_DIR)include/ValueEditor"
     </ClCompile>
     <ClCompile Include="Vec3ViewItem.cpp" />
     <ClCompile Include="VETreeWidget.cpp" />
+    <ClCompile Include="VETreeWidgetItem.cpp" />
     <ClCompile Include="ViewItemChildRouter.cpp" />
     <ClCompile Include="ViewItemFactory.cpp" />
   </ItemGroup>

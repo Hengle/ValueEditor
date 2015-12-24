@@ -42,10 +42,17 @@ private:
   void setBaseModelItem( BaseModelItem* item )
     { m_modelItem = item; }
 
+protected:
+  // It is not legal to directly delete this
+  // class, call deleteMe function instead
+  virtual ~BaseViewItem();
+
 public:
 
   BaseViewItem( QString const &name );
-  virtual ~BaseViewItem();
+
+  // Returns the number of live ViewItems
+  static int numInstances();
 
   // Returns a matching ModelItem for this ViewItem
   // May be null.
@@ -82,6 +89,11 @@ public:
   // time if the metadata associated with this item changes.
   virtual void updateMetadata( FTL::JSONObject* /*metaData*/ ) {};
 
+  // This virtual function is called to release this object.
+  // It is required for external parties to use this function
+  // instead of directly deleting the object, as that ensures
+  // the memory is released in the same Dll as it was allocated in
+  virtual void deleteMe() = 0;
 public slots:
 
   // Implement this slot to update the UI to the

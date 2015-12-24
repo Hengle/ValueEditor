@@ -40,6 +40,8 @@ public:
 
   virtual void doAppendChildViewItems( QList<BaseViewItem *>& items );
 
+  void deleteMe() { delete this; }
+
 public slots:
 
 	void onTextEditXChanged();

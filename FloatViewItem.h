@@ -19,6 +19,8 @@ public:
   
 	virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 
+  void deleteMe() { delete this; }
+
 private:
 
 	QDoubleSpinBox* m_spinner;

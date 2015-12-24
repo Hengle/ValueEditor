@@ -21,6 +21,8 @@ public:
 
   virtual void updateMetadata( FTL::JSONObject* /*metaData*/ );
   
+  void deleteMe() { delete this; }
+
 private:
 
   DoubleSlider* m_slider;
