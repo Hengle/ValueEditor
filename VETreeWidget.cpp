@@ -19,6 +19,10 @@ VETreeWidget::VETreeWidget( )
 
 void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parentTreeWidgetItem, int index )
 {
+  assert( viewItem );
+  if (viewItem == NULL)
+    return;
+
   VETreeWidgetItem *treeWidgetItem = new VETreeWidgetItem( viewItem );
   if (viewItem->hasChildren())
     treeWidgetItem->setChildIndicatorPolicy( QTreeWidgetItem::ShowIndicator );
@@ -38,7 +42,7 @@ void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem
   viewItem->setWidgetsOnTreeItem( this, treeWidgetItem );
 }
 
-QTreeWidgetItem * VETreeWidget::findTreeWidget( BaseModelItem * pItem ) const
+VETreeWidgetItem * VETreeWidget::findTreeWidget( BaseModelItem * pItem ) const
 {
   for (int i = 0; i < topLevelItemCount(); i++)
   {
@@ -47,7 +51,7 @@ QTreeWidgetItem * VETreeWidget::findTreeWidget( BaseModelItem * pItem ) const
 
     if (widgetItem != NULL)
     {
-      QTreeWidgetItem* pMatch = findTreeWidget( pItem, widgetItem );
+      VETreeWidgetItem* pMatch = findTreeWidget( pItem, widgetItem );
       if (pMatch != NULL)
         return pMatch;
     }
@@ -55,7 +59,7 @@ QTreeWidgetItem * VETreeWidget::findTreeWidget( BaseModelItem * pItem ) const
   return NULL;
 }
 
-QTreeWidgetItem * VETreeWidget::findTreeWidget( BaseModelItem * pItem, VETreeWidgetItem * pWidget ) const
+VETreeWidgetItem * VETreeWidget::findTreeWidget( BaseModelItem * pItem, VETreeWidgetItem * pWidget ) const
 {
   if (pWidget == NULL)
     return NULL;
@@ -66,7 +70,7 @@ QTreeWidgetItem * VETreeWidget::findTreeWidget( BaseModelItem * pItem, VETreeWid
   
   for (int i = 0; i < pWidget->childCount(); i++)
   {
-    QTreeWidgetItem* pMatch = findTreeWidget(
+    VETreeWidgetItem* pMatch = findTreeWidget(
       pItem,
       static_cast<VETreeWidgetItem*>(pWidget->child( i )) );
 
@@ -97,12 +101,50 @@ void VETreeWidget::onModelItemChildInserted( BaseModelItem* parent, int index, c
 
 void VETreeWidget::onModelItemRemoved( BaseModelItem* item )
 {
-
+  VETreeWidgetItem* oldWidget = findTreeWidget( item );
+  if (oldWidget != NULL)
+    delete oldWidget;
 }
 
-void VETreeWidget::onModelItemTypeChanged( BaseModelItem* parent, const char* newType )
+void VETreeWidget::onModelItemTypeChanged( BaseModelItem* item, const char* newType )
 {
-  assert( "IMPLEMENT THIS" );
+  VETreeWidgetItem* oldWidget = findTreeWidget( item );
+  if (oldWidget != NULL)
+  {
+    // We can get repeat messages for type changed, check
+    // that its not actually the same type.  If we start
+    // getting slow, checking type here would be a sensible
+    // operation.
+    //if (item->GetValue() == oldWidget->getViewItem()->)
+
+    QTreeWidgetItem* parentItem = oldWidget->parent();
+    if (parentItem != NULL)
+    {
+      int index = parentItem->indexOfChild( oldWidget );
+      BaseViewItem* newView =
+        ViewItemFactory::GetInstance()->CreateViewItem( item );
+      createTreeWidgetItem( newView, parentItem, index );
+    }
+    delete oldWidget;
+  }
+}
+
+void VETreeWidget::onModelItemChildrenReordered( BaseModelItem* parent, const QList<int>& newOrder )
+{
+  VETreeWidgetItem* parWidget = findTreeWidget( parent );
+  if (parWidget != NULL && parWidget->isExpanded())
+  {
+    QList<QTreeWidgetItem*> oldChildren = parWidget->takeChildren();
+    assert( oldChildren.size() == newOrder.size() );
+    
+    QList<QTreeWidgetItem*> children;
+    children.reserve( newOrder.size() );
+    for (int i = 0; i < newOrder.size(); i++)
+      children.push_back( oldChildren[ newOrder[i] ] );
+    
+    // Reset children on widget
+    parWidget->addChildren( children );
+  }
 }
 
 void VETreeWidget::onSetModelItem( BaseModelItem* pItem )

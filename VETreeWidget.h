@@ -17,8 +17,8 @@ public:
 
   void createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parent, int index = -1 );
 
-  QTreeWidgetItem* findTreeWidget( BaseModelItem* pItem ) const;
-  QTreeWidgetItem* findTreeWidget( BaseModelItem* pItem, VETreeWidgetItem* pWidget ) const;
+  VETreeWidgetItem* findTreeWidget( BaseModelItem* pItem ) const;
+  VETreeWidgetItem* findTreeWidget( BaseModelItem* pItem, VETreeWidgetItem* pWidget ) const;
 public slots:
 
   void onSetModelItem( BaseModelItem* pItem );
@@ -26,6 +26,7 @@ public slots:
   void onModelItemChildInserted( BaseModelItem* parent, int index, const char* name );
   void onModelItemRemoved( BaseModelItem* item );
   void onModelItemTypeChanged( BaseModelItem* item, const char* newType );
+  void onModelItemChildrenReordered( BaseModelItem* parent, const QList<int>& newOrder );
 
 protected slots:
 

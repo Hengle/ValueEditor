@@ -47,7 +47,11 @@ void BaseViewItem::appendChildViewItems( QList<BaseViewItem *>& items )
     for (int i = 0; i < numChildren; ++i)
     {
       BaseModelItem *childModelItem = m_modelItem->GetChild( i );
-      items.append( viewItemFactory->BuildView( childModelItem ) );
+      BaseViewItem* childViewItem = viewItemFactory->BuildView( childModelItem );
+      if (childViewItem == NULL)
+        continue;
+
+      items.append( childViewItem );
     }
   }
 }
