@@ -1,4 +1,5 @@
 #pragma once
+#include <QtGui/QTreeWidget>
 
 class BaseViewItem;
 class BaseModelItem;

@@ -89,8 +89,7 @@ void VETreeWidget::onModelItemChildInserted( BaseModelItem* parent, int index, c
     if (parentItem->isExpanded())
     {
       // Insert new child in the appropriate place
-      BaseModelItem* newItem = parent->GetChild( index );
-      assert( newItem->GetName() == name );
+      BaseModelItem* newItem = parent->GetChild( name );
       BaseViewItem* newView = 
         ViewItemFactory::GetInstance()->CreateViewItem( newItem );
       createTreeWidgetItem( newView, parentItem, index );
@@ -132,20 +131,7 @@ void VETreeWidget::onModelItemTypeChanged( BaseModelItem* item, const char* newT
 
 void VETreeWidget::onModelItemChildrenReordered( BaseModelItem* parent, const QList<int>& newOrder )
 {
-  VETreeWidgetItem* parWidget = findTreeWidget( parent );
-  if (parWidget != NULL && parWidget->isExpanded())
-  {
-    QList<QTreeWidgetItem*> oldChildren = parWidget->takeChildren();
-    assert( oldChildren.size() == newOrder.size() );
-    
-    QList<QTreeWidgetItem*> children;
-    children.reserve( newOrder.size() );
-    for (int i = 0; i < newOrder.size(); i++)
-      children.push_back( oldChildren[ newOrder[i] ] );
-    
-    // Reset children on widget
-    parWidget->addChildren( children );
-  }
+  sortItems( 0, Qt::AscendingOrder );
 }
 
 void VETreeWidget::onSetModelItem( BaseModelItem* pItem )

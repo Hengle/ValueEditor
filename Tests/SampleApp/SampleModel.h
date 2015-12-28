@@ -26,7 +26,7 @@ public:
 		return m_children.size();
 	}
 
-	virtual BaseModelItem* GetChild(size_t i) /*override*/
+	virtual BaseModelItem* GetChild(int i) /*override*/
 	{
 		return m_children[i];
 	}

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <FabricCore.h>
+#include <QtCore/QVariant>
+
 // Import RTVal into the QVariant types
 Q_DECLARE_METATYPE(FabricCore::RTVal);
 
@@ -88,7 +91,7 @@ inline bool VariantToRTVal(const QVariant& var, FabricCore::RTVal& val)
 	}
 	else // Unknown type?
 	{
-		assert(!"Unknown type in VariantToRTVal");
+		//assert(!"Unknown type in VariantToRTVal");
 		return false;
 	}
 	return true; // Assume successful

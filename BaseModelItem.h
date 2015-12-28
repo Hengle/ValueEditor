@@ -1,6 +1,8 @@
 #pragma once
 #pragma once
 
+#include <QtCore/QObject>
+
 namespace FTL {
   class JSONObject;
 }
@@ -22,15 +24,17 @@ public:
 
 	// The model is a tree
 	virtual size_t NumChildren() = 0;
-	virtual BaseModelItem* GetChild(size_t i) = 0;
 
-	// The name of this nodes data
+  // Children should generally be accessed by name or index
+  virtual BaseModelItem* GetChild( int childIndex ) = 0;
+  virtual BaseModelItem* GetChild( QString childName );
+
+  // Enable switching between index/name
+  virtual QString ChildName( int i );
+  virtual int ChildIndex( QString name );
+
+	// The name of this node
 	virtual QString GetName() = 0;
-	// The type of data exposed.  This should
-	// function should be redundant though, we
-	// should simply use the type of the QVariant
-	// returned from GetValue
-	//virtual QString GetType() = 0;
 
 	// We need to define a metadata syntax for 
 	// additional type-info.  For example, it should
