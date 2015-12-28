@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "VETreeWidget.h"
 #include "VETreeWidgetItem.h"
 #include "BaseViewItem.h"
@@ -180,3 +181,7 @@ void VETreeWidget::onTreeWidgetItemCollapsed( QTreeWidgetItem *treeWidgetItem )
     delete childTreeWidgetItem;
   }
 }
+
+// Include MOC'ed file here, in order
+// to support PCH on windows.
+#include "moc_VETreeWidget.cpp"

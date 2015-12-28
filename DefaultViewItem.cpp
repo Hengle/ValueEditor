@@ -1,8 +1,8 @@
+#include "stdafx.h"
 #include "BaseModelItem.h"
 #include "DefaultViewItem.h"
 #include "BaseViewItemCreator.h"
 #include "ViewItemFactory.h"
-#include <QtGui/QLabel.h>
 
 DefaultViewItem::DefaultViewItem(
   QString const &name,

@@ -1,13 +1,7 @@
+#include "stdafx.h"
 #include "ColorViewItem.h"
 #include "BaseViewItemCreator.h"
 #include "ViewItemFactory.h"
-#include <QtGui/QColorDialog>
-#include <QtGui/QPushButton>
-#include <assert.h>
-
-#pragma warning(push, 0)
-#include <FTL/JSONValue.h>
-#pragma warning(pop)
 
 ColorViewItem::ColorViewItem(
   const QVariant& value,
@@ -186,3 +180,7 @@ static ColorViewItem* CreateItem(
   return 0;
 }
 EXPOSE_VIEW_ITEM( ColorViewItem, CreateItem, 3 );
+
+// Include MOC'ed file here, in order
+// to support PCH on windows.
+#include "moc_ColorViewItem.cpp"

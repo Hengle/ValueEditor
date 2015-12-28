@@ -1,7 +1,6 @@
+#include "stdafx.h"
 #include "BaseViewItem.h"
 #include "BaseModelItem.h"
-#include <assert.h>
-#include <QtGui/QTreeWidget.h>
 #include "ViewItemFactory.h"
 
 
@@ -64,3 +63,7 @@ void BaseViewItem::setWidgetsOnTreeItem(
   treeWidgetItem->setText( 0, m_name );
   treeWidget->setItemWidget( treeWidgetItem, 1, getWidget() );
 }
+
+// Include MOC'ed file here, in order
+// to support PCH on windows.
+#include "moc_BaseViewItem.cpp"

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "BaseComplexViewItem.h"
 #include "ViewItemChildRouter.h"
 

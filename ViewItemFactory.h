@@ -1,9 +1,5 @@
 #pragma once
 
-#include <vector>
-#include "DllExport.h"
-#include <QtCore/QVariant.h>
-
 class BaseViewItemCreator;
 class BaseViewItem;
 class BaseModelItem;

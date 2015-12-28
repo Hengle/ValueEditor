@@ -23,9 +23,6 @@
     <Filter Include="ViewItems\ColorViewItem">
       <UniqueIdentifier>{0d5b7434-c299-450c-a368-f685fead4d42}</UniqueIdentifier>
     </Filter>
-    <Filter Include="moc">
-      <UniqueIdentifier>{74cbd16b-8508-4bcb-be51-85a6692f1ef7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VETreeWidget">
       <UniqueIdentifier>{238bf36f-147c-454a-ae58-e5dcb640d393}</UniqueIdentifier>
     </Filter>
@@ -54,24 +51,6 @@
     <ClCompile Include="ColorViewItem.cpp">
       <Filter>ViewItems\ColorViewItem</Filter>
     </ClCompile>
-    <ClCompile Include="moc_BaseModelItem.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
-    <ClCompile Include="moc_BaseViewItem.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
-    <ClCompile Include="moc_FloatViewItem.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
-    <ClCompile Include="moc_Vec3ViewItem.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
-    <ClCompile Include="moc_VETreeWidget.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
-    <ClCompile Include="moc_ColorViewItem.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
     <ClCompile Include="BaseModelItem.cpp">
       <Filter>BaseClasses</Filter>
     </ClCompile>
@@ -93,20 +72,11 @@
     <ClCompile Include="BaseComplexViewItem.cpp">
       <Filter>BaseClasses</Filter>
     </ClCompile>
-    <ClCompile Include="moc_ViewItemChildRouter.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
     <ClCompile Include="FloatSliderViewItem.cpp">
       <Filter>ViewItems\FloatSliderViewItem</Filter>
     </ClCompile>
-    <ClCompile Include="moc_FloatSliderViewItem.cpp">
-      <Filter>moc</Filter>
-    </ClCompile>
     <ClCompile Include="DoubleSlider.cpp">
       <Filter>ViewItems\FloatSliderViewItem</Filter>
-    </ClCompile>
-    <ClCompile Include="moc_DoubleSlider.cpp">
-      <Filter>moc</Filter>
     </ClCompile>
     <ClCompile Include="VETreeWidgetItem.cpp">
       <Filter>VETreeWidget</Filter>

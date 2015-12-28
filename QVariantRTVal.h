@@ -1,8 +1,5 @@
 #pragma once
 
-#include <FabricCore.h>
-#include <assert.h>
-
 // Import RTVal into the QVariant types
 Q_DECLARE_METATYPE(FabricCore::RTVal);
 

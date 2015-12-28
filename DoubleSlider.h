@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QtGui/QSlider.h>
-
 class DoubleSlider : public QSlider {
   Q_OBJECT
 

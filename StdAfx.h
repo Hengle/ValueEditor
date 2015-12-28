@@ -13,9 +13,10 @@
 #pragma warning(push, 0)
 #include <QtGui/QtGui>
 #include <FabricCore.h>
+#include <FTL/JSONValue.h>
 #pragma warning(pop)
-// TODO: reference additional headers your program requires here
 
+#include <vector>
 #include <assert.h>
 
 #include "DllExport.h"

@@ -1,9 +1,7 @@
+#include "stdafx.h"
 #include "FloatSliderViewItem.h"
 #include "BaseViewItemCreator.h"
 #include "DoubleSlider.h"
-#pragma warning(push, 0)
-#include <FTL/JSONValue.h>
-#pragma warning(pop)
 
 FloatSliderViewItem::FloatSliderViewItem(
   QString const &name,
@@ -89,3 +87,7 @@ static FloatSliderViewItem* CreateItem(
 }
 
 EXPOSE_VIEW_ITEM( FloatSliderViewItem, CreateItem, 5 );
+
+// Include MOC'ed file here, in order
+// to support PCH on windows.
+#include "moc_FloatSliderViewItem.cpp"

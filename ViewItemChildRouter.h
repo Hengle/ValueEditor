@@ -1,8 +1,5 @@
 #pragma once
 
-#include <QtCore/QObject.h>
-#include "DllExport.h"
-
 class BaseViewItem;
 class BaseComplexViewItem;
 

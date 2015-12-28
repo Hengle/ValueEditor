@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "VETreeWidgetItem.h"
 #include "BaseViewItem.h"
 

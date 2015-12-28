@@ -1,9 +1,7 @@
+#include "stdafx.h"
 #include "Vec3ViewItem.h"
 #include "BaseViewItemCreator.h"
 #include "ViewItemFactory.h"
-#include <QtGui/QBoxLayout.h>
-#include <QtGui/QLineEdit.h>
-#include <assert.h>
 
 Vec3ViewItem::Vec3ViewItem(
   QString const &name,
@@ -145,3 +143,7 @@ static Vec3ViewItem* CreateItem(
 }
 
 EXPOSE_VIEW_ITEM( Vec3ViewItem, CreateItem, 3 );
+
+// Include MOC'ed file here, in order
+// to support PCH on windows.
+#include "moc_Vec3ViewItem.cpp"

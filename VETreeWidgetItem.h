@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QtGui/QTreeWidget.h>
-
 class BaseViewItem;
 
 class VETreeWidgetItem : public QTreeWidgetItem

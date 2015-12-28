@@ -1,8 +1,5 @@
 #pragma once
 
-#include <QtGui/QTreeWidget.h>
-#include "DllExport.h"
-
 class BaseViewItem;
 class BaseModelItem;
 class VETreeWidgetItem;

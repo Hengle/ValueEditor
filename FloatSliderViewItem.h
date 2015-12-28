@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BaseViewItem.h"
+
 class DoubleSlider;
 
 class FloatSliderViewItem : public BaseViewItem

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "BaseViewItem.h"
 
 class QDoubleSpinBox;

@@ -67,7 +67,6 @@
       <AdditionalIncludeDirectories>$(QT_DIR)include;$(FABRIC_DIR)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FEC_STATIC;_DEBUG;VALUEEDITOR_BUILD;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <ForcedIncludeFiles>StdAfx.h</ForcedIncludeFiles>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreadedDebug</RuntimeLibrary>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
       <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditAndContinue</DebugInformationFormat>
@@ -126,15 +125,6 @@ copy *.h "$(FABRIC_DIR)include/ValueEditor"
     <ClCompile Include="FloatSliderViewItem.cpp" />
     <ClCompile Include="FloatViewItem.cpp" />
     <ClCompile Include="BaseViewItemCreator.cpp" />
-    <ClCompile Include="moc_BaseModelItem.cpp" />
-    <ClCompile Include="moc_BaseViewItem.cpp" />
-    <ClCompile Include="moc_ColorViewItem.cpp" />
-    <ClCompile Include="moc_DoubleSlider.cpp" />
-    <ClCompile Include="moc_FloatSliderViewItem.cpp" />
-    <ClCompile Include="moc_FloatViewItem.cpp" />
-    <ClCompile Include="moc_Vec3ViewItem.cpp" />
-    <ClCompile Include="moc_VETreeWidget.cpp" />
-    <ClCompile Include="moc_ViewItemChildRouter.cpp" />
     <ClCompile Include="RTValViewItem.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

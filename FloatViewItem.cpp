@@ -1,7 +1,6 @@
+#include "stdafx.h"
 #include "FloatViewItem.h"
 #include "BaseViewItemCreator.h"
-#include <QtGui/QSpinBox.h>
-#include <assert.h>
 #include "QVariantRTVal.h"
 
 FloatViewItem::FloatViewItem(
@@ -68,3 +67,7 @@ static FloatViewItem* CreateItem(
 }
 
 EXPOSE_VIEW_ITEM( FloatViewItem, CreateItem, 3 );
+
+// Include MOC'ed file here, in order
+// to support PCH on windows.
+#include "moc_FloatViewItem.cpp"

@@ -1,11 +1,8 @@
+#include "stdafx.h"
 #include "RTValViewItem.h"
 #include "BaseViewItemCreator.h"
 #include "ViewItemFactory.h"
-#include <QtGui/QWidget.h>
 #include "QVariantRTVal.h"
-#pragma warning(push, 0)
-#include <FTL/JSONValue.h>
-#pragma warning(pop)
 
 RTValViewItem::RTValViewItem( QString name, const FabricCore::RTVal& value )
   : BaseComplexViewItem( name )
@@ -70,6 +67,8 @@ void RTValViewItem::doAppendChildViewItems( QList<BaseViewItem*>& items )
       return;
 
     const char* cdesc = desc.getStringCString();
+    if (strcmp( cdesc, "null" ) == 0)
+      return;
 
     // parse cdesc, Build children from desc.
     FTL::JSONValue* value = FTL::JSONValue::Decode( cdesc );
@@ -105,7 +104,9 @@ void RTValViewItem::doAppendChildViewItems( QList<BaseViewItem*>& items )
 void RTValViewItem::UpdateWidget()
 {
   FabricCore::RTVal desc = m_val.getDesc();
-  QString str = desc.getStringCString();
+  QString str = m_val.getTypeNameCStr();
+  str += ": ";
+  str += desc.getStringCString();
 
   // We chew up tonnes of perf if we don't limit the length
   const int maxLen = 50;

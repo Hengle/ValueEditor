@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "BaseViewItemCreator.h"
 #include "ViewItemFactory.h"
 

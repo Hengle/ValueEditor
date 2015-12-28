@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QtCore/QObject.h>
-
 class BaseModelItem;
 class BaseViewItem;
 
