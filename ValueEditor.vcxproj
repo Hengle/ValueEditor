@@ -69,7 +69,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreadedDebug</RuntimeLibrary>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
-      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ProgramDatabase</DebugInformationFormat>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
     </ClCompile>
@@ -140,7 +140,7 @@ copy *.h "$(FABRIC_DIR)include/ValueEditor"
     <ClInclude Include="BaseComplexViewItem.h" />
     <ClInclude Include="BaseViewItemCreator.h" />
     <QtMOC Include="ColorViewItem.h" />
-    <QtMOC Include="DefaultViewItem.h" />
+    <ClInclude Include="DefaultViewItem.h" />
     <ClInclude Include="DllExport.h" />
     <QtMOC Include="BaseModelItem.h" />
     <ClInclude Include="RTValViewItem.h" />
