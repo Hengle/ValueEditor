@@ -7,6 +7,7 @@
 RTValViewItem::RTValViewItem( QString name, const FabricCore::RTVal& value )
   : BaseComplexViewItem( name )
   , m_val(value)
+  , m_widget(new QLabel())
 {
   UpdateWidget();
 }
@@ -112,7 +113,7 @@ void RTValViewItem::UpdateWidget()
   const int maxLen = 50;
   if (str.length() > maxLen)
     str.resize( maxLen );
-  m_widget = new QLabel( str );
+  m_widget->setText( str );
 }
 
 //////////////////////////////////////////////////////////

@@ -16,6 +16,8 @@ VETreeWidget::VETreeWidget( )
     this, SIGNAL( itemCollapsed( QTreeWidgetItem * ) ),
     this, SLOT( onTreeWidgetItemCollapsed( QTreeWidgetItem * ) )
     );
+
+  setObjectName( "valueEditor" );
 }
 
 void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parentTreeWidgetItem, int index )
@@ -40,7 +42,6 @@ void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem
   else
   {
     addTopLevelItem( treeWidgetItem );
-    // By default, we always expand root-level items
     treeWidgetItem->setExpanded( true );
   }
 
