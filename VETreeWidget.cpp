@@ -38,7 +38,11 @@ void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem
       parentTreeWidgetItem->insertChild( index, treeWidgetItem );
   }
   else
+  {
     addTopLevelItem( treeWidgetItem );
+    // By default, we always expand root-level items
+    treeWidgetItem->setExpanded( true );
+  }
 
   viewItem->setWidgetsOnTreeItem( this, treeWidgetItem );
 }

@@ -38,7 +38,7 @@ bool BaseViewItem::hasChildren() const
 
 void BaseViewItem::appendChildViewItems( QList<BaseViewItem *>& items )
 {
-  if ( !!m_modelItem )
+  if ( m_modelItem != NULL )
   {
     ViewItemFactory *viewItemFactory = ViewItemFactory::GetInstance();
 
