@@ -44,6 +44,9 @@ bool RTVariant::rtCanConvert( const QVariant::Private *d, Type t )
   if (isRTVal( d ))
   {
     const FabricCore::RTVal& val = value( d );
+    if (!val.isValid())
+      return false;
+
     const char* rtype = val.getTypeNameCStr();
 
     switch (t)

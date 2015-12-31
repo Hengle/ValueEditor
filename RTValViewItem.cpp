@@ -129,7 +129,7 @@ static BaseViewItem* CreateItem(
     return NULL;
 
   FabricCore::RTVal rtVal = value.value<FabricCore::RTVal>();
-  if (rtVal.isObject() || rtVal.isStruct())
+  if (rtVal.isValid() && (rtVal.isObject() || rtVal.isStruct()))
   {
     RTValViewItem* pViewItem = new RTValViewItem( QString( name ), rtVal );
     return pViewItem;
