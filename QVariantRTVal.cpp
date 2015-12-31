@@ -18,8 +18,8 @@ void RTVariant::injectRTHandler()
 
 bool isRTVal( const QVariant::Private *d )
 {
-  static const int rtType = qMetaTypeId<FabricCore::RTVal>();
-  return d->type >= QVariant::UserType;
+  static const QVariant::Type rtType = QVariant::Type( qMetaTypeId<FabricCore::RTVal>() );
+  return d->type >= rtType;
 }
 
 bool RTVariant::canConvert( const QVariant & var, Type type )
@@ -66,6 +66,9 @@ bool RTVariant::rtCanConvert( const QVariant::Private *d, Type t )
         return strcmp( rtype, "SInt64" ) == 0;
       case QVariant::ULongLong:
         return strcmp( rtype, "UInt64" ) == 0;
+      case QMetaType::Float:
+        return strcmp( rtype, "Float32" ) == 0 ||
+          strcmp( rtype, "Scalar" ) == 0;
       case QVariant::Double:
         return strcmp( rtype, "Float32" ) == 0 ||
           strcmp( rtype, "Float64" ) == 0 ||
@@ -223,6 +226,13 @@ bool RTVariant::rtConvert( const QVariant::Private *d, QVariant::Type t, void *r
         }
       }
       break;
+      case QMetaType::Float:
+        if (strcmp( rtype, "Float32" ) == 0 ||
+          strcmp( rtype, "Scalar" ) == 0)
+        {
+          float& v = *((float*)result);
+          v = val.getFloat32();
+        }
       case QVariant::Double:
       {
         double& v = *((double*)result);
