@@ -81,6 +81,7 @@
     <ClCompile Include="VETreeWidgetItem.cpp">
       <Filter>VETreeWidget</Filter>
     </ClCompile>
+    <ClCompile Include="QVariantRTVal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ViewItemFactory.h">

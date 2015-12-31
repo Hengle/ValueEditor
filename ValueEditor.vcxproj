@@ -125,6 +125,7 @@ copy *.h "$(FABRIC_DIR)include/ValueEditor"
     <ClCompile Include="FloatSliderViewItem.cpp" />
     <ClCompile Include="FloatViewItem.cpp" />
     <ClCompile Include="BaseViewItemCreator.cpp" />
+    <ClCompile Include="QVariantRTVal.cpp" />
     <ClCompile Include="RTValViewItem.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

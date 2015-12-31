@@ -6,6 +6,42 @@
 // Import RTVal into the QVariant types
 Q_DECLARE_METATYPE(FabricCore::RTVal);
 
+class RTVariant : public QVariant
+{
+public:
+  static void injectRTHandler();
+
+private:
+  // Overrides for built-in functionality
+
+  // isNull tests rtVal for isValid
+  static bool rtIsNull( const QVariant::Private *d);
+
+  static bool rtCanConvert( const QVariant::Private *d, Type t );
+
+  static bool rtConvert( const QVariant::Private *d, QVariant::Type t, void *result, bool *ok );
+
+  static void rtStreamDebug( QDebug dbg, const QVariant &v );
+
+  static const Handler* origh;
+
+  static const void *constData( const QVariant::Private *d );
+
+  static const FabricCore::RTVal& value( const Private *p ) {
+    // Code taken from QVariant::value<T>
+    return *reinterpret_cast<const FabricCore::RTVal*>(p->is_shared ? p->data.shared->ptr : &p->data.ptr);
+  }
+
+};
+
+inline bool isRTVal( const QVariant& var ) {
+  if (var.type() != QVariant::UserType)
+    return false;
+  if (var.userType() != qMetaTypeId<FabricCore::RTVal>())
+    return false;
+  return true;
+}
+
 // Initially at least - A set of functions for 
 // converting RTVal <--> QVariant
 inline QVariant toVariant(const FabricCore::RTVal& val) 
