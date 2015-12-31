@@ -11,7 +11,7 @@ Q_DECLARE_METATYPE(FabricCore::RTVal);
 // base class to inject our own versions of some
 // functions.  This allows us to present a seamless
 // bridge between RTVal and the QVariant
-class RTVariant : public QVariant
+class VALUEEDIT_API RTVariant : public QVariant
 {
 public:
   static void injectRTHandler();
@@ -46,6 +46,9 @@ public:
 
   // Test if we can convert to the listed type.
   static bool canConvert( const QVariant& var, Type type );
+
+  // Helper function provides east conversion to provided RTVal
+  static bool toRTVal( const QVariant& var, FabricCore::RTVal& ioVal );
 
 private:
   // Overrides for built-in functionality
@@ -82,43 +85,34 @@ inline QVariant toVariant(const FabricCore::RTVal& val)
 	return QVariant::fromValue<FabricCore::RTVal>(val); 
 }
 
-inline FabricCore::RTVal toRTVal(const QVariant var) 
-{
-	if (var.userType() == qMetaTypeId<FabricCore::RTVal>())
-		return var.value<FabricCore::RTVal>();
-
-	return FabricCore::RTVal();
-}
-
-
-
-inline bool VariantToRTVal(const QVariant& var, FabricCore::RTVal& val)
-{
-	if (var.userType() == qMetaTypeId<FabricCore::RTVal>())
-	{
-		val = var.value<FabricCore::RTVal>();
-		return true;
-	}
-
-	FabricCore::Context ctxt;
-	// Convert into the type of the RTVal
-	const char* ctype = val.getTypeNameCStr();
-	if (strcmp(ctype, "Float32") == 0)
-		val.setFloat32(var.toFloat());
-  else if (strcmp( ctype, "Scalar" ) == 0)
-    val.setFloat32( var.toFloat() );
-  else if (strcmp(ctype, "Float64") == 0)
-		val = FabricCore::RTVal::ConstructFloat64(ctxt, var.toFloat());
-	else if (strcmp(ctype, "String") == 0)
-	{
-		QByteArray asciiArr = var.toString().toAscii();
-		val = FabricCore::RTVal::ConstructString(ctxt, asciiArr.data());
-	}
-	else // Unknown type?
-	{
-		//assert(!"Unknown type in VariantToRTVal");
-		return false;
-	}
-	return true; // Assume successful
-
-}
+//
+//inline bool VariantToRTVal(const QVariant& var, FabricCore::RTVal& val)
+//{
+//	if (var.userType() == qMetaTypeId<FabricCore::RTVal>())
+//	{
+//		val = var.value<FabricCore::RTVal>();
+//		return true;
+//	}
+//
+//	FabricCore::Context ctxt;
+//	// Convert into the type of the RTVal
+//	const char* ctype = val.getTypeNameCStr();
+//	if (strcmp(ctype, "Float32") == 0)
+//		val.setFloat32(var.toFloat());
+//  else if (strcmp( ctype, "Scalar" ) == 0)
+//    val.setFloat32( var.toFloat() );
+//  else if (strcmp(ctype, "Float64") == 0)
+//		val = FabricCore::RTVal::ConstructFloat64(ctxt, var.toFloat());
+//	else if (strcmp(ctype, "String") == 0)
+//	{
+//		QByteArray asciiArr = var.toString().toAscii();
+//		val = FabricCore::RTVal::ConstructString(ctxt, asciiArr.data());
+//	}
+//	else // Unknown type?
+//	{
+//		//assert(!"Unknown type in VariantToRTVal");
+//		return false;
+//	}
+//	return true; // Assume successful
+//
+//}

@@ -22,7 +22,7 @@ QWidget *RTValViewItem::getWidget()
 
 void RTValViewItem::onModelValueChanged( QVariant const &value )
 {
-  m_val = toRTVal( value );
+  RTVariant::toRTVal( value, m_val );
   for (int i = 0; i < m_childNames.size(); i++)
   {
     const char* childName = m_childNames[i].data();
@@ -49,7 +49,7 @@ void RTValViewItem::onChildViewValueChanged(
   // we have to set the type exactly the same as the original.  Get the
   // original child value to ensure the new value matches the internal type
   FabricCore::RTVal oldChildVal = m_val.maybeGetMemberRef( childName );
-  VariantToRTVal( value, oldChildVal );
+  RTVariant::toRTVal( value, oldChildVal );
   m_val.setMember( childName, oldChildVal );
 
   emit viewValueChanged( toVariant( m_val ), commit );
