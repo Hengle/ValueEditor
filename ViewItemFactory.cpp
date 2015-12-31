@@ -25,6 +25,16 @@ ViewItemFactory* ViewItemFactory::GetInstance()
 
 BaseViewItem *ViewItemFactory::BuildView( BaseModelItem *modelItem )
 {
+  // We put the QVariant-RTVal bridge injection
+  // code here, as before we build a view it won't
+  // be needed
+  static bool doVarInjection = true;
+  if (doVarInjection)
+  {
+    RTVariant::injectRTHandler();
+    doVarInjection = false;
+  }
+
   if ( !modelItem )
     return 0;
 

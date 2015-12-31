@@ -173,7 +173,7 @@ static ColorViewItem* CreateItem(
   FTL::JSONObject* /*metaData*/
   )
 {
-  if (value.type() == QVariant( QColor() ).type())
+  if (RTVariant::isType<QColor>(value))
   {
     return new ColorViewItem( value, name );
   }

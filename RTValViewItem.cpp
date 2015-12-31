@@ -2,7 +2,6 @@
 #include "RTValViewItem.h"
 #include "BaseViewItemCreator.h"
 #include "ViewItemFactory.h"
-#include "QVariantRTVal.h"
 
 RTValViewItem::RTValViewItem( QString name, const FabricCore::RTVal& value )
   : BaseComplexViewItem( name )
@@ -86,9 +85,9 @@ void RTValViewItem::doAppendChildViewItems( QList<BaseViewItem*>& items )
         BaseViewItem* childItem = factory->CreateViewItem( childName, toVariant( childVal ), NULL );
         if (childItem != NULL)
         {
-          int index = m_childNames.size();
+          size_t index = m_childNames.size();
           m_childNames.push_back( childName );
-          connectChild( index, childItem );
+          connectChild( (int)index, childItem );
 
           items.push_back( childItem );
         }

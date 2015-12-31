@@ -20,3 +20,4 @@
 #include <assert.h>
 
 #include "DllExport.h"
+#include "QVariantRTVal.h"

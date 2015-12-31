@@ -1,9 +1,9 @@
 #include "StdAfx.h"
-#include "QVariantRTVal.h"
-
 
 const QVariant::Handler* RTVariant::origh = NULL;
 
+// Code replaces the built-in handler for several
+// operations in QVariant
 void RTVariant::injectRTHandler()
 {
   origh = handler;
@@ -20,6 +20,11 @@ bool isRTVal( const QVariant::Private *d )
 {
   static const int rtType = qMetaTypeId<FabricCore::RTVal>();
   return d->type >= QVariant::UserType;
+}
+
+bool RTVariant::canConvert( const QVariant & var, Type type )
+{
+  return rtCanConvert( &reinterpret_cast<const RTVariant&>(var).d, type );
 }
 
 bool RTVariant::rtIsNull( const QVariant::Private *d )
@@ -62,7 +67,7 @@ bool RTVariant::rtCanConvert( const QVariant::Private *d, Type t )
       case QVariant::ULongLong:
         return strcmp( rtype, "UInt64" ) == 0;
       case QVariant::Double:
-        strcmp( rtype, "Float32" ) == 0 ||
+        return strcmp( rtype, "Float32" ) == 0 ||
           strcmp( rtype, "Float64" ) == 0 ||
           strcmp( rtype, "Scalar" ) == 0;
       case QVariant::String:

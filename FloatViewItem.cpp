@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "FloatViewItem.h"
 #include "BaseViewItemCreator.h"
-#include "QVariantRTVal.h"
 
 FloatViewItem::FloatViewItem(
   QString const &name,
@@ -30,9 +29,9 @@ QWidget *FloatViewItem::getWidget()
   return m_spinner;
 }
 
-void FloatViewItem::onModelValueChanged( QVariant const &value )
+void FloatViewItem::onModelValueChanged( QVariant const &v )
 {
-  m_spinner->setValue( getDouble(value) );
+  m_spinner->setValue( v.value<double>() );
 }
 
 void FloatViewItem::OnSpinnerChanged( double value )
@@ -59,7 +58,7 @@ static FloatViewItem* CreateItem(
   FTL::JSONObject* /*metaData*/
   )
 {
-  if ( isDouble(value) )
+  if (RTVariant::isType<double>(value) || RTVariant::isType<float>(value))
   {
     return new FloatViewItem( name, value );
   }

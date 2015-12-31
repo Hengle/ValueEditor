@@ -6,10 +6,46 @@
 // Import RTVal into the QVariant types
 Q_DECLARE_METATYPE(FabricCore::RTVal);
 
+// This class is not a class meant to be constructed,
+// instead it overwrites a static member of the
+// base class to inject our own versions of some
+// functions.  This allows us to present a seamless
+// bridge between RTVal and the QVariant
 class RTVariant : public QVariant
 {
 public:
   static void injectRTHandler();
+
+  // It turns out that the built-in versions of
+  // of the can/Convert functions mostly ignore
+  // the handler, which renders our injection
+  // of handling code (and the built-in handler)
+  // mostly pointless.  Qt5 supports the handler
+  // in a much better method, so we will keep
+  // the code as/is, and when upgrading to Qt5
+  // fix-up the system so we can just use Qt's
+  // built-in functions
+  // Note - some of the functions (value<T> etc)
+  // are successfully hooked by our injection
+  //-------------------------------------------
+
+  // A strict test of the current type, tests
+  // Qt type or RTVal type (if appropriate)
+  template<typename T>
+  static bool isType( QVariant var )
+  {
+    QVariant::Type testType = QVariant::Type( qMetaTypeId<T>() );
+    QVariant::Type currType = var.type();
+    return (testType == currType ||
+             (
+             isRTVal( var ) &&
+             canConvert( var, testType )
+             )
+             );
+  }
+
+  // Test if we can convert to the listed type.
+  static bool canConvert( const QVariant& var, Type type );
 
 private:
   // Overrides for built-in functionality
@@ -23,8 +59,6 @@ private:
 
   static void rtStreamDebug( QDebug dbg, const QVariant &v );
 
-  static const Handler* origh;
-
   static const void *constData( const QVariant::Private *d );
 
   static const FabricCore::RTVal& value( const Private *p ) {
@@ -32,14 +66,13 @@ private:
     return *reinterpret_cast<const FabricCore::RTVal*>(p->is_shared ? p->data.shared->ptr : &p->data.ptr);
   }
 
+  static const Handler* origh;
 };
 
 inline bool isRTVal( const QVariant& var ) {
   if (var.type() != QVariant::UserType)
     return false;
-  if (var.userType() != qMetaTypeId<FabricCore::RTVal>())
-    return false;
-  return true;
+  return var.userType() == qMetaTypeId<FabricCore::RTVal>();
 }
 
 // Initially at least - A set of functions for 
@@ -57,51 +90,7 @@ inline FabricCore::RTVal toRTVal(const QVariant var)
 	return FabricCore::RTVal();
 }
 
-inline bool isDouble( const FabricCore::RTVal& val )
-{
-  if (val.isValid())
-  {
-    const char* typeName = val.getTypeNameCStr();
-    if (strcmp( typeName, "Float32" ) == 0)
-      return true;
-    else if (strcmp( typeName, "Float64" ) == 0)
-      return true;
-    else if (strcmp( typeName, "Scalar" ) == 0)
-      return true;
-  }
-  return false;
-}
 
-inline bool isDouble( const QVariant& var )
-{
-  if (var.type() == QVariant::Double
-       || var.type() == QMetaType::Float)
-    return true;
-
-  FabricCore::RTVal val = toRTVal( var );
-  return isDouble( val );
-}
-
-inline double getDouble( const FabricCore::RTVal& val )
-{
-  const char* typeName = val.getTypeNameCStr();
-  if (strcmp( typeName, "Float64" ) == 0)
-    return val.getFloat64();
-  else
-    return val.getFloat32();
-}
-
-inline double getDouble( const QVariant& var )
-{
-  bool ok = false;
-  double res = var.toDouble( &ok );
-  if (!ok)
-  {
-    FabricCore::RTVal val = toRTVal( var );
-    res = getDouble( val );
-  }
-  return res;
-}
 
 inline bool VariantToRTVal(const QVariant& var, FabricCore::RTVal& val)
 {
