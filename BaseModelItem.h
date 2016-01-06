@@ -3,9 +3,8 @@
 
 #include <QtCore/QObject>
 
-namespace FTL {
-  class JSONObject;
-}
+class ItemMetadata;
+
 // The base model item is the base class for defining
 // items on the model.  This provides a common
 // interface for supplying data from the FabricCore, and
@@ -41,7 +40,7 @@ public:
 	// be possible using metadata to request a value
 	// be displayed in a certain way, eg as an angle
 	// or as a percentage, or 
-	virtual FTL::JSONObject* GetMetadata();
+	virtual ItemMetadata* GetMetadata();
 
 	// Return a copy of this classes value
 	virtual QVariant GetValue() = 0;

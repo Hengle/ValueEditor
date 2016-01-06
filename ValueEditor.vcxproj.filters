@@ -82,6 +82,9 @@
       <Filter>VETreeWidget</Filter>
     </ClCompile>
     <ClCompile Include="QVariantRTVal.cpp" />
+    <ClCompile Include="ItemMetadata.cpp">
+      <Filter>BaseClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ViewItemFactory.h">
@@ -104,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="DefaultViewItem.h">
       <Filter>ViewItems\DefaultViewItem</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemMetadata.h">
+      <Filter>BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

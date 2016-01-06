@@ -4,10 +4,7 @@
 
 class BaseModelItem;
 class BaseViewItem;
-
-namespace FTL {
-  class JSONObject;
-}
+class ItemMetadata;
 
 // The base item for the view-side of the equation.
 // A BaseViewItem essentially represents a row in the
@@ -83,7 +80,7 @@ public:
   // Implement this function if ViewItem uses metadata to
   // set its behaviour.  This function may be called at any
   // time if the metadata associated with this item changes.
-  virtual void updateMetadata( FTL::JSONObject* /*metaData*/ ) {};
+  virtual void updateMetadata( ItemMetadata* /*metaData*/ ) {};
 
   // This virtual function is called to release this object.
   // It is required for external parties to use this function

@@ -92,7 +92,7 @@ BaseViewItem *ViewItemFactory::CreateViewItem(
   BaseModelItem *modelItem,
   QString const &name,
   QVariant const &value,
-  FTL::JSONObject* metaData
+  ItemMetadata* metaData
   )
 {
   // iterate in reverse.  This ensures we test the most-specialized types
@@ -126,7 +126,7 @@ BaseViewItem *ViewItemFactory::CreateViewItem(
 BaseViewItem *ViewItemFactory::CreateViewItem(
   QString const &name,
   QVariant const &value,
-  FTL::JSONObject* metaData
+  ItemMetadata* metaData
   )
 {
   return CreateViewItem(

@@ -2,6 +2,7 @@
 
 class BaseModelItem;
 class BaseViewItem;
+class ItemMetadata;
 
 namespace FTL {
   class JSONObject;
@@ -33,7 +34,7 @@ public:
   virtual BaseViewItem* CreateItem(
     QString const &name,
     QVariant const &value,
-    FTL::JSONObject* metaData
+    ItemMetadata* metaData
     ) = 0;
 
   // Implement this function to delete this class, it will 
@@ -66,7 +67,7 @@ public: \
   BaseViewItem* CreateItem( \
     QString const &name, \
     QVariant const &value, \
-    FTL::JSONObject* metaData \
+    ItemMetadata* metaData \
     ) /*override*/ \
   { return ::CreatorFn( name, value, metaData ); } \
   int Priority() /*override*/ { return _priority; } \

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "FloatSliderViewItem.h"
 #include "BaseViewItemCreator.h"
+#include "ItemMetadata.h"
 #include "DoubleSlider.h"
 
 FloatSliderViewItem::FloatSliderViewItem(
@@ -35,7 +36,7 @@ void FloatSliderViewItem::onModelValueChanged( QVariant const &value )
   m_slider->setDoubleValue( value.toDouble() );
 }
 
-void FloatSliderViewItem::updateMetadata( FTL::JSONObject* metaData ) 
+void FloatSliderViewItem::updateMetadata( ItemMetadata* metaData ) 
 {
   if (metaData->has( "min" ) && metaData->has( "max" ))
   {
@@ -66,7 +67,7 @@ void FloatSliderViewItem::OnEditFinished()
 static FloatSliderViewItem* CreateItem(
   QString const &name,
   QVariant const &value,
-  FTL::JSONObject* metaData
+  ItemMetadata* metaData
   )
 {
   if (metaData == NULL)

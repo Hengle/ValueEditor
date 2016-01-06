@@ -132,7 +132,7 @@ void Vec3ViewItem::doAppendChildViewItems(QList<BaseViewItem *>& items)
 static Vec3ViewItem* CreateItem(
   QString const &name,
   QVariant const &value,
-  FTL::JSONObject* 
+  ItemMetadata*
   )
 {
   const int qv3Dtype = ((QVariant)QVector3D()).type();

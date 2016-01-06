@@ -20,7 +20,7 @@ public:
 
   virtual void onModelValueChanged( QVariant const &value ) /*override*/;
 
-  virtual void updateMetadata( FTL::JSONObject* /*metaData*/ );
+  virtual void updateMetadata( ItemMetadata* metaData );
   
   void deleteMe() { delete this; }
 

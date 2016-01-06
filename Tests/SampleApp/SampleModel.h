@@ -36,9 +36,9 @@ public:
 		return m_name;
 	}
 
-	virtual QString GetMetadata(QString string) /*override*/
+	virtual ItemMetadata* GetMetadata()
 	{
-		return QString();
+		return NULL;
 	}
 
 	virtual QVariant GetValue() /*override*/

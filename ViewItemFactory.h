@@ -3,6 +3,7 @@
 class BaseViewItemCreator;
 class BaseViewItem;
 class BaseModelItem;
+class ItemMetadata;
 
 namespace FTL {
   class JSONObject;
@@ -60,7 +61,7 @@ protected:
 	  BaseModelItem *modelItem,
 		QString const &name,
 		QVariant const &value,
-    FTL::JSONObject* metaData
+    ItemMetadata* metaData
 	  );
 
 public:
@@ -90,6 +91,6 @@ public:
 	BaseViewItem* CreateViewItem(
 		QString const &name,
 		QVariant const &value,
-    FTL::JSONObject* metaData = NULL
+    ItemMetadata* metaData = NULL
 	  );
 };
