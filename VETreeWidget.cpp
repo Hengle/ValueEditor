@@ -91,6 +91,7 @@ void VETreeWidget::onModelItemChildInserted( BaseModelItem* parent, int index, c
   QTreeWidgetItem* parentItem = findTreeWidget( parent );
   if (parent != NULL)
   {
+    parentItem->setChildIndicatorPolicy( QTreeWidgetItem::ShowIndicator );
     if (parentItem->isExpanded())
     {
       // Insert new child in the appropriate place
@@ -99,8 +100,6 @@ void VETreeWidget::onModelItemChildInserted( BaseModelItem* parent, int index, c
         ViewItemFactory::GetInstance()->CreateViewItem( newItem );
       createTreeWidgetItem( newView, parentItem, index );
     }
-    else
-      parentItem->setChildIndicatorPolicy( QTreeWidgetItem::ShowIndicator );
   }
 }
 
