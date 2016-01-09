@@ -3,12 +3,14 @@
 
 ViewItemMetadata::ViewItemMetadata( ItemMetadata* parent )
   : m_parent(parent)
+  , m_json(new FTL::JSONObject())
 {
 
 }
 
 ViewItemMetadata::ViewItemMetadata()
   : m_parent(NULL)
+  , m_json( new FTL::JSONObject() )
 {
 
 }

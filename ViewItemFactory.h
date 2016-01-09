@@ -68,14 +68,9 @@ public:
 
 	static ViewItemFactory* GetInstance();
 	//////////////////////////////////////////////////////////////////////////
-
-
-	// Call this function to build a View layer from the
-	// given Model interface.  This will not create any
-	// actual widgets
-	BaseViewItem* BuildView(BaseModelItem* model);
 	
-	// Create the most appropriate value editor given the following data
+	// Recursively Create the most appropriate value editor 
+  // given the modelItem
 	// \data The modelitem to represent in the UI
 	BaseViewItem* CreateViewItem(
 	  BaseModelItem *modelItem

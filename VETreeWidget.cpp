@@ -141,7 +141,7 @@ void VETreeWidget::onModelItemChildrenReordered( BaseModelItem* parent, const QL
 void VETreeWidget::onSetModelItem( BaseModelItem* pItem )
 {
   ViewItemFactory* pFactory = ViewItemFactory::GetInstance();
-  BaseViewItem* pViewLayer = pFactory->BuildView( pItem );
+  BaseViewItem* pViewLayer = pFactory->CreateViewItem( pItem );
   // Remove all existing
   clear();
   createTreeWidgetItem( pViewLayer, NULL );

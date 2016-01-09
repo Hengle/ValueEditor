@@ -32,8 +32,7 @@ class VALUEEDIT_API BaseViewItem : public QObject
 private:
 
   // This value is only setable by ViewitemFactory
-  void setBaseModelItem( BaseModelItem* item )
-    { m_modelItem = item; }
+  void setBaseModelItem( BaseModelItem* item );
 
 protected:
   // It is not legal to directly delete this

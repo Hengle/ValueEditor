@@ -23,36 +23,9 @@ ViewItemFactory* ViewItemFactory::GetInstance()
 }
 
 
-BaseViewItem *ViewItemFactory::BuildView( BaseModelItem *modelItem )
-{
-  // We put the QVariant-RTVal bridge injection
-  // code here, as before we build a view it won't
-  // be needed
-  static bool doVarInjection = true;
-  if (doVarInjection)
-  {
-    RTVariant::injectRTHandler();
-    doVarInjection = false;
-  }
-
-  if ( !modelItem )
-    return 0;
-
-  BaseViewItem* viewItem = CreateViewItem( modelItem );
-  if ( viewItem )
-  {
-    QObject::connect(
-      viewItem, SIGNAL( viewValueChanged( QVariant const &, bool ) ),
-      modelItem, SLOT( onViewValueChanged( QVariant const &, bool ) )
-      );
-
-    QObject::connect(
-      modelItem, SIGNAL( modelValueChanged( QVariant const & ) ),
-      viewItem, SLOT( onModelValueChanged( QVariant const & ) )
-      );
-  }
-  return viewItem;
-}
+//BaseViewItem *ViewItemFactory::BuildView( BaseModelItem *modelItem )
+//{
+//}
 
 // sort using a custom function object
 struct CreatorSort
@@ -95,6 +68,16 @@ BaseViewItem *ViewItemFactory::CreateViewItem(
   ItemMetadata* metaData
   )
 {
+  // We put the QVariant-RTVal bridge injection
+  // code here, as before we build a view it won't
+  // be needed
+  static bool doVarInjection = true;
+  if (doVarInjection)
+  {
+    RTVariant::injectRTHandler();
+    doVarInjection = false;
+  }
+
   // iterate in reverse.  This ensures we test the most-specialized types
   // before testing the more generalized types
   for ( CreatorRIT itr = creatorRBegin(); itr != creatorREnd(); itr++ )
