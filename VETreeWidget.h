@@ -31,4 +31,8 @@ protected slots:
   void onTreeWidgetItemExpanded( QTreeWidgetItem *_treeWidgetItem );
 
   void onTreeWidgetItemCollapsed( QTreeWidgetItem *_treeWidgetItem );
+
+  void prepareMenu( const QPoint& pt );
+
+  void resetItem();
 };

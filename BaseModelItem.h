@@ -45,6 +45,15 @@ public:
 	// Return a copy of this classes value
 	virtual QVariant GetValue() = 0;
 
+  // Returns true if a ModelItem has a default
+  // value - in other words, if resetToDefault
+  // will have an effect
+  virtual bool hasDefault() = 0;
+
+  // An implementation should implement this function
+  // to reset its value back to the default
+  virtual void resetToDefault() = 0;
+
   // Allow others to trigger these signals...
   void emitModelValueChanged( QVariant const &newValue ) 
     { emit modelValueChanged( newValue );  }

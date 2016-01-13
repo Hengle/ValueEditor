@@ -42,3 +42,12 @@ BaseModelItem* BuildSampleModel( FabricCore::Client& client )
 
 	return rootItem;
 }
+
+bool SampleModelItem::hasDefault()
+{
+  return false;
+}
+
+void SampleModelItem::resetToDefault()
+{
+}

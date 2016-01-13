@@ -5,9 +5,17 @@
 #include "BaseModelItem.h"
 #include "ViewItemFactory.h"
 
+//////////////////////////////////////////////////////////////////////////
+
+BaseModelItem* GetFirstModelItem( VETreeWidgetItem* item );
+
+//////////////////////////////////////////////////////////////////////////
+
 VETreeWidget::VETreeWidget( )
 {
   setColumnCount( 2 );
+  setContextMenuPolicy( Qt::CustomContextMenu );
+
   connect(
     this, SIGNAL( itemExpanded( QTreeWidgetItem * ) ),
     this, SLOT( onTreeWidgetItemExpanded( QTreeWidgetItem * ) )
@@ -16,8 +24,13 @@ VETreeWidget::VETreeWidget( )
     this, SIGNAL( itemCollapsed( QTreeWidgetItem * ) ),
     this, SLOT( onTreeWidgetItemCollapsed( QTreeWidgetItem * ) )
     );
+  connect( 
+    this, SIGNAL( customContextMenuRequested( const QPoint& ) ),
+    this, SLOT( prepareMenu( const QPoint& ) )
+    );
 
   setObjectName( "valueEditor" );
+
 }
 
 void VETreeWidget::createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parentTreeWidgetItem, int index )
@@ -170,6 +183,54 @@ void VETreeWidget::onTreeWidgetItemCollapsed( QTreeWidgetItem *treeWidgetItem )
     treeWidgetItem->removeChild( childTreeWidgetItem );
     delete childTreeWidgetItem;
   }
+}
+
+void VETreeWidget::prepareMenu( const QPoint& pt )
+{
+  VETreeWidgetItem* item = static_cast<VETreeWidgetItem*>(itemAt( pt ));
+  BaseModelItem* model = GetFirstModelItem( item );
+
+  QAction *newAct = new QAction( tr( "Reset" ), this );
+  newAct->setStatusTip( tr( "new sth" ) );
+
+  newAct->setEnabled( model->hasDefault() );
+  connect( newAct, SIGNAL( triggered() ), this, SLOT( resetItem() ) );
+
+  QMenu menu( this );
+  menu.addAction( newAct );
+  menu.exec( mapToGlobal( pt ) );
+}
+
+void VETreeWidget::resetItem()
+{
+  QList<QTreeWidgetItem*> items = selectedItems();
+  for (int i = 0; i < items.size(); i++)
+  {
+    VETreeWidgetItem* item = static_cast<VETreeWidgetItem*>(items[i]);
+    BaseModelItem* model = GetFirstModelItem( item );
+    if (model)
+      model->resetToDefault();
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+BaseModelItem* GetFirstModelItem( VETreeWidgetItem* item )
+{
+  if (item == NULL)
+    return NULL;
+
+  BaseViewItem* pViewItem = item->getViewItem();
+  if (pViewItem != NULL)
+  {
+    BaseModelItem* pModelItem = pViewItem->GetModelItem();
+    if (pModelItem != NULL)
+      return pModelItem;
+  }
+  VETreeWidgetItem* parent =
+    static_cast<VETreeWidgetItem*>(item->parent());
+
+  return GetFirstModelItem( parent );
 }
 
 // Include MOC'ed file here, in order
