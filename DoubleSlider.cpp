@@ -7,6 +7,9 @@ DoubleSlider::DoubleSlider( QWidget * parent )
   , m_min(0)
   , m_max(1)
 {
+  // Default to horizontal orientation
+  setOrientation( Qt::Horizontal );
+
   connect( this, SIGNAL( valueChanged( int ) ),
            this, SLOT( notifyValueChanged( int ) ) );
 }
@@ -29,9 +32,6 @@ void DoubleSlider::setDoubleValue( double value )
     double ratio = (value - m_min) / (m_max - m_min);
     setValue( int(ratio * m_resolution) );
   }
-
-  // Default to horizontal orientation
-  setOrientation( Qt::Horizontal );
 }
 
 double DoubleSlider::doubleValue()

@@ -33,6 +33,9 @@
     <Filter Include="ViewItems\FloatSliderViewItem">
       <UniqueIdentifier>{d0650ba1-51dc-4e12-88c7-bcc66619c730}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ViewItems\IntSliderViewItem">
+      <UniqueIdentifier>{63ce19ae-7713-485a-bd51-7cd18b5dc72f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StdAfx.cpp" />
@@ -84,6 +87,9 @@
     <ClCompile Include="QVariantRTVal.cpp" />
     <ClCompile Include="ItemMetadata.cpp">
       <Filter>BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="IntSliderViewItem.cpp">
+      <Filter>ViewItems\IntSliderViewItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +145,9 @@
     </QtMOC>
     <QtMOC Include="DoubleSlider.h">
       <Filter>ViewItems\FloatSliderViewItem</Filter>
+    </QtMOC>
+    <QtMOC Include="IntSliderViewItem.h">
+      <Filter>ViewItems\IntSliderViewItem</Filter>
     </QtMOC>
   </ItemGroup>
 </Project>
