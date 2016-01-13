@@ -11,6 +11,34 @@ DoubleSlider::DoubleSlider( QWidget * parent )
            this, SLOT( notifyValueChanged( int ) ) );
 }
 
+void DoubleSlider::mousePressEvent( QMouseEvent *event )
+{
+  // Taken pretty much verbatim from:
+  // http://stackoverflow.com/questions/11132597/qslider-mouse-direct-jump
+  QStyleOptionSlider opt;
+  initStyleOption( &opt );
+  QRect sr = style()->subControlRect( QStyle::CC_Slider, &opt, QStyle::SC_SliderHandle, this );
+
+  if (event->button() == Qt::LeftButton &&
+        sr.contains( event->pos() ) == false)
+  {
+    int newVal;
+    if (orientation() == Qt::Vertical)
+      newVal = minimum() + ((maximum() - minimum()) * (height() - event->y())) / height();
+    else
+      newVal = minimum() + ((maximum() - minimum()) * event->x()) / width();
+
+    if (invertedAppearance() == true)
+      setValue( maximum() - newVal );
+    else
+      setValue( newVal );
+
+    event->accept();
+  }
+  QSlider::mousePressEvent( event );
+}
+
+
 void DoubleSlider::setResolution( int resolution, double min, double max )
 {
   m_resolution = resolution;
@@ -47,6 +75,7 @@ double DoubleSlider::toDouble( int value )
 void DoubleSlider::notifyValueChanged( int value ) {
   emit doubleValueChanged( toDouble( value ) );
 }
+
 
 // Include MOC'ed file here, in order
 // to support PCH on windows.
