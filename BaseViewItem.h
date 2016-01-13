@@ -51,13 +51,13 @@ public:
   BaseModelItem* GetModelItem()
     { return m_modelItem; }
 
-  // Implement this function to build the widgets to
-  // display the value represented by your class
-  virtual QWidget *getWidget() = 0;
-
   // Get the name of this ViewItem
   QString const &getName() const
     { return m_name; }
+
+  // Implement this function to build the widgets to
+  // display the value represented by your class
+  virtual QWidget *getWidget() = 0;
 
   // Indicate if this ViewItem will return any 
   // ViewItems in the appendChildViewItems function
@@ -86,6 +86,7 @@ public:
   // instead of directly deleting the object, as that ensures
   // the memory is released in the same Dll as it was allocated in
   virtual void deleteMe() = 0;
+
 public slots:
 
   // Implement this slot to update the UI to the

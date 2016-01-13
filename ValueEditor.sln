@@ -13,6 +13,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FabricUI", "..\FabricUI\FabricUI.vcxproj", "{E867E022-A01F-4783-8F25-DFCC50934B50}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Canvas", "..\CanvasStandalone\Canvas.vcxproj", "{AAC902D0-959F-E6B9-13DD-006FAB5C50A2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E867E022-A01F-4783-8F25-DFCC50934B50} = {E867E022-A01F-4783-8F25-DFCC50934B50}
+		{19ECE0BC-7BF0-4485-8375-A0637E288F33} = {19ECE0BC-7BF0-4485-8375-A0637E288F33}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

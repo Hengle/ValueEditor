@@ -76,6 +76,11 @@ public:
 		m_value = value;
 		emit modelValueChanged( m_value );
 	}
+
+  virtual bool hasDefault() override;
+
+  virtual void resetToDefault() override;
+
 };
 
 

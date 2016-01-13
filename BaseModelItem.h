@@ -42,8 +42,28 @@ public:
 	// or as a percentage, or 
 	virtual ItemMetadata* GetMetadata();
 
+  // Implement this function to indicate which
+  // direction the value is heading in this
+  // NOTE: the returned value is equivalent to
+  // FabricCore::DFGPortType
+  // Default: FabricCore::DFGPortType_In
+  virtual int GetInOut();
+
+  // Returns true if this value is read-only,
+  // or false if it can be set.
+  //virtual bool IsReadOnline();
+
 	// Return a copy of this classes value
 	virtual QVariant GetValue() = 0;
+
+  // Returns true if a ModelItem has a default
+  // value - in other words, if resetToDefault
+  // will have an effect
+  virtual bool hasDefault() = 0;
+
+  // An implementation should implement this function
+  // to reset its value back to the default
+  virtual void resetToDefault() = 0;
 
   // Allow others to trigger these signals...
   void emitModelValueChanged( QVariant const &newValue ) 

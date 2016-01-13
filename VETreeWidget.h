@@ -13,7 +13,7 @@ public:
 
   VETreeWidget( );
 
-  void createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parent, int index = -1 );
+  VETreeWidgetItem* createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parent, int index = -1 );
 
   VETreeWidgetItem* findTreeWidget( BaseModelItem* pItem ) const;
   VETreeWidgetItem* findTreeWidget( BaseModelItem* pItem, VETreeWidgetItem* pWidget ) const;
@@ -31,4 +31,8 @@ protected slots:
   void onTreeWidgetItemExpanded( QTreeWidgetItem *_treeWidgetItem );
 
   void onTreeWidgetItemCollapsed( QTreeWidgetItem *_treeWidgetItem );
+
+  void prepareMenu( const QPoint& pt );
+
+  void resetItem();
 };
