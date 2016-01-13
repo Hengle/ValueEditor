@@ -69,9 +69,11 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreadedDebug</RuntimeLibrary>
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
-      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditAndContinue</DebugInformationFormat>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</WholeProgramOptimization>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -122,6 +124,7 @@ copy *.h "$(FABRIC_DIR)\include\ValueEditor"
     <ClCompile Include="ColorViewItem.cpp" />
     <ClCompile Include="DefaultViewItem.cpp" />
     <ClCompile Include="DoubleSlider.cpp" />
+    <ClCompile Include="FilepathViewItem.cpp" />
     <ClCompile Include="FloatSliderViewItem.cpp" />
     <ClCompile Include="FloatViewItem.cpp" />
     <ClCompile Include="BaseViewItemCreator.cpp" />
@@ -131,6 +134,7 @@ copy *.h "$(FABRIC_DIR)\include\ValueEditor"
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StringViewItem.cpp" />
     <ClCompile Include="Vec3ViewItem.cpp" />
     <ClCompile Include="VETreeWidget.cpp" />
     <ClCompile Include="VETreeWidgetItem.cpp" />
@@ -145,6 +149,7 @@ copy *.h "$(FABRIC_DIR)\include\ValueEditor"
     <ClInclude Include="DefaultViewItem.h" />
     <ClInclude Include="DllExport.h" />
     <QtMOC Include="BaseModelItem.h" />
+    <QtMOC Include="FilepathViewItem.h" />
     <ClInclude Include="ItemMetadata.h" />
     <ClInclude Include="RTValViewItem.h" />
     <QtMOC Include="FloatViewItem.h" />
@@ -154,6 +159,7 @@ copy *.h "$(FABRIC_DIR)\include\ValueEditor"
     <ClInclude Include="StdAfx.h" />
     <QtMOC Include="Vec3ViewItem.h" />
     <QtMOC Include="VETreeWidget.h" />
+    <QtMOC Include="StringViewItem.h" />
     <ClInclude Include="VETreeWidgetItem.h" />
     <QtMOC Include="ViewItemChildRouter.h" />
     <ClInclude Include="ViewItemFactory.h" />
