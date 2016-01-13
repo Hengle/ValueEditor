@@ -42,6 +42,11 @@ ItemMetadata* BaseModelItem::GetMetadata()
   return NULL;
 }
 
+int BaseModelItem::GetInOut()
+{
+  return FabricCore::DFGPortType_In;
+}
+
 // Include MOC'ed file here, in order
 // to support PCH on windows.
 #include "moc_BaseModelItem.cpp"

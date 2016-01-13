@@ -13,7 +13,7 @@ public:
 
   VETreeWidget( );
 
-  void createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parent, int index = -1 );
+  VETreeWidgetItem* createTreeWidgetItem( BaseViewItem* viewItem, QTreeWidgetItem* parent, int index = -1 );
 
   VETreeWidgetItem* findTreeWidget( BaseModelItem* pItem ) const;
   VETreeWidgetItem* findTreeWidget( BaseModelItem* pItem, VETreeWidgetItem* pWidget ) const;
